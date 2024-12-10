@@ -56,7 +56,7 @@ dependencies:
   flutter_native_splash: ^2.4.3
   # An SVG rendering and widget library for Flutter, which allows painting 
   flutter_svg: ^2.0.16
-  # for adapting screen and font size.
+  # for responsive design
   flutter_screenutil: ^5.9.3
   # easy way to add shimmer effect
   shimmer: ^3.0.0
@@ -64,7 +64,6 @@ dependencies:
   shared_preferences: ^2.3.3
   # router for navigation between screens 
   get: ^4.6.6
-  # screeen size
 
 
 
@@ -80,7 +79,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-
+flutter_native_splash:
+  color: "#25AEBE"
+  android: true
+  ios: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -93,8 +95,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
