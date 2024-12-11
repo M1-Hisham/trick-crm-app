@@ -4,6 +4,6 @@ import 'theming/tesxt_styles.dart';
 
 class R {
   static AppColors colors = AppColors();
-  static AppImages images = AppImages();
+  static AppImages icons = AppImages();
   static AppTextStyles textStyles = AppTextStyles();
 }
