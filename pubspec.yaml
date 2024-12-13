@@ -67,6 +67,8 @@ dependencies:
   get: ^4.6.6
   # font family for app
   google_fonts: ^6.2.1
+  # for secure storage of user credentials
+  flutter_secure_storage: ^4.2.1
 
 
 
