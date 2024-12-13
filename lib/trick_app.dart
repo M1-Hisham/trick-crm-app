@@ -22,9 +22,7 @@ class TrickApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: R.colors.primaryColor,
             ),
-            home: const Scaffold(
-              body: SplashScreen(),
-            ),
+            home: const SplashScreen(),
           );
         });
   }
