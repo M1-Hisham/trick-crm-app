@@ -105,17 +105,6 @@ class AppTextFormField extends StatelessWidget {
       cursorColor: cursorColor ?? R.colors.primaryColor,
       cursorErrorColor: cursorErrorColor ?? R.colors.red,
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter some text';
-        } else if (value.length < 3) {
-          return 'Please enter at least 3 characters';
-        } else if (value.length > 10) {
-          return 'Please enter at most 10 characters';
-        } else if (value.contains(' ')) {
-          return 'Please enter a valid email address';
-        } else if (value.contains('.')) {
-          return 'Please enter a valid email address';
-        }
         return validator?.call(value);
       },
     );
