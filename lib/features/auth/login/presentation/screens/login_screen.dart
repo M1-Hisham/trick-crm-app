@@ -7,7 +7,6 @@ import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:trick_crm_app/core/widgets/app_button.dart';
 
 import '../../../../../core/resources/resources.dart';
-import '../../data/models/login_request_body.dart';
 import '../../logic/cubit/login_cubit.dart';
 import '../widgets/email_and_pass_field.dart';
 import '../widgets/login_bloc_listener.dart';
@@ -72,11 +71,7 @@ class LoginScreen extends StatelessWidget {
 
   void _login(BuildContext context) {
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
-      final loginRequestBody = LoginRequestBody(
-        email: context.read<LoginCubit>().email.text,
-        password: context.read<LoginCubit>().password.text,
-      );
-      context.read<LoginCubit>().emitLoginStates(loginRequestBody);
+      context.read<LoginCubit>().emitLoginStates();
     }
   }
 }
