@@ -1,27 +1,20 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:trick_crm_app/core/widgets/app_button.dart';
-import 'package:trick_crm_app/core/widgets/app_text_form_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/resources/resources.dart';
+import '../../data/models/login_request_body.dart';
+import '../../logic/cubit/login_cubit.dart';
+import '../widgets/email_and_pass_field.dart';
+import '../widgets/login_bloc_listener.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey formKey = GlobalKey<FormState>();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  FocusNode passwordNode = FocusNode();
-  bool isObscureText = true;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -45,40 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: R.textStyles.font40BlackBold,
                 ),
                 spacingV(74),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      AppTextFormField(
-                        hintText: "Enter your email",
-                        controller: email,
-                        keyboardType: TextInputType.emailAddress,
-                        nextFocusNode: passwordNode,
-                      ),
-                      spacingV(15),
-                      AppTextFormField(
-                        hintText: "Enter your password",
-                        controller: password,
-                        isObscureText: isObscureText,
-                        focusNode: passwordNode,
-                        keyboardType: TextInputType.visiblePassword,
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isObscureText = !isObscureText;
-                            });
-                            log("Show Password");
-                          },
-                          icon: isObscureText
-                              ? SvgPicture.asset(
-                                  R.icons.eye,
-                                )
-                              : const Icon(Icons.visibility_off_outlined),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const EmailAndPassField(),
                 spacingV(11),
                 GestureDetector(
                   onTap: () {
@@ -96,11 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 spacingV(39),
                 AppButton(
                   onPressed: () {
-                    _showSnackBar("Login");
+                    _login(context);
                   },
                   text: "Login",
                   borderRadius: 8,
                 ),
+                const LoginBlocListener(),
               ],
             ),
           ),
@@ -109,8 +70,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _showSnackBar(String message) {
-    final snackBar = SnackBar(content: Text(message));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  void _login(BuildContext context) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+      final loginRequestBody = LoginRequestBody(
+        email: context.read<LoginCubit>().email.text,
+        password: context.read<LoginCubit>().password.text,
+      );
+      context.read<LoginCubit>().emitLoginStates(loginRequestBody);
+    }
   }
 }

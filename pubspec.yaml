@@ -51,6 +51,7 @@ dependencies:
   dio: ^5.7.0
   retrofit: ^4.4.1
   retrofit_generator: ^9.1.5
+  # Showing loading status when loading data from network requests using dio package
   pretty_dio_logger: ^1.4.0
   # for splash screen
   flutter_native_splash: ^2.4.3
