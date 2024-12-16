@@ -53,7 +53,7 @@ class AppTextFormField extends StatelessWidget {
         isDense: true,
         contentPadding: contentPadding ??
             EdgeInsets.symmetric(horizontal: 20.w, vertical: 19.h),
-        hintStyle: hintStyle ?? R.textStyles.font15BlackW500,
+        hintStyle: hintStyle ?? R.textStyles.font15RegentGrayW500,
         suffixIcon: suffixIcon,
         hoverColor: hoverColor ?? R.colors.primaryColor,
         filled: true,
