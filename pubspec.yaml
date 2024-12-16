@@ -69,6 +69,10 @@ dependencies:
   google_fonts: ^6.2.1
   # for secure storage of user credentials
   flutter_secure_storage: ^4.2.1
+  # for bottom navigation bar
+  google_nav_bar: ^5.0.7
+  # for charts
+  fl_chart: ^0.69.2
 
 
 

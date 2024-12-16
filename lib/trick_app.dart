@@ -19,12 +19,8 @@ class TrickApp extends StatelessWidget {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             getPages: AppRouter.routes,
-            theme: ThemeData(
-              primaryColor: R.colors.primaryColor,
-            ),
-            home: const Scaffold(
-              body: SplashScreen(),
-            ),
+            theme: R.themeData.theme,
+            home: const SplashScreen(),
           );
         });
   }
