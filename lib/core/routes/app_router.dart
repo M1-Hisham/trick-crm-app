@@ -4,7 +4,7 @@ import 'package:trick_crm_app/core/routes/routes.dart';
 
 import '../../features/auth/login/logic/cubit/login_cubit.dart';
 import '../../features/auth/login/presentation/screens/login_screen.dart';
-import '../../features/home/home_screen.dart';
+import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/splash/splash_screen.dart';
 import '../di/dependency_injection.dart';
 
