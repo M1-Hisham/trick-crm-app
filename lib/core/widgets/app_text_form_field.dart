@@ -60,7 +60,7 @@ class AppTextFormField extends StatelessWidget {
         fillColor: fillColor ?? const Color(0xFFF7F8F9),
         alignLabelWithHint: true,
         // label: ,
-        // prefixIcon: Icon(Icons.email_outlined),
+        prefixIcon: prefixIcon,
         border: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Color.fromARGB(255, 139, 139, 139),
