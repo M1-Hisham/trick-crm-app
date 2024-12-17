@@ -6,5 +6,6 @@ class RoutesNames {
   static const String otpVerification = '/otp_verification';
   static const String loginSuccessful = '/login_Successful';
   static const String home = '/home';
+  static const String leads = '/leads';
   
 }

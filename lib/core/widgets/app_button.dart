@@ -12,6 +12,7 @@ class AppButton extends StatelessWidget {
   final Color? backgroundColor;
   final EdgeInsetsGeometry? padding;
   final TextStyle? textStyle;
+  final Widget? icon;
   const AppButton({
     super.key,
     required this.text,
@@ -21,6 +22,7 @@ class AppButton extends StatelessWidget {
     this.borderRadius,
     this.padding,
     this.textStyle,
+    this.icon,
   });
 
   @override
@@ -28,15 +30,17 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: heigth == null ? 56.h : heigth!.h,
-      child: ElevatedButton(
+      child: ElevatedButton.icon(
         onPressed: onPressed,
+        icon: icon,
+        iconAlignment: IconAlignment.start,
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? R.colors.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius?.r ?? 5.r),
           ),
         ),
-        child: Padding(
+        label: Padding(
           padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
             text,

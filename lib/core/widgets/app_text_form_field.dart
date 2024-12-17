@@ -18,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
   final Color? cursorErrorColor;
   final Color? hoverColor;
   final Color? fillColor;
+  final Color? colorEnableBorder;
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
@@ -40,6 +41,7 @@ class AppTextFormField extends StatelessWidget {
     this.fillColor,
     this.focusNode,
     this.nextFocusNode,
+    this.colorEnableBorder,
   });
 
   @override
@@ -60,7 +62,7 @@ class AppTextFormField extends StatelessWidget {
         fillColor: fillColor ?? const Color(0xFFF7F8F9),
         alignLabelWithHint: true,
         // label: ,
-        // prefixIcon: Icon(Icons.email_outlined),
+        prefixIcon: prefixIcon,
         border: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Color.fromARGB(255, 139, 139, 139),
@@ -73,10 +75,10 @@ class AppTextFormField extends StatelessWidget {
             color: Color.fromARGB(255, 139, 139, 139),
           ),
         ),
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(
-            color: Color(0xFFE8ECF4),
+            color: colorEnableBorder ?? const Color(0xFFE8ECF4),
           ),
         ),
         errorBorder: const OutlineInputBorder(

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 import 'package:trick_crm_app/core/routes/routes.dart';
+import 'package:trick_crm_app/features/leads/presentation/screens/leads_screen.dart';
 
 import '../../features/auth/login/logic/cubit/login_cubit.dart';
 import '../../features/auth/login/presentation/screens/login_screen.dart';
@@ -13,11 +14,13 @@ abstract class AppRouter {
   static final List<GetPage> routes = [
     GetPage(name: RoutesNames.splashScreen, page: () => const SplashScreen()),
     GetPage(
-        name: RoutesNames.login,
-        page: () => BlocProvider(
-              create: (context) => getIt<LoginCubit>(),
-              child: const LoginScreen(),
-            )),
+      name: RoutesNames.login,
+      page: () => BlocProvider(
+        create: (context) => getIt<LoginCubit>(),
+        child: const LoginScreen(),
+      ),
+    ),
     GetPage(name: RoutesNames.home, page: () => const HomeScreen()),
+    GetPage(name: RoutesNames.leads, page: () => const LeadsScreen()),
   ];
 }
