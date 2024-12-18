@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:trick_crm_app/features/auth/login/data/models/login_request_body.dart';
 import 'package:trick_crm_app/features/auth/login/data/models/login_response.dart';
 
+import '../../features/home/data/models/dashboard_response.dart';
 import 'api_constants.dart';
 
 part 'api_service.g.dart';
@@ -12,8 +13,11 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-  @POST(ApiConstants.login)
-
   /// service for login
-  Future<LoginResponse> login(@Body() LoginRequestBody loginRequestBody);
+  @POST(ApiConstants.login)
+  Future<LoginResponseModel> login(@Body() LoginRequestBody loginRequestBody);
+
+  /// service for dashboard
+  @GET(ApiConstants.dashboard)
+  Future<DashboardResponseModel> getDashboard();
 }

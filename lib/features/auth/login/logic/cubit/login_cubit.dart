@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trick_crm_app/features/auth/login/data/models/login_request_body.dart';
+import 'package:trick_crm_app/features/auth/login/data/models/login_response.dart';
 import 'package:trick_crm_app/features/auth/login/data/repos/login_repo.dart';
 
 import '../../../../../core/helpers/shaerd_pref_helper.dart';
@@ -25,9 +26,12 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(
-      success: (data) async {
-        emit(LoginState.success(data));
-        final String? token = data.token;
+      success: (loginResponseModel) async {
+        emit(LoginState.success(loginResponseModel));
+        // get user data
+        final UserData? userData = loginResponseModel.userData;
+        log('user data id: ${userData?.id}');
+        final String? token = loginResponseModel.token;
         // save token to shared pref
         if (token != null && token.isNotEmpty) {
           await SharedPrefHelper.setSecuredString('auth_token', token);

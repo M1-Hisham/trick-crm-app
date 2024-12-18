@@ -5,4 +5,5 @@ class ApiConstants {
       "https://crm-crmsubdomain.hcvuje.easypanel.host/api/v1/tenant";
   // endpoints
   static const String login = "/login";
+  static const String dashboard = "/dashboard";
 }

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/core/routes/routes.dart';

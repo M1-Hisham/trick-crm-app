@@ -3,16 +3,16 @@ part 'login_response.g.dart';
 
 /// model class for login response
 @JsonSerializable()
-class LoginResponse {
+class LoginResponseModel {
   String? status;
   String? token;
   @JsonKey(name: 'user')
   UserData? userData;
 
-  LoginResponse({this.status, this.token, this.userData});
+  LoginResponseModel({this.status, this.token, this.userData});
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) =>
-      _$LoginResponseFromJson(json);
+  factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$LoginResponseModelFromJson(json);
 }
 
 ///  model class for user data

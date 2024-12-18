@@ -29,7 +29,7 @@ class LoginBlocListener extends StatelessWidget {
                   );
                 });
           },
-          success: (loginResponse) {
+          success: (loginResponseModel) {
             Get.back();
             showDialog(
                 context: context,

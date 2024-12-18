@@ -12,7 +12,7 @@ class LoginRepo {
   LoginRepo(this._apiService);
 
   /// Login API call
-  Future<ApiResult<LoginResponse>> login(
+  Future<ApiResult<LoginResponseModel>> login(
       LoginRequestBody loginRequestBody) async {
     try {
       final response = await _apiService.login(loginRequestBody);
