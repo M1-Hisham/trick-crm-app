@@ -15,4 +15,6 @@ class AppImages {
   String exportOptions = "assets/icons/Export-Options.svg";
   String integrateFacebook = "assets/icons/Integrate-Facebook.svg";
   String importOptions = "assets/icons/Import-Options.svg";
+  String closeIcon = "assets/icons/close-icon.svg";
+  String subtract = "assets/icons/Subtract.svg";
 }
