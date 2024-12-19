@@ -6,6 +6,7 @@ import '../resources/resources.dart';
 /// Generic TextFormField
 class AppTextFormField extends StatelessWidget {
   final String hintText;
+  final String? labelText;
   final bool? isObscureText;
   final EdgeInsetsGeometry? contentPadding;
   final Widget? suffixIcon;
@@ -22,6 +23,7 @@ class AppTextFormField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
+  final int? maxLines;
 
   const AppTextFormField({
     super.key,
@@ -42,6 +44,8 @@ class AppTextFormField extends StatelessWidget {
     this.focusNode,
     this.nextFocusNode,
     this.colorEnableBorder,
+    this.labelText,
+    this.maxLines,
   });
 
   @override
@@ -50,8 +54,14 @@ class AppTextFormField extends StatelessWidget {
       onFieldSubmitted: (value) =>
           FocusScope.of(context).requestFocus(nextFocusNode),
       focusNode: focusNode,
+      maxLines: maxLines,
       decoration: InputDecoration(
+        labelText: labelText,
         hintText: hintText,
+        labelStyle: R.textStyles.font14DimGrayW400.copyWith(
+          color: const Color(0XFF2C2E32),
+          fontWeight: FontWeight.bold,
+        ),
         isDense: true,
         contentPadding: contentPadding ??
             EdgeInsets.symmetric(horizontal: 20.w, vertical: 19.h),
@@ -61,7 +71,6 @@ class AppTextFormField extends StatelessWidget {
         filled: true,
         fillColor: fillColor ?? const Color(0xFFF7F8F9),
         alignLabelWithHint: true,
-        // label: ,
         prefixIcon: prefixIcon,
         border: const OutlineInputBorder(
           borderSide: BorderSide(

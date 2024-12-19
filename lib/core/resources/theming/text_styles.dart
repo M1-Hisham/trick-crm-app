@@ -41,6 +41,20 @@ class AppTextStyles {
       fontWeight: FontWeight.w600,
     ),
   );
+  TextStyle font17PrimaryW600 = GoogleFonts.poppins(
+    textStyle: TextStyle(
+      fontSize: 17.sp,
+      color: R.colors.primaryColor,
+      fontWeight: FontWeight.w600,
+    ),
+  );
+  TextStyle font17whiteW600 = GoogleFonts.poppins(
+    textStyle: TextStyle(
+      fontSize: 17.sp,
+      color: R.colors.white,
+      fontWeight: FontWeight.w600,
+    ),
+  );
   TextStyle font15RegentGrayW500 = GoogleFonts.poppins(
     textStyle: TextStyle(
       fontSize: 15.sp,

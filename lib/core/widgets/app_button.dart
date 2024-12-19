@@ -10,6 +10,7 @@ class AppButton extends StatelessWidget {
   final double? heigth;
   final double? borderRadius;
   final Color? backgroundColor;
+  final Color? borderColor;
   final EdgeInsetsGeometry? padding;
   final TextStyle? textStyle;
   final Widget? icon;
@@ -23,6 +24,7 @@ class AppButton extends StatelessWidget {
     this.padding,
     this.textStyle,
     this.icon,
+    this.borderColor,
   });
 
   @override
@@ -34,7 +36,8 @@ class AppButton extends StatelessWidget {
         onPressed: onPressed,
         icon: icon,
         iconAlignment: IconAlignment.start,
-        style: ElevatedButton.styleFrom(
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: borderColor ?? Colors.transparent),
           backgroundColor: backgroundColor ?? R.colors.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius?.r ?? 5.r),
