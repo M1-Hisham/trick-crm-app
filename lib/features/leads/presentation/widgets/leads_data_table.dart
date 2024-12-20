@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trick_crm_app/core/helpers/spacing.dart';
 
 import '../../../../core/resources/resources.dart';
+import '../../data/models/leads_model.dart';
+import 'control_table_button.dart';
 
 class LeadsDataTable extends StatefulWidget {
+  final List<Leads>? leads;
   const LeadsDataTable({
     super.key,
+    required this.leads,
   });
 
   @override
@@ -13,6 +18,7 @@ class LeadsDataTable extends StatefulWidget {
 }
 
 class _LeadsDataTableState extends State<LeadsDataTable> {
+  late final List<Leads>? leads = widget.leads;
   final ScrollController _scrollController = ScrollController();
   @override
   void dispose() {
@@ -30,52 +36,82 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
       thumbColor: R.colors.primaryColor,
       radius: const Radius.circular(6),
       child: SingleChildScrollView(
-        controller: _scrollController,
         scrollDirection: Axis.horizontal,
+        controller: _scrollController,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Table header
-            Container(
-              color: const Color(0XFFF2F2F2),
-              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
-              child: Row(
-                children: [
-                  _buildHeader("Name"),
-                  _buildHeader("Lead Source"),
-                  _buildHeader("Details"),
-                  _buildHeader("More Info"),
-                  const Icon(Icons.remove_red_eye, size: 20),
-                ],
-              ),
-            ),
+            _tableHeader(),
             // Table body
-            Column(
-              children: List.generate(10, (index) {
-                return Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 8.h, horizontal: 15.w),
-                  decoration: BoxDecoration(
-                    color: index % 2 == 0
-                        ? R.colors.white
-                        : const Color(0XFFF6F6F6),
-                    border: Border(
-                      bottom: BorderSide(color: Colors.grey.shade300),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      _buildBody("mohamed"),
-                      _buildBody("Facebook"),
-                      _buildBody("Details $index"),
-                      _buildBody("More Info $index"),
-                      const Icon(Icons.visibility, size: 20),
-                    ],
-                  ),
-                );
-              }),
-            ),
+            _tableBody(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _tableHeader() {
+    return Container(
+      color: const Color(0XFFF2F2F2),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+      child: Row(
+        children: [
+          // ControlTableButton(
+          //   color: R.colors.white,
+          //   borderRadius: 100,
+          //   onPressed: () {},
+          // ),
+          spacingH(8),
+          _buildHeader("Name"),
+          _buildHeader("Lead Source"),
+          ControlTableButton(
+            icon: const Icon(Icons.arrow_back_ios_rounded),
+            color: R.colors.white,
+            borderRadius: 50,
+            iconSize: 16,
+            onPressed: () {
+              //? Add your action here
+            },
+          ),
+          spacingH(8),
+          ControlTableButton(
+            icon: const Icon(Icons.arrow_forward_ios_rounded),
+            color: R.colors.white,
+            borderRadius: 50,
+            iconSize: 16,
+            onPressed: () {
+              //? Add your action here
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _tableBody() {
+    return Column(
+      children: List.generate(
+        leads?.length ?? 0,
+        (index) {
+          final lead = leads?[index];
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+            decoration: BoxDecoration(
+              color: index % 2 == 0 ? Colors.white : const Color(0xFFF6F6F6),
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.shade300),
+              ),
+            ),
+            child: Row(
+              children: [
+                _buildBody(lead?.leadName ?? 'empty'),
+                _buildBody(lead?.leadSource ?? 'empty'),
+                const Icon(Icons.visibility, size: 20),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -93,7 +129,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
 
   Widget _buildBody(String text) {
     return Container(
-      width: 150.w,
+      width: 182.w,
       alignment: Alignment.centerLeft,
       child: Text(text),
     );

@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:trick_crm_app/core/api/api_service.dart';
 import 'package:trick_crm_app/core/api/dio_factory.dart';
 import 'package:trick_crm_app/features/home/logic/cubit/dashboard_cubit.dart';
+import 'package:trick_crm_app/features/leads/data/repo/leads_repo.dart';
 
 import '../../features/auth/login/data/repos/login_repo.dart';
 import '../../features/auth/login/logic/cubit/login_cubit.dart';
@@ -25,5 +26,6 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<DashboardRepo>(() => DashboardRepo(getIt()));
   getIt.registerFactory<DashboardCubit>(() => DashboardCubit(getIt()));
 
-  // more instances can be added here
+  // leads repo & leads cubit instance
+  getIt.registerLazySingleton<LeadsRepo>(() => LeadsRepo(getIt()));
 }

@@ -3,11 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:trick_crm_app/core/widgets/app_bottom_nav_bar.dart';
+import 'package:trick_crm_app/core/widgets/app_button.dart';
 import 'package:trick_crm_app/features/home/presentation/widgets/employees_chart_card.dart';
 
 import '../../../../core/resources/resources.dart';
+import '../../../../core/routes/routes.dart';
 import '../widgets/deals_card.dart';
 import '../widgets/home_card.dart';
 import '../widgets/meetings_card.dart';
@@ -26,6 +29,12 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(22),
               child: Column(
                 children: [
+                  spacingV(7),
+                  AppButton(
+                      text: "Go to leads",
+                      onPressed: () {
+                        Get.toNamed(RoutesNames.leads);
+                      }),
                   spacingV(7),
                   HomeCard(
                     icon: R.icons.numberOfClients,
