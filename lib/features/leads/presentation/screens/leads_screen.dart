@@ -8,7 +8,7 @@ import 'package:trick_crm_app/features/leads/presentation/widgets/create_lead.da
 
 import '../../../../core/resources/resources.dart';
 import '../widgets/control_table_button.dart';
-import '../widgets/leads_data_table.dart';
+import '../widgets/leads_data_bloc_builder.dart';
 
 class LeadsScreen extends StatelessWidget {
   const LeadsScreen({super.key});
@@ -112,7 +112,8 @@ class LeadsScreen extends StatelessWidget {
                     size: 31.dg,
                   ),
                 ),
-                const LeadsDataTable(),
+                // leads data table
+                const LeadsDataBlocBuilder(),
                 spacingV(15),
                 Row(
                   children: [

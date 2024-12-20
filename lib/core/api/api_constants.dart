@@ -6,4 +6,5 @@ class ApiConstants {
   // endpoints
   static const String login = "/login";
   static const String dashboard = "/dashboard";
+  static const String leads = "/leads";
 }
