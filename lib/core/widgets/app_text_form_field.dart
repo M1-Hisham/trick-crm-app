@@ -54,7 +54,7 @@ class AppTextFormField extends StatelessWidget {
       onFieldSubmitted: (value) =>
           FocusScope.of(context).requestFocus(nextFocusNode),
       focusNode: focusNode,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
