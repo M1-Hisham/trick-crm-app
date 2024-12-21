@@ -36,7 +36,12 @@ class LoginBlocListener extends StatelessWidget {
                 builder: (context) {
                   return Center(child: SvgPicture.asset(R.icons.successmark));
                 });
-            Get.offAllNamed(RoutesNames.home);
+            Future.delayed(
+              const Duration(milliseconds: 500),
+              () {
+                Get.offAllNamed(RoutesNames.home);
+              },
+            );
           },
           error: (e) {
             Get.back();

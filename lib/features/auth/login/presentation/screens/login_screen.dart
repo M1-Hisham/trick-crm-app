@@ -56,6 +56,7 @@ class LoginScreen extends StatelessWidget {
                 AppButton(
                   onPressed: () {
                     _login(context);
+                    context.read<LoginCubit>().clearLoginFields();
                   },
                   text: "Login",
                   borderRadius: 8,

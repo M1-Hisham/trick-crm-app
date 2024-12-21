@@ -43,4 +43,17 @@ class LoginCubit extends Cubit<LoginState> {
       },
     );
   }
+
+  /// clear login fields
+  void clearLoginFields() {
+    email.clear();
+    password.clear();
+  }
+
+  @override
+  Future<void> close() {
+    email.dispose();
+    password.dispose();
+    return super.close();
+  }
 }

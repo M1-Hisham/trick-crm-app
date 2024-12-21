@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:trick_crm_app/core/widgets/app_bottom_nav_bar.dart';
 import 'package:trick_crm_app/core/widgets/app_button.dart';
+import 'package:trick_crm_app/features/auth/logout/logout.dart';
 import 'package:trick_crm_app/features/home/presentation/widgets/employees_chart_card.dart';
 
 import '../../../../core/resources/resources.dart';
@@ -62,6 +61,8 @@ class HomeScreen extends StatelessWidget {
                   const DealsCard(),
                   spacingV(16),
                   const MeetingsCard(),
+                  spacingV(16),
+                  const Logout(),
                 ],
               ),
             ),
