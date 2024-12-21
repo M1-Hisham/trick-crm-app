@@ -12,7 +12,7 @@ class AppColors {
   Color dimGray = const Color(0xFF6F6F6F);
   Color darkCharcoa = const Color(0xFF333333);
   Color white = const Color(0xFFFFFFFF);
-  Color black = const Color(0xFF000000);
+  Color black = const Color(0xFF1E232C);
   Color jetBlack = const Color(0xFF373737);
   Color darkBlueGray = const Color(0xFF615E83);
 }

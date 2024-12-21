@@ -30,7 +30,11 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 spacingV(15),
-                Image.asset(R.icons.logo),
+                Image.asset(
+                  R.icons.logo,
+                  width: 112.w,
+                  height: 55.h,
+                ),
                 spacingV(101),
                 Text(
                   "Welcome back!\nGlad to see you,\nAgain!",
