@@ -10,8 +10,8 @@ import 'package:trick_crm_app/features/home/presentation/widgets/employees_chart
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/routes/routes.dart';
+import '../widgets/card_bloc_builder.dart';
 import '../widgets/deals_card.dart';
-import '../widgets/home_card.dart';
 import '../widgets/meetings_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,26 +35,7 @@ class HomeScreen extends StatelessWidget {
                         Get.toNamed(RoutesNames.leads);
                       }),
                   spacingV(7),
-                  HomeCard(
-                    icon: R.icons.numberOfClients,
-                    title: 'Number of Clients',
-                    // $ number of deals here
-                    numberOfTitle: '5,432',
-                  ),
-                  spacingV(16),
-                  HomeCard(
-                    icon: R.icons.numberOfLeads,
-                    title: 'Numbers of Leads',
-                    // $ number of deals here
-                    numberOfTitle: '5,432',
-                  ),
-                  spacingV(16),
-                  HomeCard(
-                    icon: R.icons.totalDeals,
-                    title: 'Total Deals in Pipeline',
-                    // $ number of deals here
-                    numberOfTitle: '5,432',
-                  ),
+                  const CardBlocBuilder(),
                   spacingV(22),
                   const EmployeesChartCard(),
                   spacingV(16),
