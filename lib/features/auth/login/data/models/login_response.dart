@@ -21,18 +21,27 @@ class UserData {
   int? id;
   String? name;
   String? email;
+  @JsonKey(name: 'tenant_id')
   String? tenantId;
+  @JsonKey(name: 'email_verified_at')
   String? emailVerifiedAt;
+  @JsonKey(name: 'department_id')
   dynamic departmentId;
+  @JsonKey(name: 'company_id')
   int? companyId;
   String? avatar;
+  @JsonKey(name: 'role_as')
   int? roleAs;
+  @JsonKey(name: 'is_tenant')
   int? isTenant;
+  @JsonKey(name: 'is_active')
   int? isActive;
+  @JsonKey(name: 'created_at')
   String? createdAt;
+  @JsonKey(name: 'updated_at')
   String? updatedAt;
   dynamic department;
-  List<dynamic>? roles;
+  List<Roles>? roles;
   List<Permissions>? permissions;
   UserData(
       {this.id,
@@ -54,28 +63,79 @@ class UserData {
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserDataToJson(this);
+}
+
+/// model class for roles
+@JsonSerializable()
+class Roles {
+  int? id;
+  String? name;
+  String? guardName;
+  String? tenantId;
+  String? createdAt;
+  String? updatedAt;
+  PivotRoles? pivot;
+
+  Roles({
+    this.id,
+    this.name,
+    this.guardName,
+    this.tenantId,
+    this.createdAt,
+    this.updatedAt,
+    this.pivot,
+  });
+
+  factory Roles.fromJson(Map<String, dynamic> json) => _$RolesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RolesToJson(this);
+}
+
+/// model class for pivot roles
+@JsonSerializable()
+class PivotRoles {
+  String? modelType;
+  int? modelId;
+  int? roleId;
+
+  PivotRoles({this.modelType, this.modelId, this.roleId});
+
+  factory PivotRoles.fromJson(Map<String, dynamic> json) =>
+      _$PivotRolesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PivotRolesToJson(this);
 }
 
 /// model class for permissions
 @JsonSerializable()
 class Permissions {
   String? name;
-  Pivot? pivot;
+  PivotPermissions? pivot;
 
   Permissions({this.name, this.pivot});
 
   factory Permissions.fromJson(Map<String, dynamic> json) =>
       _$PermissionsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PermissionsToJson(this);
 }
 
-/// model class for pivot
+/// model class for pivot permissions
 @JsonSerializable()
-class Pivot {
+class PivotPermissions {
+  @JsonKey(name: 'model_type')
   String? modelType;
+  @JsonKey(name: 'model_id')
   int? modelId;
+  @JsonKey(name: 'permission_id')
   int? permissionId;
 
-  Pivot({this.modelType, this.modelId, this.permissionId});
+  PivotPermissions({this.modelType, this.modelId, this.permissionId});
 
-  factory Pivot.fromJson(Map<String, dynamic> json) => _$PivotFromJson(json);
+  factory PivotPermissions.fromJson(Map<String, dynamic> json) =>
+      _$PivotPermissionsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PivotPermissionsToJson(this);
 }

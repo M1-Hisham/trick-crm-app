@@ -37,6 +37,11 @@ class LoginCubit extends Cubit<LoginState> {
           await SharedPrefHelper.setSecuredString('auth_token', token);
           log('token saved successfully: $token');
         }
+        // save user data to shared pref
+        if (userData != null) {
+          await SharedPrefHelper.saveUser(userData);
+          log('user data saved successfully: ${userData.toJson().toString()}');
+        }
       },
       error: (message) {
         emit(LoginState.error(error: message));
