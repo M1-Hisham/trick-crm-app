@@ -15,6 +15,7 @@ class Logout extends StatelessWidget {
       text: "Logout",
       onPressed: () {
         SharedPrefHelper.clearAllSecuredData();
+        SharedPrefHelper.clearAllData();
         log("logout success and clear all data");
         Get.offAllNamed(RoutesNames.login);
       },

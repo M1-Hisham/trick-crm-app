@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../features/auth/login/data/models/login_response.dart';
 
 /// Shared pref helper class to store and retrieve data from shared preferences.
 class SharedPrefHelper {
@@ -41,6 +45,31 @@ class SharedPrefHelper {
       default:
         return null;
     }
+  }
+
+  /// Saves a user in SharedPreferences.
+  static Future<void> saveUser(UserData userData) async {
+    final prefs = await SharedPreferences.getInstance();
+    String userJson = jsonEncode(userData.toJson());
+
+    await prefs.setString("user_data", userJson);
+  }
+
+  /// Gets a user from SharedPreferences.
+  static Future<UserData?> getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? userJson = prefs.getString("user_data");
+    if (userJson != null) {
+      Map<String, dynamic> userMap = jsonDecode(userJson);
+      return UserData.fromJson(userMap);
+    }
+    return null;
+  }
+
+  /// Clears the user data from SharedPreferences.
+  static Future<void> clearUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("user_data");
   }
 
   /// Gets a bool value from SharedPreferences with given [key].
