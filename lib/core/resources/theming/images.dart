@@ -17,4 +17,5 @@ class AppImages {
   String importOptions = "assets/icons/Import-Options.svg";
   String closeIcon = "assets/icons/close-icon.svg";
   String subtract = "assets/icons/Subtract.svg";
+  String imageUserError = "assets/icons/image-user-error.png";
 }
