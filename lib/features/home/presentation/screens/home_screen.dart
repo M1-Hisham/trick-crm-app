@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:trick_crm_app/core/widgets/app_bottom_nav_bar.dart';
 import 'package:trick_crm_app/core/widgets/app_button.dart';
@@ -10,6 +11,7 @@ import 'package:trick_crm_app/features/home/presentation/widgets/employees_chart
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../auth/login/data/models/login_response.dart';
 import '../widgets/card_bloc_builder.dart';
 import '../widgets/deals_card.dart';
 import '../widgets/meetings_card.dart';
@@ -57,7 +59,7 @@ class HomeScreen extends StatelessWidget {
   Widget appBar() {
     return Container(
       width: double.infinity,
-      height: 258.h,
+      // height: 258.h,
       decoration: BoxDecoration(
         color: R.colors.primaryColor,
         borderRadius: const BorderRadius.only(
@@ -98,32 +100,49 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               spacingV(25),
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 35.dg,
-                    backgroundColor: R.colors.white,
-                    backgroundImage:
-                        const AssetImage("assets/icons/IMG_8967.jpeg"),
-                  ),
-                  spacingH(14),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hello! Welcom back!",
-                        style: R.textStyles.font14WhiteW500,
-                      ),
-                      spacingV(1.5),
-                      Text(
-                        "Mohamed Hisham",
-                        style: R.textStyles.font18WhiteW600,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              spacingV(25),
+              FutureBuilder(
+                  future: SharedPrefHelper.getUser(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final UserData userData = snapshot.data!;
+                      return Row(
+                        children: [
+                          CircleAvatar(
+                              radius: 35.dg,
+                              backgroundColor: R.colors.transparent,
+                              backgroundImage: NetworkImage(
+                                userData.avatar ?? '',
+                              ),
+                              onBackgroundImageError: (context, error) {
+                                if (error
+                                    .toString()
+                                    .contains("Failed host lookup")) {
+                                  Image.asset(R.icons.imageUserError);
+                                }
+                                Image.asset(R.icons.imageUserError);
+                              }),
+                          spacingH(14),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Hello! Welcom back!",
+                                style: R.textStyles.font14WhiteW500,
+                              ),
+                              spacingV(1.5),
+                              Text(
+                                userData.name ?? "",
+                                style: R.textStyles.font18WhiteW600,
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  }),
+              spacingV(10),
             ],
           ),
         ),

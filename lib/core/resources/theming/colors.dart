@@ -15,4 +15,5 @@ class AppColors {
   Color black = const Color(0xFF1E232C);
   Color jetBlack = const Color(0xFF373737);
   Color darkBlueGray = const Color(0xFF615E83);
+  Color transparent = const Color(0x00000000);
 }

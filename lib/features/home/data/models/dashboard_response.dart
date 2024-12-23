@@ -21,7 +21,7 @@ class Data {
   List<dynamic>? tasks;
   List<dynamic>? meetings;
   List<dynamic>? calls;
-  List<dynamic>? topFiveSalesPersons;
+  List<TopFiveSalesPersons>? topFiveSalesPersons;
 
   Data({
     this.leads,
@@ -34,4 +34,16 @@ class Data {
     this.topFiveSalesPersons,
   });
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+}
+
+@JsonSerializable()
+class TopFiveSalesPersons {
+  String? name;
+  String? year;
+  String? gdp;
+
+  TopFiveSalesPersons({this.name, this.year, this.gdp});
+
+  factory TopFiveSalesPersons.fromJson(Map<String, dynamic> json) =>
+      _$TopFiveSalesPersonsFromJson(json);
 }

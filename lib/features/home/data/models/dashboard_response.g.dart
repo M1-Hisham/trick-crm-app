@@ -30,7 +30,9 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       tasks: json['tasks'] as List<dynamic>?,
       meetings: json['meetings'] as List<dynamic>?,
       calls: json['calls'] as List<dynamic>?,
-      topFiveSalesPersons: json['topFiveSalesPersons'] as List<dynamic>?,
+      topFiveSalesPersons: (json['topFiveSalesPersons'] as List<dynamic>?)
+          ?.map((e) => TopFiveSalesPersons.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
@@ -42,4 +44,19 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'meetings': instance.meetings,
       'calls': instance.calls,
       'topFiveSalesPersons': instance.topFiveSalesPersons,
+    };
+
+TopFiveSalesPersons _$TopFiveSalesPersonsFromJson(Map<String, dynamic> json) =>
+    TopFiveSalesPersons(
+      name: json['name'] as String?,
+      year: json['year'] as String?,
+      gdp: json['gdp'] as String?,
+    );
+
+Map<String, dynamic> _$TopFiveSalesPersonsToJson(
+        TopFiveSalesPersons instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'year': instance.year,
+      'gdp': instance.gdp,
     };
