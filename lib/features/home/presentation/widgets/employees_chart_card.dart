@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trick_crm_app/features/home/presentation/widgets/line_chart.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/resources/resources.dart';
+import 'chart_sample_bloc_builder.dart';
 
 class EmployeesChartCard extends StatelessWidget {
   const EmployeesChartCard({super.key});
@@ -22,22 +21,7 @@ class EmployeesChartCard extends StatelessWidget {
               style: R.textStyles.font24JetBlackBold,
             ),
             spacingV(22),
-            Row(children: [
-              SvgPicture.asset(R.icons.box),
-              spacingH(4),
-              const Text("Ahmed Raffat"),
-              spacingH(33),
-              SvgPicture.asset(R.icons.box),
-              spacingH(4),
-              const Text("Ahmed Raffat"),
-            ]),
-            spacingV(18),
-            const Divider(
-              height: 1,
-              color: Color(0xFFE5E5EF),
-            ),
-            spacingV(16),
-            const LineChartSample(),
+            const ChartSampleBlocBuilder(),
           ],
         ),
       ),
