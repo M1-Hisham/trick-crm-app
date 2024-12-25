@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trick_crm_app/features/home/data/models/dashboard_response.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trick_crm_app/features/home/logic/cubit/dashboard_cubit.dart';
-import 'package:trick_crm_app/features/home/logic/cubit/dashboard_state.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/resources/resources.dart';
-import 'home_card.dart';
+import '../../data/models/dashboard_response.dart';
+import '../../logic/cubit/dashboard_state.dart';
+import 'line_chart.dart';
 
-class CardBlocBuilder extends StatelessWidget {
-  const CardBlocBuilder({super.key});
+class ChartSampleBlocBuilder extends StatelessWidget {
+  const ChartSampleBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class CardBlocBuilder extends StatelessWidget {
           ),
           success: (dashboardResponseModel) {
             final Data? data = dashboardResponseModel.data;
-            return _buildCard(data);
+            return _builedEmployeesChart(data);
           },
           error: (e) => Center(
             child: Text(e),
@@ -36,31 +37,32 @@ class CardBlocBuilder extends StatelessWidget {
       },
     );
   }
-}
 
-Widget _buildCard(Data? data) {
-  return Column(
-    children: [
-      HomeCard(
-        icon: R.icons.numberOfClients,
-        title: 'Number of Clients',
-        // $ number of deals here
-        numberOfTitle: '${data?.clients?.length ?? "Empty"}',
+  Widget _builedEmployeesChart(data) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children:
+              List.generate(data?.topFiveSalesPersons?.length ?? 0, (index) {
+            return Row(
+              children: [
+                SvgPicture.asset(R.icons.box),
+                spacingH(4),
+                Text(data.topFiveSalesPersons?[index].name ?? ''),
+                spacingH(33),
+              ],
+            );
+          }),
+        ),
+      ),
+      spacingV(18),
+      const Divider(
+        height: 1,
+        color: Color(0xFFE5E5EF),
       ),
       spacingV(16),
-      HomeCard(
-        icon: R.icons.numberOfLeads,
-        title: 'Numbers of Leads',
-        // $ number of deals here
-        numberOfTitle: '${data?.leads?.length ?? "Empty"}',
-      ),
-      spacingV(16),
-      HomeCard(
-        icon: R.icons.totalDeals,
-        title: 'Total Deals in Pipeline',
-        // $ number of deals here
-        numberOfTitle: '${data?.deals?.length ?? "Empty"}',
-      ),
-    ],
-  );
+      LineChartSample(data: data),
+    ]);
+  }
 }
