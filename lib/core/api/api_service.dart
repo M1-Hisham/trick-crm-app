@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:trick_crm_app/features/auth/login/data/models/login_request_body.dart';
 import 'package:trick_crm_app/features/auth/login/data/models/login_response.dart';
+import 'package:trick_crm_app/features/leads/create-lead/data/models/create_lead_model.dart';
 import 'package:trick_crm_app/features/leads/data/models/leads_model.dart';
 
 import '../../features/home/data/models/dashboard_response.dart';
+import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
 import 'api_constants.dart';
 
 part 'api_service.g.dart';
@@ -25,4 +27,9 @@ abstract class ApiService {
   /// service for Leads
   @GET(ApiConstants.leads)
   Future<LeadsModel> getLeads();
+
+  /// service for create Lead
+  @POST(ApiConstants.createLead)
+  Future<CreateLeadModel> createLead(
+      @Body() CreateLeadRequestBody createLeadRequestBody);
 }

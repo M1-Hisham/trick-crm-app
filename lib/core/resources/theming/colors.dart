@@ -6,6 +6,7 @@ class AppColors {
   Color iconColor = const Color(0xFF26AEBE);
   Color red = const Color(0xFFC00202);
   Color gray = const Color(0xFFF7F8F9);
+  Color secGray = const Color(0xFFD9D9D9);
   Color shadowGray = const Color(0xFF4A4A4A);
   Color regentGray = const Color(0xFF8391A1);
   Color darkGery = const Color(0xFF6A707C);
