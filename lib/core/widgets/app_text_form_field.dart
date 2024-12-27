@@ -24,6 +24,8 @@ class AppTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
   final int? maxLines;
+  final FormFieldSetter<String>? onSaved;
+  final Key? valueKey;
 
   const AppTextFormField({
     super.key,
@@ -46,20 +48,25 @@ class AppTextFormField extends StatelessWidget {
     this.colorEnableBorder,
     this.labelText,
     this.maxLines,
+    this.onSaved,
+    this.valueKey,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: valueKey,
       onFieldSubmitted: (value) =>
           FocusScope.of(context).requestFocus(nextFocusNode),
       focusNode: focusNode,
+      onSaved: onSaved,
       maxLines: maxLines ?? 1,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
         labelStyle: R.textStyles.font14DimGrayW400.copyWith(
           color: const Color(0XFF2C2E32),
+          fontSize: 13.sp,
           fontWeight: FontWeight.bold,
         ),
         isDense: true,

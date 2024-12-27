@@ -7,4 +7,5 @@ class ApiConstants {
   static const String login = "/login";
   static const String dashboard = "/dashboard";
   static const String leads = "/leads";
+  static const String createLead = "/leads-create";
 }

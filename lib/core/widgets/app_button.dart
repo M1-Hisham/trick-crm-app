@@ -11,7 +11,7 @@ class AppButton extends StatelessWidget {
   final double? borderRadius;
   final Color? backgroundColor;
   final Color? borderColor;
-  final EdgeInsetsGeometry? padding;
+  final Color? overlayColor;
   final TextStyle? textStyle;
   final Widget? icon;
   const AppButton({
@@ -21,10 +21,10 @@ class AppButton extends StatelessWidget {
     this.heigth,
     this.backgroundColor,
     this.borderRadius,
-    this.padding,
     this.textStyle,
     this.icon,
     this.borderColor,
+    this.overlayColor,
   });
 
   @override
@@ -37,14 +37,14 @@ class AppButton extends StatelessWidget {
         icon: icon,
         iconAlignment: IconAlignment.start,
         style: OutlinedButton.styleFrom(
+          overlayColor: overlayColor,
           side: BorderSide(color: borderColor ?? Colors.transparent),
           backgroundColor: backgroundColor ?? R.colors.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius?.r ?? 5.r),
           ),
         ),
-        label: Padding(
-          padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
+        label: FittedBox(
           child: Text(
             text,
             style: textStyle ?? R.textStyles.font18WhiteW600,
