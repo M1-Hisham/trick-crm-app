@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/widgets/app_button.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
+import '../../data/models/create_lead_request_body.dart';
 import 'uploud_image.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -172,7 +177,7 @@ List<Widget> _submitAndCancel(context) {
           child: AppButton(
             icon: SvgPicture.asset(R.icons.createLeads),
             text: "Create Lead",
-            onPressed: () => _submitCrateLead(),
+            onPressed: () => _submitCrateLead(context),
           ),
         ),
         spacingH(10),
@@ -193,10 +198,19 @@ List<Widget> _submitAndCancel(context) {
   ];
 }
 
-void _submitCrateLead() {
+void _submitCrateLead(context) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState?.save();
-    // context.read.<CreateLeadCubit>(getIt())
+    log("_formData: $_formData");
+    var createLeadRequestBody = CreateLeadRequestBody(
+      firstName: _formData['First Name']!,
+      lastName: _formData['Last Name']!,
+      email: _formData['Email']!,
+      mobile: _formData['Phone Number']!,
+    );
+    GetIt.I<CreateLeadCubit>().emitCreateLeadState(createLeadRequestBody);
+    log("createLeadRequestBody: $createLeadRequestBody");
+    log("Submit Successfully");
     Get.back();
   }
 }
