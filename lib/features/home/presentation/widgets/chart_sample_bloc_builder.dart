@@ -42,7 +42,9 @@ class ChartSampleBlocBuilder extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Row(
+        child:
+            // Top 5 Sales Persons
+            Row(
           children:
               List.generate(data?.topFiveSalesPersons?.length ?? 0, (index) {
             return Row(
