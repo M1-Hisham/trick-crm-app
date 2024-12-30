@@ -3,11 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:trick_crm_app/core/widgets/app_button.dart';
-import 'package:trick_crm_app/core/widgets/app_text_form_field.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../create-lead/presentation/create_lead_screen.dart';
-import '../widgets/control_table_button.dart';
 import '../widgets/leads_data_bloc_builder.dart';
 
 class LeadsScreen extends StatelessWidget {
@@ -111,36 +109,8 @@ class LeadsScreen extends StatelessWidget {
                   ],
                 ),
                 spacingV(32),
-                AppTextFormField(
-                  hintText: "search",
-                  colorEnableBorder: const Color(0XFFD1D1D1),
-                  fillColor: R.colors.white,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: const Color(0xFF8A8A8A),
-                    size: 31.dg,
-                  ),
-                ),
                 // leads data table
                 const LeadsDataBlocBuilder(),
-                spacingV(15),
-                Row(
-                  children: [
-                    const Text(
-                      "02 Page of 21",
-                    ),
-                    const Spacer(),
-                    ControlTableButton(
-                      icon: const Icon(Icons.arrow_back_ios_rounded),
-                      onPressed: () {},
-                    ),
-                    spacingH(14),
-                    ControlTableButton(
-                      icon: const Icon(Icons.arrow_forward_ios_rounded),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

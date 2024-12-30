@@ -9,7 +9,7 @@ class ControlTableButton extends StatelessWidget {
   final double? borderRadius;
   final Color? color;
   final Color? colorBorderSide;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   const ControlTableButton({
     super.key,
     this.icon,
