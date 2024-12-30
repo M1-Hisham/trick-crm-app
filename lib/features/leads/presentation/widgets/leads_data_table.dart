@@ -46,6 +46,20 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
       children: [
         AppTextFormField(
           controller: _searchController,
+          suffixIcon: _searchController.text.isNotEmpty
+              ? IconButton(
+                  icon: const Icon(
+                    Icons.close,
+                    color: Color(0xFF8A8A8A),
+                  ),
+                  onPressed: () {
+                    FocusScope.of(context).unfocus();
+                    _searchController.clear();
+                    _filterLeads();
+                  },
+                )
+              : null,
+          keyboardType: TextInputType.text,
           hintText: "search",
           colorEnableBorder: const Color(0XFFD1D1D1),
           onSaved: (newValue) => _filterLeads(),
@@ -85,7 +99,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                 ),
               ),
         spacingV(15),
-        _pageControl(),
+        filteredLeads!.isEmpty ? const SizedBox.shrink() : _pageControl(),
       ],
     );
   }
@@ -153,6 +167,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
       if (query.isEmpty) {
         filteredLeads = leads;
       } else {
+        _currentPage = 1;
         filteredLeads = leads?.where((lead) {
           final leadName = lead.leadName?.toLowerCase() ?? '';
           final leadSource = lead.leadSource?.toLowerCase() ?? '';
@@ -185,7 +200,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
     return Row(
       children: [
         Text(
-          "$_currentPage Page of ${(leads != null && leads!.isNotEmpty ? (leads!.length / _dataPerPage).ceil() : 1)}",
+          "$_currentPage Page of ${(filteredLeads != null && filteredLeads!.isNotEmpty ? (filteredLeads!.length / _dataPerPage).ceil() : 1)}",
         ),
         const Spacer(),
         ControlTableButton(
@@ -195,9 +210,10 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
         spacingH(14),
         ControlTableButton(
           icon: const Icon(Icons.arrow_forward_ios_rounded),
-          onPressed: (_currentPage * _dataPerPage) < (leads?.length ?? 0)
-              ? _loadMore
-              : null,
+          onPressed:
+              (_currentPage * _dataPerPage) < (filteredLeads?.length ?? 0)
+                  ? _loadMore
+                  : null,
         ),
       ],
     );
@@ -214,7 +230,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
   }
 
   void _loadMore() {
-    if ((_currentPage * _dataPerPage) < (leads?.length ?? 0)) {
+    if ((_currentPage * _dataPerPage) < (filteredLeads?.length ?? 0)) {
       setState(() {
         _currentPage++;
       });
