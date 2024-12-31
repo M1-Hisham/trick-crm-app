@@ -73,6 +73,8 @@ dependencies:
   google_nav_bar: ^5.0.7
   # for charts
   fl_chart: ^0.69.2
+  # for slider drawer
+  flutter_slider_drawer: ^2.1.3
 
 
 
