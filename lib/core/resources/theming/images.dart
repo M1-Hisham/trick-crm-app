@@ -1,7 +1,10 @@
 class AppImages {
   String logo = "assets/icons/logo.png";
+  String logoMenu = "assets/icons/trick-logo-menu.png";
   String successmark = "assets/icons/Successmark.svg";
   String eye = "assets/icons/eye-filled.svg";
+  String openMenu = "assets/icons/Vector.svg";
+  String closeMenu = "assets/icons/closeMenu.svg";
   String numberOfClients = "assets/icons/Number-of-clients.svg";
   String numberOfLeads = "assets/icons/Number-of-leads.svg";
   String totalDeals = "assets/icons/total-deals.svg";
@@ -18,4 +21,22 @@ class AppImages {
   String closeIcon = "assets/icons/close-icon.svg";
   String subtract = "assets/icons/Subtract.svg";
   String imageUserError = "assets/icons/image-user-error.png";
+  Map<String, String> iconsMenu = {
+    //! dashboard
+    "dashboard": "assets/icons/iconsMenu/Contacts.svg",
+    "Contacts": "assets/icons/iconsMenu/Contacts.svg",
+    "Leads": "assets/icons/iconsMenu/Leads.svg",
+    "Clients": "assets/icons/iconsMenu/Clients.svg",
+    "Tasks": "assets/icons/iconsMenu/Tasks.svg",
+    "Meetings": "assets/icons/iconsMenu/Meetings.svg",
+    //! calls
+    "calls": "assets/icons/iconsMenu/Deals.svg",
+    "Deals": "assets/icons/iconsMenu/Deals.svg",
+    "Campaigns": "assets/icons/iconsMenu/Campaigns.svg",
+    "Brokers": "assets/icons/iconsMenu/Brokers.svg",
+    "Projects": "assets/icons/iconsMenu/Projects.svg",
+    "Reports": "assets/icons/iconsMenu/Reports.svg",
+    //! "Settings": "assets/icons/iconsMenu/Settings.svg",
+    "Settings": "assets/icons/iconsMenu/Reports.svg",
+  };
 }
