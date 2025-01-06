@@ -16,38 +16,7 @@ class LeadsScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          forceMaterialTransparency: true,
-          toolbarHeight: 60.h,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              color: R.colors.primaryColor,
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(35),
-                bottomRight: Radius.circular(35),
-              ),
-            ),
-          ),
-          leading: const BackButton(),
-          centerTitle: true,
-          title: const Text('Leads'),
-          // nottification icon
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 16.w),
-              child: IconButton(
-                onPressed: () {
-                  //? Add your action here
-                },
-                icon: SvgPicture.asset(
-                  R.icons.notification,
-                  width: 32.w,
-                  height: 32.h,
-                ),
-              ),
-            ),
-          ],
-        ),
+        appBar: appBar(),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(22),
@@ -116,6 +85,41 @@ class LeadsScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      forceMaterialTransparency: true,
+      toolbarHeight: 60.h,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          color: R.colors.primaryColor,
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(35),
+            bottomRight: Radius.circular(35),
+          ),
+        ),
+      ),
+      leading: const BackButton(),
+      centerTitle: true,
+      title: const Text('Leads'),
+      // nottification icon
+      actions: [
+        Padding(
+          padding: EdgeInsets.only(right: 16.w),
+          child: IconButton(
+            onPressed: () {
+              //? Add your action here
+            },
+            icon: SvgPicture.asset(
+              R.icons.notification,
+              width: 32.w,
+              height: 32.h,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

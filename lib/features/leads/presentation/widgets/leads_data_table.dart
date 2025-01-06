@@ -26,6 +26,16 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
   int _currentPage = 1;
   final TextEditingController _searchController = TextEditingController();
 
+  List<String> headers = [
+    "Name",
+    "Lead Source",
+    "Email",
+    "Phone",
+    "Lead Assigned to",
+    "Created At",
+  ];
+  int _switchHeaders = 0;
+
   @override
   void initState() {
     super.initState();
@@ -111,14 +121,20 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
       child: Row(
         children: [
           spacingH(8),
-          _buildHeader("Name"),
-          _buildHeader("Lead Source"),
+          _buildHeader(headers[_switchHeaders]),
+          _buildHeader(headers[_switchHeaders + 1]),
           ControlTableButton(
             icon: const Icon(Icons.arrow_back_ios_rounded),
             color: R.colors.white,
             borderRadius: 50,
             iconSize: 16,
-            onPressed: () {},
+            onPressed: _switchHeaders == 0
+                ? null
+                : () {
+                    setState(() {
+                      _switchHeaders -= 2;
+                    });
+                  },
           ),
           spacingH(8),
           ControlTableButton(
@@ -126,7 +142,13 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
             color: R.colors.white,
             borderRadius: 50,
             iconSize: 16,
-            onPressed: () {},
+            onPressed: _switchHeaders == 4
+                ? null
+                : () {
+                    setState(() {
+                      _switchHeaders += 2;
+                    });
+                  },
           ),
         ],
       ),
@@ -135,10 +157,19 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
 
   Column _tableBody() {
     final currentLeads = _currentLeads;
+
     return Column(
       children: currentLeads != null
           ? currentLeads.map((lead) {
               int index = filteredLeads!.indexOf(lead);
+              final List<String?> leadsBody = [
+                lead.leadName,
+                lead.leadSource,
+                lead.email,
+                lead.mobile,
+                lead.assigned,
+                lead.createdAt,
+              ];
               return Container(
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                 decoration: BoxDecoration(
@@ -150,8 +181,8 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                 ),
                 child: Row(
                   children: [
-                    _buildBody(lead.leadName ?? 'empty'),
-                    _buildBody(lead.leadSource ?? 'empty'),
+                    _buildBody(leadsBody[_switchHeaders] ?? 'empty'),
+                    _buildBody(leadsBody[_switchHeaders + 1] ?? 'empty'),
                     const Icon(Icons.visibility, size: 20),
                   ],
                 ),
