@@ -54,14 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(22),
                   child: Column(
                     children: [
-                      spacingV(7),
-                      AppButton(
-                        text: "Go to leads",
-                        onPressed: () {
-                          Get.toNamed(RoutesNames.leads);
-                        },
-                      ),
-                      spacingV(7),
                       const CardBlocBuilder(),
                       spacingV(22),
                       // const EmployeesChartCard(),
