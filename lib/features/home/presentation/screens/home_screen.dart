@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:trick_crm_app/core/widgets/app_bottom_nav_bar.dart';
-import 'package:trick_crm_app/core/widgets/app_button.dart';
 import 'package:trick_crm_app/features/auth/logout/logout.dart';
 
 import '../../../../core/resources/resources.dart';
