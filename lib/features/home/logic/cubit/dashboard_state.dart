@@ -9,6 +9,9 @@ class DashboardState with _$DashboardState {
   const factory DashboardState.initial() = _Initial;
 
   const factory DashboardState.loading() = Loading;
-  const factory DashboardState.success(DashboardResponseModel dashboardData) = Success;
+  const factory DashboardState.success(DashboardResponseModel dashboardData) =
+      Success;
   const factory DashboardState.error({required String error}) = Error;
+
+  const factory DashboardState.menu({required bool isOpenOrClose}) = Menu;
 }

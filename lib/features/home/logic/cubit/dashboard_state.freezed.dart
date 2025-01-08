@@ -22,6 +22,7 @@ mixin _$DashboardState {
     required TResult Function() loading,
     required TResult Function(DashboardResponseModel dashboardData) success,
     required TResult Function(String error) error,
+    required TResult Function(bool isOpenOrClose) menu,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$DashboardState {
     TResult? Function()? loading,
     TResult? Function(DashboardResponseModel dashboardData)? success,
     TResult? Function(String error)? error,
+    TResult? Function(bool isOpenOrClose)? menu,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$DashboardState {
     TResult Function()? loading,
     TResult Function(DashboardResponseModel dashboardData)? success,
     TResult Function(String error)? error,
+    TResult Function(bool isOpenOrClose)? menu,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$DashboardState {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(Menu value) menu,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$DashboardState {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(Menu value)? menu,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$DashboardState {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(Menu value)? menu,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +140,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(DashboardResponseModel dashboardData) success,
     required TResult Function(String error) error,
+    required TResult Function(bool isOpenOrClose) menu,
   }) {
     return initial();
   }
@@ -145,6 +152,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(DashboardResponseModel dashboardData)? success,
     TResult? Function(String error)? error,
+    TResult? Function(bool isOpenOrClose)? menu,
   }) {
     return initial?.call();
   }
@@ -156,6 +164,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(DashboardResponseModel dashboardData)? success,
     TResult Function(String error)? error,
+    TResult Function(bool isOpenOrClose)? menu,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -171,6 +180,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(Menu value) menu,
   }) {
     return initial(this);
   }
@@ -182,6 +192,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(Menu value)? menu,
   }) {
     return initial?.call(this);
   }
@@ -193,6 +204,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(Menu value)? menu,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -251,6 +263,7 @@ class _$LoadingImpl implements Loading {
     required TResult Function() loading,
     required TResult Function(DashboardResponseModel dashboardData) success,
     required TResult Function(String error) error,
+    required TResult Function(bool isOpenOrClose) menu,
   }) {
     return loading();
   }
@@ -262,6 +275,7 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? loading,
     TResult? Function(DashboardResponseModel dashboardData)? success,
     TResult? Function(String error)? error,
+    TResult? Function(bool isOpenOrClose)? menu,
   }) {
     return loading?.call();
   }
@@ -273,6 +287,7 @@ class _$LoadingImpl implements Loading {
     TResult Function()? loading,
     TResult Function(DashboardResponseModel dashboardData)? success,
     TResult Function(String error)? error,
+    TResult Function(bool isOpenOrClose)? menu,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -288,6 +303,7 @@ class _$LoadingImpl implements Loading {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(Menu value) menu,
   }) {
     return loading(this);
   }
@@ -299,6 +315,7 @@ class _$LoadingImpl implements Loading {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(Menu value)? menu,
   }) {
     return loading?.call(this);
   }
@@ -310,6 +327,7 @@ class _$LoadingImpl implements Loading {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(Menu value)? menu,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -396,6 +414,7 @@ class _$SuccessImpl implements Success {
     required TResult Function() loading,
     required TResult Function(DashboardResponseModel dashboardData) success,
     required TResult Function(String error) error,
+    required TResult Function(bool isOpenOrClose) menu,
   }) {
     return success(dashboardData);
   }
@@ -407,6 +426,7 @@ class _$SuccessImpl implements Success {
     TResult? Function()? loading,
     TResult? Function(DashboardResponseModel dashboardData)? success,
     TResult? Function(String error)? error,
+    TResult? Function(bool isOpenOrClose)? menu,
   }) {
     return success?.call(dashboardData);
   }
@@ -418,6 +438,7 @@ class _$SuccessImpl implements Success {
     TResult Function()? loading,
     TResult Function(DashboardResponseModel dashboardData)? success,
     TResult Function(String error)? error,
+    TResult Function(bool isOpenOrClose)? menu,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -433,6 +454,7 @@ class _$SuccessImpl implements Success {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(Menu value) menu,
   }) {
     return success(this);
   }
@@ -444,6 +466,7 @@ class _$SuccessImpl implements Success {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(Menu value)? menu,
   }) {
     return success?.call(this);
   }
@@ -455,6 +478,7 @@ class _$SuccessImpl implements Success {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(Menu value)? menu,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -549,6 +573,7 @@ class _$ErrorImpl implements Error {
     required TResult Function() loading,
     required TResult Function(DashboardResponseModel dashboardData) success,
     required TResult Function(String error) error,
+    required TResult Function(bool isOpenOrClose) menu,
   }) {
     return error(this.error);
   }
@@ -560,6 +585,7 @@ class _$ErrorImpl implements Error {
     TResult? Function()? loading,
     TResult? Function(DashboardResponseModel dashboardData)? success,
     TResult? Function(String error)? error,
+    TResult? Function(bool isOpenOrClose)? menu,
   }) {
     return error?.call(this.error);
   }
@@ -571,6 +597,7 @@ class _$ErrorImpl implements Error {
     TResult Function()? loading,
     TResult Function(DashboardResponseModel dashboardData)? success,
     TResult Function(String error)? error,
+    TResult Function(bool isOpenOrClose)? menu,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -586,6 +613,7 @@ class _$ErrorImpl implements Error {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
+    required TResult Function(Menu value) menu,
   }) {
     return error(this);
   }
@@ -597,6 +625,7 @@ class _$ErrorImpl implements Error {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
+    TResult? Function(Menu value)? menu,
   }) {
     return error?.call(this);
   }
@@ -608,6 +637,7 @@ class _$ErrorImpl implements Error {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
+    TResult Function(Menu value)? menu,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -626,5 +656,163 @@ abstract class Error implements DashboardState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MenuImplCopyWith<$Res> {
+  factory _$$MenuImplCopyWith(
+          _$MenuImpl value, $Res Function(_$MenuImpl) then) =
+      __$$MenuImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isOpenOrClose});
+}
+
+/// @nodoc
+class __$$MenuImplCopyWithImpl<$Res>
+    extends _$DashboardStateCopyWithImpl<$Res, _$MenuImpl>
+    implements _$$MenuImplCopyWith<$Res> {
+  __$$MenuImplCopyWithImpl(_$MenuImpl _value, $Res Function(_$MenuImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isOpenOrClose = null,
+  }) {
+    return _then(_$MenuImpl(
+      isOpenOrClose: null == isOpenOrClose
+          ? _value.isOpenOrClose
+          : isOpenOrClose // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MenuImpl implements Menu {
+  const _$MenuImpl({required this.isOpenOrClose});
+
+  @override
+  final bool isOpenOrClose;
+
+  @override
+  String toString() {
+    return 'DashboardState.menu(isOpenOrClose: $isOpenOrClose)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MenuImpl &&
+            (identical(other.isOpenOrClose, isOpenOrClose) ||
+                other.isOpenOrClose == isOpenOrClose));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isOpenOrClose);
+
+  /// Create a copy of DashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MenuImplCopyWith<_$MenuImpl> get copyWith =>
+      __$$MenuImplCopyWithImpl<_$MenuImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(DashboardResponseModel dashboardData) success,
+    required TResult Function(String error) error,
+    required TResult Function(bool isOpenOrClose) menu,
+  }) {
+    return menu(isOpenOrClose);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(DashboardResponseModel dashboardData)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(bool isOpenOrClose)? menu,
+  }) {
+    return menu?.call(isOpenOrClose);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(DashboardResponseModel dashboardData)? success,
+    TResult Function(String error)? error,
+    TResult Function(bool isOpenOrClose)? menu,
+    required TResult orElse(),
+  }) {
+    if (menu != null) {
+      return menu(isOpenOrClose);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) error,
+    required TResult Function(Menu value) menu,
+  }) {
+    return menu(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? error,
+    TResult? Function(Menu value)? menu,
+  }) {
+    return menu?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? error,
+    TResult Function(Menu value)? menu,
+    required TResult orElse(),
+  }) {
+    if (menu != null) {
+      return menu(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Menu implements DashboardState {
+  const factory Menu({required final bool isOpenOrClose}) = _$MenuImpl;
+
+  bool get isOpenOrClose;
+
+  /// Create a copy of DashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MenuImplCopyWith<_$MenuImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
