@@ -113,15 +113,23 @@ class AppMenu extends StatelessWidget {
 
   List<Widget> _menuList() {
     List<Widget> menuItems = [];
+    Map<String, String> menuRoutes = {
+      'Dashboard': RoutesNames.home,
+      'Leads': RoutesNames.leads,
+      //? more routes here
+    };
     for (MapEntry menus in R.icons.iconsMenu.entries) {
+      String? routeName = menuRoutes[menus.key];
       menuItems.add(
         Flexible(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: GestureDetector(
-              onTap: () {
-                Get.toNamed(RoutesNames.leads);
-              },
+              onTap: routeName != null
+                  ? () {
+                      Get.toNamed(routeName);
+                    }
+                  : null,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
