@@ -23,7 +23,7 @@ class AppImages {
   String imageUserError = "assets/icons/image-user-error.png";
   Map<String, String> iconsMenu = {
     //! dashboard
-    "dashboard": "assets/icons/iconsMenu/Contacts.svg",
+    "Dashboard": "assets/icons/iconsMenu/Contacts.svg",
     "Contacts": "assets/icons/iconsMenu/Contacts.svg",
     "Leads": "assets/icons/iconsMenu/Leads.svg",
     "Clients": "assets/icons/iconsMenu/Clients.svg",
