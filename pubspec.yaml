@@ -75,6 +75,8 @@ dependencies:
   fl_chart: ^0.69.2
   # for slider drawer
   flutter_slider_drawer: ^2.1.3
+  # for date picker
+  intl: ^0.20.1
 
 
 

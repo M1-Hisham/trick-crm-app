@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
@@ -170,6 +171,12 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                 lead.assigned,
                 lead.createdAt,
               ];
+
+              var dateValue = DateFormat("yyyy-MM-ddTHH:mm:ssZ")
+                  .parseUTC(lead.createdAt ?? "0000-00-00T00:00:21Z")
+                  .toLocal();
+              String formattedDate = DateFormat("yyyy-MM-dd").format(dateValue);
+              leadsBody[5] = formattedDate;
               return Container(
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                 decoration: BoxDecoration(
