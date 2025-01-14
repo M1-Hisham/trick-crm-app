@@ -6,6 +6,7 @@ import 'package:trick_crm_app/core/widgets/app_menu.dart';
 import 'package:trick_crm_app/features/auth/logout/logout.dart';
 
 import '../../logic/cubit/dashboard_cubit.dart';
+import '../widgets/employees_chart_card.dart';
 import '../widgets/home_bar.dart';
 import '../widgets/card_bloc_builder.dart';
 import '../widgets/deals_card.dart';
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       const CardBlocBuilder(),
                       spacingV(22),
-                      // const EmployeesChartCard(),
+                      const EmployeesChartCard(),
                       spacingV(16),
                       const DealsCard(),
                       spacingV(16),

@@ -44,7 +44,6 @@ class _LineChartSampleState extends State<LineChartSample> {
       try {
         // استخراج الشهر والسنة
         final monthName = parts[1]; // "Dec"
-        final year = int.tryParse(parts[2]) ?? 0; // "2024"
 
         // تحويل اسم الشهر إلى رقم الشهر
         final month = {
@@ -123,7 +122,9 @@ class _LineChartSampleState extends State<LineChartSample> {
       maxX: 11, // 12 شهر
       minY: 0,
       maxY:
-          (spots?.map((e) => e.y).reduce((a, b) => a > b ? a : b) ?? 0) + 1000,
+          (spots != null && spots.isNotEmpty
+              ? spots.map((e) => e.y).reduce((a, b) => a > b ? a : b)
+              : 10000),
       lineBarsData: [
         LineChartBarData(
           spots: spots ?? [], // تمرير النقاط المولدة هنا

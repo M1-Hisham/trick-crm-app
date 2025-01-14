@@ -38,7 +38,7 @@ class ChartSampleBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget _builedEmployeesChart(data) {
+  Widget _builedEmployeesChart(Data? data) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -51,7 +51,7 @@ class ChartSampleBlocBuilder extends StatelessWidget {
               children: [
                 SvgPicture.asset(R.icons.box),
                 spacingH(4),
-                Text(data.topFiveSalesPersons?[index].name ?? ''),
+                Text(data!.topFiveSalesPersons?[index].name ?? ''),
                 spacingH(33),
               ],
             );
