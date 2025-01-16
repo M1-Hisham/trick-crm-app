@@ -241,7 +241,7 @@ List<Widget> _submitAndCancel(context) {
           child: AppButton(
             icon: SvgPicture.asset(R.icons.createLeads),
             text: "Create Lead",
-            onPressed: () => _submitCrateLead(context),
+            onPressed: () => _submitCreateLead(context),
           ),
         ),
         spacingH(10),
@@ -262,7 +262,7 @@ List<Widget> _submitAndCancel(context) {
   ];
 }
 
-void _submitCrateLead(context) {
+void _submitCreateLead(context) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState?.save();
     log("_formData: $_formData");

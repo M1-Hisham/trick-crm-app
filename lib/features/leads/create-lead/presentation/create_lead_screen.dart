@@ -14,7 +14,7 @@ class CreateLeadScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetIt.I<CreateLeadCubit>(),
       child: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Stack(
           children: [
             userForm(context),
