@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
+import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 
 import '../../../../../core/helpers/spacing.dart';
@@ -130,6 +131,23 @@ _selectionCase(String fieldName) {
     'ss',
     'tt',
   ];
+  const sectionIndustry = [
+    'ASP (Application Service Provider)',
+    'Data/Telecom OEM',
+    'ERP (Enterprise Resource Planning)',
+    'Government/Military',
+    'Large Enterprise',
+    'Management ISV',
+    'MSP (Managed Service Provider)',
+    'Network Equipment/Security',
+    'Non-management ISV',
+    'Optical Networking',
+    'Service Provider',
+    'Small/Medium Enterprise',
+    'Storage Equipment',
+    'System Integrator',
+    'Wireless Industry',
+  ];
   const sectionRating = [
     'Acquired',
     'Active',
@@ -166,8 +184,8 @@ _selectionCase(String fieldName) {
   ];
   return switch (fieldName) {
     'Lead Owner' => ['selection'],
-    'Assign To' => sectionAssignTo,
-    'Industry' => ['selection'],
+    'Assign To' => ['selection'],
+    'Industry' => sectionIndustry,
     'Rating' => sectionRating,
     'Lead Source' => sectionLeadSource,
     'Lead Status' => sectionLeadStatus,
