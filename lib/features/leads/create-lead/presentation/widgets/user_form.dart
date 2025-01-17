@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
-import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 
 import '../../../../../core/helpers/spacing.dart';
@@ -46,7 +45,7 @@ final Map<String, String> _formData = {};
 
 ScrollController scrollController = ScrollController();
 
-ListView userForm(context) {
+ListView userForm(context, String userName, List<String> assignedToNames) {
   return ListView(
     controller: scrollController,
     shrinkWrap: true,
@@ -60,7 +59,7 @@ ListView userForm(context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ..._getListInformation(),
+            ..._getListInformation(userName, assignedToNames),
           ],
         ),
       ),
@@ -70,7 +69,10 @@ ListView userForm(context) {
   );
 }
 
-List<Widget> _getListInformation() {
+List<Widget> _getListInformation(
+  String userName,
+  List<String> assignedToNames,
+) {
   List<Widget> childs = [];
   const sectionHeaders = [
     'Lead Information',
@@ -96,7 +98,8 @@ List<Widget> _getListInformation() {
           padding: const EdgeInsets.only(bottom: 22),
           child: AppSelectionFormField(
             labelText: fieldName,
-            selections: _selectionCase(fieldName),
+            selections: _selectionCase(fieldName, userName, assignedToNames) ??
+                ['none'],
             onSaved: (value) {
               _formData[fieldName] = value!;
             },
@@ -125,11 +128,17 @@ List<Widget> _getListInformation() {
   return childs;
 }
 
-_selectionCase(String fieldName) {
+List<String>? _selectionCase(
+  String fieldName,
+  String userName,
+  List<String> assignedToNames,
+) {
+  final sectionLeadOwner = [
+    '$userName(you)',
+  ];
   final sectionAssignTo = [
-    // '$userName(you)',
-    'ss',
-    'tt',
+    '$userName(you)',
+    ...assignedToNames,
   ];
   const sectionIndustry = [
     'ASP (Application Service Provider)',
@@ -183,8 +192,8 @@ _selectionCase(String fieldName) {
     'Not Contacted',
   ];
   return switch (fieldName) {
-    'Lead Owner' => ['selection'],
-    'Assign To' => ['selection'],
+    'Lead Owner' => sectionLeadOwner,
+    'Assign To' => sectionAssignTo,
     'Industry' => sectionIndustry,
     'Rating' => sectionRating,
     'Lead Source' => sectionLeadSource,
