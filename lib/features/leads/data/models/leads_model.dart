@@ -80,32 +80,32 @@ class Leads {
   @JsonKey(name: 'owner_id')
   String? ownerName;
   @JsonKey(name: 'first_name')
-  dynamic firstName;
+  String? firstName;
   @JsonKey(name: 'last_name')
-  dynamic lastName;
+  String? lastName;
   @JsonKey(name: 'lead_name')
   String? leadName;
-  dynamic company;
+  String? company;
   @JsonKey(name: 'job_title')
-  dynamic jobTitle;
+  String? jobTitle;
   String? email;
   String? mobile;
   @JsonKey(name: 'mobile_2')
-  dynamic mobile2;
-  dynamic website;
-  dynamic rating;
+  String? mobile2;
+  String? website;
+  String? rating;
   @JsonKey(name: 'lead_status')
-  dynamic leadStatus;
+  String? leadStatus;
   @JsonKey(name: 'lead_source')
   String? leadSource;
-  dynamic industry;
+  String? industry;
   @JsonKey(name: 'annual_revenue')
-  dynamic annualRevenue;
+  String? annualRevenue;
   String? image;
-  dynamic country;
-  dynamic city;
-  dynamic state;
-  dynamic description;
+  String? country;
+  String? city;
+  String? state;
+  String? description;
   @JsonKey(name: 'fb_lead_id')
   int? fbLeadId;
   @JsonKey(name: 'fb_ad_name')

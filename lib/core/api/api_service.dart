@@ -7,6 +7,7 @@ import 'package:trick_crm_app/features/leads/data/models/leads_model.dart';
 
 import '../../features/home/data/models/dashboard_response.dart';
 import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
+import '../../features/leads/leads-view/data/model/leads_view_model.dart';
 import 'api_constants.dart';
 
 part 'api_service.g.dart';
@@ -32,4 +33,8 @@ abstract class ApiService {
   @POST(ApiConstants.createLead)
   Future<CreateLeadModel> createLead(
       @Body() CreateLeadRequestBody createLeadRequestBody);
+
+  /// service for Leads View
+  @GET("/leads/{id}/view")
+  Future<LeadsViewModel> getLeadsView(@Path("id") int id);
 }
