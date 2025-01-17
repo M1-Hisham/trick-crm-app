@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -9,6 +8,7 @@ import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/widgets/app_button.dart';
+import '../../../../../core/widgets/app_selection_form_field.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
 import '../../data/models/create_lead_request_body.dart';
 import 'uploud_image.dart';
@@ -17,8 +17,8 @@ final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 final Map<String, dynamic> _requiredFields = {
   'Lead Information': null,
-  'Lead Owner': false,
-  'Assign To': false,
+  'Lead Owner': 'selection',
+  'Assign To': 'selection',
   'Contact Information': null,
   'First Name': true,
   'Last Name': true,
@@ -27,16 +27,16 @@ final Map<String, dynamic> _requiredFields = {
   'Phone Number': true,
   'Sec Phone Number': false,
   'Company': false,
-  'Industry': false,
-  'Rating': false,
+  'Industry': 'selection',
+  'Rating': 'selection',
   'Annual Revenue': false,
   'Website': false,
-  'Lead Source': false,
-  'Lead Status': false,
+  'Lead Source': 'selection',
+  'Lead Status': 'selection',
   'Secondary Email': false,
   'Address Information': null,
   'State': false,
-  'Counntry': false,
+  'Country': false,
   'City': false,
   'Description Information': null,
   'Description': false,
@@ -45,7 +45,7 @@ final Map<String, String> _formData = {};
 
 ScrollController scrollController = ScrollController();
 
-ListView userForm(context) {
+ListView userForm(context, String userName, List<String> assignedToNames) {
   return ListView(
     controller: scrollController,
     shrinkWrap: true,
@@ -59,7 +59,7 @@ ListView userForm(context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ..._getListInformation(),
+            ..._getListInformation(userName, assignedToNames),
           ],
         ),
       ),
@@ -69,7 +69,10 @@ ListView userForm(context) {
   );
 }
 
-List<Widget> _getListInformation() {
+List<Widget> _getListInformation(
+  String userName,
+  List<String> assignedToNames,
+) {
   List<Widget> childs = [];
   const sectionHeaders = [
     'Lead Information',
@@ -86,6 +89,20 @@ List<Widget> _getListInformation() {
           child: Text(
             fieldName,
             style: R.textStyles.font17PrimaryW600,
+          ),
+        ),
+      );
+    } else if (_requiredFields[fieldName] == 'selection') {
+      childs.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 22),
+          child: AppSelectionFormField(
+            labelText: fieldName,
+            selections: _selectionCase(fieldName, userName, assignedToNames) ??
+                ['none'],
+            onSaved: (value) {
+              _formData[fieldName] = value!;
+            },
           ),
         ),
       );
@@ -109,6 +126,80 @@ List<Widget> _getListInformation() {
     }
   }
   return childs;
+}
+
+List<String>? _selectionCase(
+  String fieldName,
+  String userName,
+  List<String> assignedToNames,
+) {
+  final sectionLeadOwner = [
+    '$userName(you)',
+  ];
+  final sectionAssignTo = [
+    '$userName(you)',
+    ...assignedToNames,
+  ];
+  const sectionIndustry = [
+    'ASP (Application Service Provider)',
+    'Data/Telecom OEM',
+    'ERP (Enterprise Resource Planning)',
+    'Government/Military',
+    'Large Enterprise',
+    'Management ISV',
+    'MSP (Managed Service Provider)',
+    'Network Equipment/Security',
+    'Non-management ISV',
+    'Optical Networking',
+    'Service Provider',
+    'Small/Medium Enterprise',
+    'Storage Equipment',
+    'System Integrator',
+    'Wireless Industry',
+  ];
+  const sectionRating = [
+    'Acquired',
+    'Active',
+    'Market Failed',
+    'Project Cancelled',
+    'Shut Down',
+  ];
+  const sectionLeadSource = [
+    'Advertisement',
+    'Cold Call',
+    'Employee Referral',
+    'External Referral',
+    'Online Store',
+    'Twitter',
+    'Facebook',
+    'partner',
+    'Google+',
+    'Public Relations',
+    'Sales Email',
+    'Seminar Partner',
+    'Internal Seminar',
+    'Trade Show',
+    'Web Download',
+    'Web Research',
+    'Chat',
+  ];
+  const sectionLeadStatus = [
+    'Attempted to Contact',
+    'Contact in Future',
+    'Contacted',
+    'Junk Lead',
+    'Lost Lead',
+    'Not Contacted',
+  ];
+  return switch (fieldName) {
+    'Lead Owner' => sectionLeadOwner,
+    'Assign To' => sectionAssignTo,
+    'Industry' => sectionIndustry,
+    'Rating' => sectionRating,
+    'Lead Source' => sectionLeadSource,
+    'Lead Status' => sectionLeadStatus,
+    _ => null,
+  };
 }
 
 _validateAllFields(fieldName, value) {
@@ -177,7 +268,7 @@ List<Widget> _submitAndCancel(context) {
           child: AppButton(
             icon: SvgPicture.asset(R.icons.createLeads),
             text: "Create Lead",
-            onPressed: () => _submitCrateLead(context),
+            onPressed: () => _submitCreateLead(context),
           ),
         ),
         spacingH(10),
@@ -198,7 +289,7 @@ List<Widget> _submitAndCancel(context) {
   ];
 }
 
-void _submitCrateLead(context) {
+void _submitCreateLead(context) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState?.save();
     log("_formData: $_formData");
@@ -207,6 +298,28 @@ void _submitCrateLead(context) {
       lastName: _formData['Last Name']!,
       email: _formData['Email']!,
       mobile: _formData['Phone Number']!,
+      image: null,
+      saluation: null,
+      // leadOwner: 'leadOwner',
+      leadName: null,
+      company: _formData['Company']!,
+      jobTitle: _formData['Title']!,
+      mobile2: _formData['Sec Phone Number']!,
+      website: _formData['Website']!,
+      rating: _formData['Rating']!,
+      leadStatus: _formData['Lead Status']!,
+      leadSource: _formData['Lead Source']!,
+      annualRevenue: null,
+      industry: null,
+      country: _formData['Country']!,
+      city: _formData['City']!,
+      state: _formData['State']!,
+      description: _formData['Description']!,
+      assignedToId: null,
+      endTime: null,
+      endTimeHour: null,
+      userId: null,
+      tenantId: null,
     );
     GetIt.I<CreateLeadCubit>().emitCreateLeadState(createLeadRequestBody);
     log("createLeadRequestBody: $createLeadRequestBody");
