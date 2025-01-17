@@ -7,6 +7,7 @@ import 'package:trick_crm_app/features/leads/presentation/screens/leads_screen.d
 import '../../features/auth/login/logic/cubit/login_cubit.dart';
 import '../../features/auth/login/presentation/screens/login_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/leads/leads-view/presentation/screens/leads_view.dart';
 import '../../features/leads/logic/cubit/leads_cubit.dart';
 import '../../features/splash/splash_screen.dart';
 import '../di/dependency_injection.dart';
@@ -34,6 +35,10 @@ abstract class AppRouter {
         create: (context) => LeadsCubit(getIt())..getLeads(),
         child: const LeadsScreen(),
       ),
+    ),
+    GetPage(
+      name: RoutesNames.leadsView,
+      page: () => const LeadsView(),
     ),
   ];
 }
