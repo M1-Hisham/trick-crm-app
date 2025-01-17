@@ -193,10 +193,14 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                     _buildBody(leadsBody[_switchHeaders] ?? 'empty'),
                     _buildBody(leadsBody[_switchHeaders + 1] ?? 'empty'),
                     GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RoutesNames.leadsView);
-                        },
-                        child: const Icon(Icons.visibility, size: 20)),
+                      onTap: () {
+                        Get.toNamed(
+                          RoutesNames.leadsView,
+                          arguments: lead.id,
+                        );
+                      },
+                      child: Icon(Icons.visibility, size: 20.sp),
+                    ),
                   ],
                 ),
               );
