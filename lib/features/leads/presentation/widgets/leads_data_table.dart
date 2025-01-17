@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/resources/resources.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
 import '../../data/models/leads_model.dart';
 import 'control_table_button.dart';
@@ -190,7 +192,11 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                   children: [
                     _buildBody(leadsBody[_switchHeaders] ?? 'empty'),
                     _buildBody(leadsBody[_switchHeaders + 1] ?? 'empty'),
-                    const Icon(Icons.visibility, size: 20),
+                    GestureDetector(
+                        onTap: () {
+                          Get.toNamed(RoutesNames.leadsView);
+                        },
+                        child: const Icon(Icons.visibility, size: 20)),
                   ],
                 ),
               );

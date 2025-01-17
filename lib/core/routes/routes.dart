@@ -7,5 +7,6 @@ class RoutesNames {
   static const String loginSuccessful = '/login_Successful';
   static const String home = '/home';
   static const String leads = '/leads';
+  static const String leadsView = '/leads_view';
   
 }
