@@ -1,95 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'leads_model.dart';
+part of 'edit_lead_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LeadsModel _$LeadsModelFromJson(Map<String, dynamic> json) => LeadsModel(
+EditLeadModel _$EditLeadModelFromJson(Map<String, dynamic> json) =>
+    EditLeadModel(
       status: json['status'] as String?,
-      message: json['message'] as String?,
+      lead: json['lead'] == null
+          ? null
+          : Lead.fromJson(json['lead'] as Map<String, dynamic>),
       users: (json['users'] as List<dynamic>?)
           ?.map((e) => Users.fromJson(e as Map<String, dynamic>))
           .toList(),
-      leads: (json['leads'] as List<dynamic>?)
-          ?.map((e) => Leads.fromJson(e as Map<String, dynamic>))
-          .toList(),
     );
 
-Map<String, dynamic> _$LeadsModelToJson(LeadsModel instance) =>
+Map<String, dynamic> _$EditLeadModelToJson(EditLeadModel instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'message': instance.message,
+      'lead': instance.lead,
       'users': instance.users,
-      'leads': instance.leads,
     };
 
-Users _$UsersFromJson(Map<String, dynamic> json) => Users(
-      id: (json['id'] as num?)?.toInt(),
-      name: json['name'] as String?,
-      email: json['email'] as String?,
-      tenantId: json['tenant_id'] as String?,
-      emailVerifiedAt: json['email_verified_at'],
-      departmentId: (json['department_id'] as num?)?.toInt(),
-      companyId: (json['company_id'] as num?)?.toInt(),
-      avatar: json['avatar'] as String?,
-      roleAs: (json['role_as'] as num?)?.toInt(),
-      isTenant: (json['is_tenant'] as num?)?.toInt(),
-      isActive: (json['is_active'] as num?)?.toInt(),
-      createdAt: json['created_at'] as String?,
-      updatedAt: json['updated_at'] as String?,
-      department: json['department'] == null
-          ? null
-          : Department.fromJson(json['department'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$UsersToJson(Users instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'email': instance.email,
-      'tenant_id': instance.tenantId,
-      'email_verified_at': instance.emailVerifiedAt,
-      'department_id': instance.departmentId,
-      'company_id': instance.companyId,
-      'avatar': instance.avatar,
-      'role_as': instance.roleAs,
-      'is_tenant': instance.isTenant,
-      'is_active': instance.isActive,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
-      'department': instance.department,
-    };
-
-Department _$DepartmentFromJson(Map<String, dynamic> json) => Department(
-      id: (json['id'] as num?)?.toInt(),
-      tenantId: json['tenant_id'] as String?,
-      name: json['name'] as String?,
-      createdAt: json['created_at'] as String?,
-      updatedAt: json['updated_at'] as String?,
-    );
-
-Map<String, dynamic> _$DepartmentToJson(Department instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'tenant_id': instance.tenantId,
-      'name': instance.name,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
-    };
-
-Leads _$LeadsFromJson(Map<String, dynamic> json) => Leads(
+Lead _$LeadFromJson(Map<String, dynamic> json) => Lead(
       id: (json['id'] as num?)?.toInt(),
       userId: (json['user_id'] as num?)?.toInt(),
       assignedToId: (json['assigned_to_id'] as num?)?.toInt(),
       tenantId: json['tenant_id'] as String?,
-      compaingId: json['company_id'],
+      compaingId: json['compaing_id'],
       saluation: json['saluation'],
       ownerName: json['owner_name'] as String?,
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
       leadName: json['lead_name'] as String?,
-      company: json['company'],
+      company: json['company'] as String?,
       jobTitle: json['job_title'] as String?,
       email: json['email'] as String?,
       mobile: json['mobile'] as String?,
@@ -106,13 +52,13 @@ Leads _$LeadsFromJson(Map<String, dynamic> json) => Leads(
       state: json['state'] as String?,
       description: json['description'] as String?,
       fbLeadId: json['fb_lead_id'],
-      fbAdName: json['fb_ad_name'] as String?,
-      fbCampaignName: json['fb_campaign_name'] as String?,
+      fbAdName: json['fb_ad_name'],
+      fbCampaignName: json['fb_campaign_name'],
       convertedDealId: json['converted_deal_id'],
       convertedClientId: json['converted_client_id'],
       isConverted: (json['is_converted'] as num?)?.toInt(),
-      endTime: json['end_time'],
-      endTimeHour: json['end_time_hour'],
+      endTime: json['end_time'] as String?,
+      endTimeHour: json['end_time_hour'] as String?,
       deletedAt: json['deleted_at'],
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
@@ -121,12 +67,12 @@ Leads _$LeadsFromJson(Map<String, dynamic> json) => Leads(
           : Assigned.fromJson(json['assigned'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$LeadsToJson(Leads instance) => <String, dynamic>{
+Map<String, dynamic> _$LeadToJson(Lead instance) => <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
       'assigned_to_id': instance.assignedToId,
       'tenant_id': instance.tenantId,
-      'company_id': instance.compaingId,
+      'compaing_id': instance.compaingId,
       'saluation': instance.saluation,
       'owner_name': instance.ownerName,
       'first_name': instance.firstName,
@@ -209,6 +155,61 @@ AssignedDepartment _$AssignedDepartmentFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$AssignedDepartmentToJson(AssignedDepartment instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'tenant_id': instance.tenantId,
+      'name': instance.name,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
+    };
+
+Users _$UsersFromJson(Map<String, dynamic> json) => Users(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      tenantId: json['tenant_id'] as String?,
+      emailVerifiedAt: json['email_verified_at'],
+      departmentId: (json['department_id'] as num?)?.toInt(),
+      companyId: (json['company_id'] as num?)?.toInt(),
+      avatar: json['avatar'] as String?,
+      roleAs: (json['role_as'] as num?)?.toInt(),
+      isTenant: (json['is_tenant'] as num?)?.toInt(),
+      isActive: (json['is_active'] as num?)?.toInt(),
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      department: json['department'] == null
+          ? null
+          : UsersDepartment.fromJson(
+              json['department'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsersToJson(Users instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'email': instance.email,
+      'tenant_id': instance.tenantId,
+      'email_verified_at': instance.emailVerifiedAt,
+      'department_id': instance.departmentId,
+      'company_id': instance.companyId,
+      'avatar': instance.avatar,
+      'role_as': instance.roleAs,
+      'is_tenant': instance.isTenant,
+      'is_active': instance.isActive,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
+      'department': instance.department,
+    };
+
+UsersDepartment _$UsersDepartmentFromJson(Map<String, dynamic> json) =>
+    UsersDepartment(
+      id: (json['id'] as num?)?.toInt(),
+      tenantId: json['tenant_id'] as String?,
+      name: json['name'] as String?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+
+Map<String, dynamic> _$UsersDepartmentToJson(UsersDepartment instance) =>
     <String, dynamic>{
       'id': instance.id,
       'tenant_id': instance.tenantId,

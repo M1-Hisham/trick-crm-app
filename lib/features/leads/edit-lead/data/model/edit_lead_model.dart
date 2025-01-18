@@ -1,83 +1,21 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'leads_model.g.dart';
+part 'edit_lead_model.g.dart';
 
 @JsonSerializable()
-class LeadsModel {
+class EditLeadModel {
   String? status;
-  String? message;
+  Lead? lead;
   List<Users>? users;
-  List<Leads>? leads;
 
-  LeadsModel({this.status, this.message, this.users, this.leads});
-  factory LeadsModel.fromJson(Map<String, dynamic> json) =>
-      _$LeadsModelFromJson(json);
+  EditLeadModel({this.status, this.lead, this.users});
+
+  factory EditLeadModel.fromJson(Map<String, dynamic> json) =>
+      _$EditLeadModelFromJson(json);
 }
 
 @JsonSerializable()
-class Users {
-  int? id;
-  String? name;
-  String? email;
-  @JsonKey(name: 'tenant_id')
-  String? tenantId;
-  @JsonKey(name: 'email_verified_at')
-  dynamic emailVerifiedAt;
-  @JsonKey(name: 'department_id')
-  int? departmentId;
-  @JsonKey(name: 'company_id')
-  int? companyId;
-  String? avatar;
-  @JsonKey(name: 'role_as')
-  int? roleAs;
-  @JsonKey(name: 'is_tenant')
-  int? isTenant;
-  @JsonKey(name: 'is_active')
-  int? isActive;
-  @JsonKey(name: 'created_at')
-  String? createdAt;
-  @JsonKey(name: 'updated_at')
-  String? updatedAt;
-  Department? department;
-
-  Users({
-    this.id,
-    this.name,
-    this.email,
-    this.tenantId,
-    this.emailVerifiedAt,
-    this.departmentId,
-    this.companyId,
-    this.avatar,
-    this.roleAs,
-    this.isTenant,
-    this.isActive,
-    this.createdAt,
-    this.updatedAt,
-    this.department,
-  });
-  factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);
-}
-
-@JsonSerializable()
-class Department {
-  int? id;
-  @JsonKey(name: 'tenant_id')
-  String? tenantId;
-  String? name;
-  @JsonKey(name: 'created_at')
-  String? createdAt;
-  @JsonKey(name: 'updated_at')
-  String? updatedAt;
-
-  Department(
-      {this.id, this.tenantId, this.name, this.createdAt, this.updatedAt});
-  factory Department.fromJson(Map<String, dynamic> json) =>
-      _$DepartmentFromJson(json);
-}
-
-@JsonSerializable()
-class Leads {
+class Lead {
   int? id;
   @JsonKey(name: 'user_id')
   int? userId;
@@ -85,7 +23,7 @@ class Leads {
   int? assignedToId;
   @JsonKey(name: 'tenant_id')
   String? tenantId;
-  @JsonKey(name: 'company_id')
+  @JsonKey(name: 'compaing_id')
   dynamic compaingId;
   dynamic saluation;
   @JsonKey(name: 'owner_name')
@@ -96,7 +34,7 @@ class Leads {
   String? lastName;
   @JsonKey(name: 'lead_name')
   String? leadName;
-  dynamic company;
+  String? company;
   @JsonKey(name: 'job_title')
   String? jobTitle;
   String? email;
@@ -120,9 +58,9 @@ class Leads {
   @JsonKey(name: 'fb_lead_id')
   dynamic fbLeadId;
   @JsonKey(name: 'fb_ad_name')
-  String? fbAdName;
+  dynamic fbAdName;
   @JsonKey(name: 'fb_campaign_name')
-  String? fbCampaignName;
+  dynamic fbCampaignName;
   @JsonKey(name: 'converted_deal_id')
   dynamic convertedDealId;
   @JsonKey(name: 'converted_client_id')
@@ -130,9 +68,9 @@ class Leads {
   @JsonKey(name: 'is_converted')
   int? isConverted;
   @JsonKey(name: 'end_time')
-  dynamic endTime;
+  String? endTime;
   @JsonKey(name: 'end_time_hour')
-  dynamic endTimeHour;
+  String? endTimeHour;
   @JsonKey(name: 'deleted_at')
   dynamic deletedAt;
   @JsonKey(name: 'created_at')
@@ -141,7 +79,7 @@ class Leads {
   String? updatedAt;
   Assigned? assigned;
 
-  Leads({
+  Lead({
     this.id,
     this.userId,
     this.assignedToId,
@@ -182,7 +120,7 @@ class Leads {
     this.assigned,
   });
 
-  factory Leads.fromJson(Map<String, dynamic> json) => _$LeadsFromJson(json);
+  factory Lead.fromJson(Map<String, dynamic> json) => _$LeadFromJson(json);
 }
 
 @JsonSerializable()
@@ -248,4 +186,68 @@ class AssignedDepartment {
 
   factory AssignedDepartment.fromJson(Map<String, dynamic> json) =>
       _$AssignedDepartmentFromJson(json);
+}
+
+@JsonSerializable()
+class Users {
+  int? id;
+  String? name;
+  String? email;
+  @JsonKey(name: 'tenant_id')
+  String? tenantId;
+  @JsonKey(name: 'email_verified_at')
+  dynamic emailVerifiedAt;
+  @JsonKey(name: 'department_id')
+  int? departmentId;
+  @JsonKey(name: 'company_id')
+  int? companyId;
+  String? avatar;
+  @JsonKey(name: 'role_as')
+  int? roleAs;
+  @JsonKey(name: 'is_tenant')
+  int? isTenant;
+  @JsonKey(name: 'is_active')
+  int? isActive;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+  @JsonKey(name: 'updated_at')
+  String? updatedAt;
+  UsersDepartment? department;
+
+  Users({
+    this.id,
+    this.name,
+    this.email,
+    this.tenantId,
+    this.emailVerifiedAt,
+    this.departmentId,
+    this.companyId,
+    this.avatar,
+    this.roleAs,
+    this.isTenant,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.department,
+  });
+
+  factory Users.fromJson(Map<String, dynamic> json) => _$UsersFromJson(json);
+}
+
+@JsonSerializable()
+class UsersDepartment {
+  int? id;
+  @JsonKey(name: 'tenant_id')
+  String? tenantId;
+  String? name;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+  @JsonKey(name: 'updated_at')
+  String? updatedAt;
+
+  UsersDepartment(
+      {this.id, this.tenantId, this.name, this.createdAt, this.updatedAt});
+
+  factory UsersDepartment.fromJson(Map<String, dynamic> json) =>
+      _$UsersDepartmentFromJson(json);
 }
