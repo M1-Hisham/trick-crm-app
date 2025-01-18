@@ -51,7 +51,7 @@ class Lead {
   @JsonKey(name: 'user_id')
   int? userId;
   @JsonKey(name: 'assigned_to_id')
-  String? assignedToId;
+  int? assignedToId;
   @JsonKey(name: 'tenant_id')
   String? tenantId;
   @JsonKey(name: 'compaing_id')
@@ -80,7 +80,7 @@ class Lead {
   String? leadSource;
   String? industry;
   @JsonKey(name: 'annual_revenue')
-  String? annualRevenue;
+  int? annualRevenue;
   String? image;
   String? country;
   String? city;
@@ -108,7 +108,7 @@ class Lead {
   String? createdAt;
   @JsonKey(name: 'updated_at')
   String? updatedAt;
-  String? assigned;
+  Assigned? assigned;
 
   Lead({
     this.id,
@@ -152,6 +152,71 @@ class Lead {
   });
 
   factory Lead.fromJson(Map<String, dynamic> json) => _$LeadFromJson(json);
+}
+
+@JsonSerializable()
+class Assigned {
+  int? id;
+  String? name;
+  String? email;
+  @JsonKey(name: 'tenant_id')
+  String? tenantId;
+  @JsonKey(name: 'email_verified_at')
+  String? emailVerifiedAt;
+  @JsonKey(name: 'department_id')
+  int? departmentId;
+  @JsonKey(name: 'company_id')
+  int? companyId;
+  String? avatar;
+  @JsonKey(name: 'role_as')
+  int? roleAs;
+  @JsonKey(name: 'is_tenant')
+  int? isTenant;
+  @JsonKey(name: 'is_active')
+  int? isActive;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+  @JsonKey(name: 'updated_at')
+  String? updatedAt;
+  AssignedDepartment? department;
+
+  Assigned({
+    this.id,
+    this.name,
+    this.email,
+    this.tenantId,
+    this.emailVerifiedAt,
+    this.departmentId,
+    this.companyId,
+    this.avatar,
+    this.roleAs,
+    this.isTenant,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.department,
+  });
+
+  factory Assigned.fromJson(Map<String, dynamic> json) =>
+      _$AssignedFromJson(json);
+}
+
+@JsonSerializable()
+class AssignedDepartment {
+  int? id;
+  @JsonKey(name: 'tenant_id')
+  String? tenantId;
+  String? name;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+  @JsonKey(name: 'updated_at')
+  String? updatedAt;
+
+  AssignedDepartment(
+      {this.id, this.tenantId, this.name, this.createdAt, this.updatedAt});
+
+  factory AssignedDepartment.fromJson(Map<String, dynamic> json) =>
+      _$AssignedDepartmentFromJson(json);
 }
 
 @JsonSerializable()
@@ -450,7 +515,7 @@ class Subject {
   dynamic deletedAt;
   String? createdAt;
   String? updatedAt;
-  String? assigned;
+  Assigned? assigned;
 
   Subject({
     this.id,
