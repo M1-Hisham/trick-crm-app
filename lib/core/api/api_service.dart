@@ -4,6 +4,7 @@ import 'package:trick_crm_app/features/auth/login/data/models/login_request_body
 import 'package:trick_crm_app/features/auth/login/data/models/login_response.dart';
 import 'package:trick_crm_app/features/leads/create-lead/data/models/create_lead_model.dart';
 import 'package:trick_crm_app/features/leads/data/models/leads_model.dart';
+import 'package:trick_crm_app/features/leads/edit-lead/data/model/edit_lead_model.dart';
 
 import '../../features/home/data/models/dashboard_response.dart';
 import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
@@ -37,4 +38,8 @@ abstract class ApiService {
   /// service for Leads View
   @GET("/leads/{id}/view")
   Future<LeadsViewModel> getLeadsView(@Path("id") int id);
+  
+  /// service for Leads Edit
+  @GET("/leads/{id}/edit")
+  Future<EditLeadModel> getEditLead(@Path("id") int id);
 }

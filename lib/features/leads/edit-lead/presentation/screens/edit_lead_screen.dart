@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EditLead extends StatelessWidget {
-  const EditLead({super.key});
+class EditLeadScreen extends StatelessWidget {
+  const EditLeadScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
