@@ -61,7 +61,7 @@ Map<String, dynamic> _$LeadsViewModelToJson(LeadsViewModel instance) =>
 Lead _$LeadFromJson(Map<String, dynamic> json) => Lead(
       id: (json['id'] as num?)?.toInt(),
       userId: (json['user_id'] as num?)?.toInt(),
-      assignedToId: json['assigned_to_id'] as String?,
+      assignedToId: (json['assigned_to_id'] as num?)?.toInt(),
       tenantId: json['tenant_id'] as String?,
       compaingId: json['compaing_id'] as String?,
       saluation: json['saluation'] as String?,
@@ -79,7 +79,7 @@ Lead _$LeadFromJson(Map<String, dynamic> json) => Lead(
       leadStatus: json['lead_status'] as String?,
       leadSource: json['lead_source'] as String?,
       industry: json['industry'] as String?,
-      annualRevenue: json['annual_revenue'] as String?,
+      annualRevenue: (json['annual_revenue'] as num?)?.toInt(),
       image: json['image'] as String?,
       country: json['country'] as String?,
       city: json['city'] as String?,
@@ -96,7 +96,9 @@ Lead _$LeadFromJson(Map<String, dynamic> json) => Lead(
       deletedAt: json['deleted_at'],
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      assigned: json['assigned'] as String?,
+      assigned: json['assigned'] == null
+          ? null
+          : Assigned.fromJson(json['assigned'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LeadToJson(Lead instance) => <String, dynamic>{
@@ -138,6 +140,61 @@ Map<String, dynamic> _$LeadToJson(Lead instance) => <String, dynamic>{
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'assigned': instance.assigned,
+    };
+
+Assigned _$AssignedFromJson(Map<String, dynamic> json) => Assigned(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      tenantId: json['tenant_id'] as String?,
+      emailVerifiedAt: json['email_verified_at'] as String?,
+      departmentId: (json['department_id'] as num?)?.toInt(),
+      companyId: (json['company_id'] as num?)?.toInt(),
+      avatar: json['avatar'] as String?,
+      roleAs: (json['role_as'] as num?)?.toInt(),
+      isTenant: (json['is_tenant'] as num?)?.toInt(),
+      isActive: (json['is_active'] as num?)?.toInt(),
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      department: json['department'] == null
+          ? null
+          : AssignedDepartment.fromJson(
+              json['department'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssignedToJson(Assigned instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'email': instance.email,
+      'tenant_id': instance.tenantId,
+      'email_verified_at': instance.emailVerifiedAt,
+      'department_id': instance.departmentId,
+      'company_id': instance.companyId,
+      'avatar': instance.avatar,
+      'role_as': instance.roleAs,
+      'is_tenant': instance.isTenant,
+      'is_active': instance.isActive,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
+      'department': instance.department,
+    };
+
+AssignedDepartment _$AssignedDepartmentFromJson(Map<String, dynamic> json) =>
+    AssignedDepartment(
+      id: (json['id'] as num?)?.toInt(),
+      tenantId: json['tenant_id'] as String?,
+      name: json['name'] as String?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+
+Map<String, dynamic> _$AssignedDepartmentToJson(AssignedDepartment instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'tenant_id': instance.tenantId,
+      'name': instance.name,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
     };
 
 Users _$UsersFromJson(Map<String, dynamic> json) => Users(
@@ -386,7 +443,9 @@ Subject _$SubjectFromJson(Map<String, dynamic> json) => Subject(
       deletedAt: json['deletedAt'],
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
-      assigned: json['assigned'] as String?,
+      assigned: json['assigned'] == null
+          ? null
+          : Assigned.fromJson(json['assigned'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SubjectToJson(Subject instance) => <String, dynamic>{
