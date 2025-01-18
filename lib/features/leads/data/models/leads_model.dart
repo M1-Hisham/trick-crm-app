@@ -19,16 +19,24 @@ class Users {
   int? id;
   String? name;
   String? email;
+  @JsonKey(name: 'tenant_id')
   String? tenantId;
-  // String? emailVerifiedAt;
+  @JsonKey(name: 'email_verified_at')
   dynamic emailVerifiedAt;
+  @JsonKey(name: 'department_id')
   int? departmentId;
+  @JsonKey(name: 'company_id')
   int? companyId;
   String? avatar;
+  @JsonKey(name: 'role_as')
   int? roleAs;
+  @JsonKey(name: 'is_tenant')
   int? isTenant;
+  @JsonKey(name: 'is_active')
   int? isActive;
+  @JsonKey(name: 'created_at')
   String? createdAt;
+  @JsonKey(name: 'updated_at')
   String? updatedAt;
   Department? department;
 
@@ -54,9 +62,12 @@ class Users {
 @JsonSerializable()
 class Department {
   int? id;
+  @JsonKey(name: 'tenant_id')
   String? tenantId;
   String? name;
+  @JsonKey(name: 'created_at')
   String? createdAt;
+  @JsonKey(name: 'updated_at')
   String? updatedAt;
 
   Department(
@@ -71,13 +82,13 @@ class Leads {
   @JsonKey(name: 'user_id')
   int? userId;
   @JsonKey(name: 'assigned_to_id')
-  dynamic assignedToId;
+  int? assignedToId;
   @JsonKey(name: 'tenant_id')
   String? tenantId;
   @JsonKey(name: 'company_id')
   dynamic compaingId;
   dynamic saluation;
-  @JsonKey(name: 'owner_id')
+  @JsonKey(name: 'owner_name')
   String? ownerName;
   @JsonKey(name: 'first_name')
   String? firstName;
@@ -85,7 +96,7 @@ class Leads {
   String? lastName;
   @JsonKey(name: 'lead_name')
   String? leadName;
-  String? company;
+  dynamic company;
   @JsonKey(name: 'job_title')
   String? jobTitle;
   String? email;
@@ -100,14 +111,14 @@ class Leads {
   String? leadSource;
   String? industry;
   @JsonKey(name: 'annual_revenue')
-  String? annualRevenue;
+  int? annualRevenue;
   String? image;
   String? country;
   String? city;
   String? state;
   String? description;
   @JsonKey(name: 'fb_lead_id')
-  int? fbLeadId;
+  dynamic fbLeadId;
   @JsonKey(name: 'fb_ad_name')
   String? fbAdName;
   @JsonKey(name: 'fb_campaign_name')
@@ -128,7 +139,7 @@ class Leads {
   String? createdAt;
   @JsonKey(name: 'updated_at')
   String? updatedAt;
-  dynamic assigned;
+  Assigned? assigned;
 
   Leads({
     this.id,
@@ -172,4 +183,69 @@ class Leads {
   });
 
   factory Leads.fromJson(Map<String, dynamic> json) => _$LeadsFromJson(json);
+}
+
+@JsonSerializable()
+class Assigned {
+  int? id;
+  String? name;
+  String? email;
+  @JsonKey(name: 'tenant_id')
+  String? tenantId;
+  @JsonKey(name: 'email_verified_at')
+  String? emailVerifiedAt;
+  @JsonKey(name: 'department_id')
+  int? departmentId;
+  @JsonKey(name: 'company_id')
+  int? companyId;
+  String? avatar;
+  @JsonKey(name: 'role_as')
+  int? roleAs;
+  @JsonKey(name: 'is_tenant')
+  int? isTenant;
+  @JsonKey(name: 'is_active')
+  int? isActive;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+  @JsonKey(name: 'updated_at')
+  String? updatedAt;
+  AssignedDepartment? department;
+
+  Assigned({
+    this.id,
+    this.name,
+    this.email,
+    this.tenantId,
+    this.emailVerifiedAt,
+    this.departmentId,
+    this.companyId,
+    this.avatar,
+    this.roleAs,
+    this.isTenant,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.department,
+  });
+
+  factory Assigned.fromJson(Map<String, dynamic> json) =>
+      _$AssignedFromJson(json);
+}
+
+@JsonSerializable()
+class AssignedDepartment {
+  int? id;
+  @JsonKey(name: 'tenant_id')
+  String? tenantId;
+  String? name;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+  @JsonKey(name: 'updated_at')
+  String? updatedAt;
+
+  AssignedDepartment(
+      {this.id, this.tenantId, this.name, this.createdAt, this.updatedAt});
+
+  factory AssignedDepartment.fromJson(Map<String, dynamic> json) =>
+      _$AssignedDepartmentFromJson(json);
 }

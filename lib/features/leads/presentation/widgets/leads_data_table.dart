@@ -170,7 +170,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                 lead.leadSource,
                 lead.email,
                 lead.mobile,
-                lead.assigned,
+                lead.assigned?.name,
                 lead.createdAt,
               ];
 
