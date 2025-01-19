@@ -37,16 +37,16 @@ Future<void> setupGetIt() async {
 
   // leads view repo instance
   getIt.registerLazySingleton<LeadsViewRepo>(() => LeadsViewRepo(getIt()));
-  getIt.registerFactory<LeadsViewCubit>(
+  getIt.registerLazySingleton<LeadsViewCubit>(
       () => LeadsViewCubit(getIt<LeadsViewRepo>()));
 
   // create lead instance
   getIt.registerLazySingleton<CreateLeadRepo>(() => CreateLeadRepo(getIt()));
-  getIt.registerFactory<CreateLeadCubit>(
+  getIt.registerLazySingleton<CreateLeadCubit>(
       () => CreateLeadCubit(getIt<CreateLeadRepo>()));
 
   // Edit lead instance
   getIt.registerLazySingleton<EditLeadRepo>(() => EditLeadRepo(getIt()));
-  getIt.registerFactory<EditLeadCubit>(
+  getIt.registerLazySingleton<EditLeadCubit>(
       () => EditLeadCubit(getIt<EditLeadRepo>()));
 }
