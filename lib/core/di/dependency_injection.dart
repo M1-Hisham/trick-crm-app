@@ -37,7 +37,7 @@ Future<void> setupGetIt() async {
 
   // leads view repo instance
   getIt.registerLazySingleton<LeadsViewRepo>(() => LeadsViewRepo(getIt()));
-  getIt.registerLazySingleton<LeadsViewCubit>(
+  getIt.registerFactory<LeadsViewCubit>(
       () => LeadsViewCubit(getIt<LeadsViewRepo>()));
 
   // create lead instance

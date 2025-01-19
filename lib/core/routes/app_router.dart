@@ -2,8 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 import 'package:trick_crm_app/core/routes/routes.dart';
 import 'package:trick_crm_app/features/home/logic/cubit/dashboard_cubit.dart';
-import 'package:trick_crm_app/features/leads/edit-lead/logic/cubit/edit_lead_cubit.dart';
-import 'package:trick_crm_app/features/leads/edit-lead/presentation/screens/edit_lead_screen.dart';
 import 'package:trick_crm_app/features/leads/leads-view/logic/cubit/leads_view_cubit.dart';
 import 'package:trick_crm_app/features/leads/presentation/screens/leads_screen.dart';
 
@@ -44,13 +42,6 @@ abstract class AppRouter {
       page: () => BlocProvider(
         create: (context) => LeadsViewCubit(getIt()),
         child: const LeadsView(),
-      ),
-    ),
-    GetPage(
-      name: RoutesNames.editLead,
-      page: () => BlocProvider(
-        create: (context) => EditLeadCubit(getIt()),
-        child: const EditLeadScreen(),
       ),
     ),
   ];
