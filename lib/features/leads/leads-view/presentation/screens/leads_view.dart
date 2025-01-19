@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:trick_crm_app/core/routes/routes.dart';
+import 'package:trick_crm_app/core/di/dependency_injection.dart';
 
 import '../../../../../core/resources/resources.dart';
+import '../../../edit-lead/logic/cubit/edit_lead_cubit.dart';
+import '../../../edit-lead/presentation/screens/edit_lead_screen.dart';
 import '../../logic/cubit/leads_view_cubit.dart';
 
 class LeadsView extends StatelessWidget {
@@ -17,8 +19,6 @@ class LeadsView extends StatelessWidget {
 
     return Scaffold(
       body: BlocBuilder<LeadsViewCubit, LeadsViewState>(
-        buildWhen: (previous, current) =>
-            current is Success || current is Error,
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => Center(
@@ -32,7 +32,26 @@ class LeadsView extends StatelessWidget {
               return Center(
                   child: TextButton(
                 onPressed: () {
-                  Get.toNamed(RoutesNames.editLead);
+                  showModalBottomSheet(
+                    useSafeArea: true,
+                    isScrollControlled: true,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(13),
+                        topRight: Radius.circular(13),
+                      ),
+                    ),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return BlocProvider(
+                        create: (context) => getIt<EditLeadCubit>(),
+                        child: EditLeadScreen(
+                          leadId: leadId,
+                        ),
+                      );
+                    },
+                  );
                 },
                 child: Text('Edit Lead ${leadView.lead?.id}'),
               ));
