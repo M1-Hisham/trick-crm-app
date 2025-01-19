@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
+import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
 import '../../logic/cubit/leads_cubit.dart';
 import '../logic/cubit/create_lead_cubit.dart';
-import 'widgets/tob_bar.dart';
 import 'widgets/user_form.dart';
 
 class CreateLeadScreen extends StatefulWidget {
@@ -45,7 +45,10 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
               top: 0,
               left: 0,
               right: 0,
-              child: topBar(),
+              child: appTopBarDialog(
+                "Create New Lead",
+                "complete all the fields below the form",
+              ),
             ),
           ],
         ),
