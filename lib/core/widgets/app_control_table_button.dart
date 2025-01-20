@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/resources/resources.dart';
+import '../resources/resources.dart';
 
 class ControlTableButton extends StatelessWidget {
   final Icon? icon;

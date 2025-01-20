@@ -6,9 +6,9 @@ import 'package:intl/intl.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../../core/widgets/app_control_table_button.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
 import '../../data/models/leads_model.dart';
-import 'control_table_button.dart';
 
 class LeadsDataTable extends StatefulWidget {
   final List<Leads>? leads;
