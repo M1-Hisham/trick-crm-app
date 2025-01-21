@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
+import 'package:trick_crm_app/core/resources/resources.dart';
 import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
 import '../../logic/cubit/leads_cubit.dart';
@@ -34,7 +35,11 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
         child: Stack(
           children: [
             if (userName == null || assignedToNames == null)
-              const Center(child: CircularProgressIndicator())
+              Center(
+                child: CircularProgressIndicator(
+                  color: R.colors.primaryColor,
+                ),
+              )
             else
               userForm(
                 context,
