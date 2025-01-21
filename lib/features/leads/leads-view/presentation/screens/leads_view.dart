@@ -44,8 +44,8 @@ class LeadsView extends StatelessWidget {
                     ),
                     context: context,
                     builder: (BuildContext context) {
-                      return BlocProvider(
-                        create: (context) => getIt<EditLeadCubit>(),
+                      return BlocProvider.value(
+                        value: getIt<EditLeadCubit>(),
                         child: EditLeadScreen(
                           leadId: leadId,
                         ),
