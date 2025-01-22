@@ -58,6 +58,7 @@ class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButtonFormField<String>(
+          menuMaxHeight: 250,
           decoration: const InputDecoration(
             border: InputBorder.none,
             isDense: true,
