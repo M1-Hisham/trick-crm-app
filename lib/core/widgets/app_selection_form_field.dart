@@ -5,8 +5,8 @@ import '../resources/resources.dart';
 
 class AppSelectionFormField extends StatefulWidget {
   final String? labelText;
-  final List<String> selections;
-  final FormFieldSetter<String>? onSaved;
+  final List<dynamic> selections;
+  final FormFieldSetter<dynamic>? onSaved;
   const AppSelectionFormField({
     super.key,
     required this.labelText,
@@ -19,7 +19,7 @@ class AppSelectionFormField extends StatefulWidget {
 }
 
 class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
-  late final List<String> _currencies = widget.selections;
+  late final List<dynamic> _currencies = widget.selections;
   String? _selectedValue;
 
   @override
@@ -63,9 +63,18 @@ class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
             isDense: true,
           ),
           dropdownColor: R.colors.white,
-          value: _selectedValue ?? _currencies.first,
+          value: widget.labelText == 'Lead Owner'
+              ? _currencies.first['id'].toString()
+              : _selectedValue,
           isDense: true,
-          onChanged: (String? value) {
+          hint: Text(
+            "Select an option",
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Colors.grey,
+            ),
+          ),
+          onChanged: (dynamic value) {
             if (value != null) {
               setState(() {
                 _selectedValue = value;
@@ -73,11 +82,17 @@ class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
             }
           },
           onSaved: widget.onSaved,
-          items: _currencies.map((String value) {
+          items: _currencies.map((dynamic value) {
             return DropdownMenuItem<String>(
-              value: value,
+              value: widget.labelText == 'Lead Owner' ||
+                      widget.labelText == 'Assign To'
+                  ? value['id'].toString()
+                  : value,
               child: Text(
-                value,
+                widget.labelText == 'Lead Owner' ||
+                        widget.labelText == 'Assign To'
+                    ? value['name']
+                    : value,
                 style: TextStyle(
                   fontSize: 14.sp,
                 ),
