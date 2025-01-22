@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
+import 'package:trick_crm_app/core/resources/resources.dart';
 import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
 import '../../logic/cubit/leads_cubit.dart';
@@ -16,8 +19,8 @@ class CreateLeadScreen extends StatefulWidget {
 }
 
 class _CreateLeadScreenState extends State<CreateLeadScreen> {
-  String? userName;
-  List<String>? assignedToNames;
+  List<Map<String, dynamic>>? assignedToNames;
+  List<Map<String, dynamic>>? leadOwner;
   @override
   void initState() {
     super.initState();
@@ -33,13 +36,23 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Stack(
           children: [
-            if (userName == null || assignedToNames == null)
-              const Center(child: CircularProgressIndicator())
+            if (leadOwner == null || assignedToNames == null)
+              Center(
+                child: CircularProgressIndicator(
+                  color: R.colors.primaryColor,
+                ),
+              )
             else
               userForm(
                 context,
-                userName ?? 'Unknown User',
-                assignedToNames ?? ['No data'],
+                leadOwner ??
+                    [
+                      {'name': 'No data'}
+                    ],
+                assignedToNames ??
+                    [
+                      {'name': 'No data'}
+                    ],
               ),
             Positioned(
               top: 0,
@@ -59,12 +72,19 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
   void loadUserData() async {
     try {
       final userData = await SharedPrefHelper.getUser();
-      debugPrint('User data: ${userData?.name}');
+      log('User data: ${userData?.name}');
       final assignedToNames = await loadAssignedToNames();
-      debugPrint('Assigned to names: $assignedToNames');
+      log('Assigned to names: $assignedToNames');
       if (mounted) {
+        var userName = userData?.name ?? 'Unknown User';
+        var userId = userData?.id;
         setState(() {
-          userName = userData?.name ?? 'Unknown User';
+          leadOwner = [
+            {
+              'name': userName,
+              'id': userId,
+            },
+          ];
           this.assignedToNames = assignedToNames;
         });
       }
@@ -73,24 +93,32 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
     }
   }
 
-  Future<List<String>> loadAssignedToNames() async {
+  Future<List<Map<String, dynamic>>> loadAssignedToNames() async {
     while (GetIt.I<LeadsCubit>().state is Loading) {
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(const Duration(milliseconds: 10));
     }
 
     final leadsState = GetIt.I<LeadsCubit>().state;
     return leadsState.maybeWhen(
-      loading: () => ['Loading...'],
+      loading: () => [
+        {'name': 'Loading...', 'id': null}
+      ],
       success: (leadsModel) {
         if (leadsModel.users == null || leadsModel.users!.isEmpty) {
-          return ['No users available'];
+          return [
+            {'name': 'No users available', 'id': null}
+          ];
         }
         return leadsModel.users!
-            .map((user) => user.name ?? 'Unknown User')
+            .map((user) => {'name': user.name ?? 'Unknown User', 'id': user.id})
             .toList();
       },
-      error: (message) => ['Error: $message'],
-      orElse: () => ['No data available'],
+      error: (message) => [
+        {'name': 'Error: $message', 'id': null}
+      ],
+      orElse: () => [
+        {'name': 'No data available', 'id': null}
+      ],
     );
   }
 }

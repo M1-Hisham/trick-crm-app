@@ -41,11 +41,15 @@ final Map<String, dynamic> _requiredFields = {
   'Description Information': null,
   'Description': false,
 };
-final Map<String, String> _formData = {};
+final Map<String, dynamic> _formData = {};
 
 ScrollController scrollController = ScrollController();
 
-ListView userForm(context, String userName, List<String> assignedToNames) {
+ListView userForm(
+  context,
+  List<Map<String, dynamic>>? leadOwner,
+  List<Map<String, dynamic>>? assignedToNames,
+) {
   return ListView(
     controller: scrollController,
     shrinkWrap: true,
@@ -59,7 +63,7 @@ ListView userForm(context, String userName, List<String> assignedToNames) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ..._getListInformation(userName, assignedToNames),
+            ..._getListInformation(leadOwner, assignedToNames),
           ],
         ),
       ),
@@ -70,8 +74,8 @@ ListView userForm(context, String userName, List<String> assignedToNames) {
 }
 
 List<Widget> _getListInformation(
-  String userName,
-  List<String> assignedToNames,
+  List<Map<String, dynamic>>? leadOwner,
+  List<Map<String, dynamic>>? assignedToNames,
 ) {
   List<Widget> childs = [];
   const sectionHeaders = [
@@ -98,10 +102,10 @@ List<Widget> _getListInformation(
           padding: const EdgeInsets.only(bottom: 22),
           child: AppSelectionFormField(
             labelText: fieldName,
-            selections: _selectionCase(fieldName, userName, assignedToNames) ??
+            selections: _selectionCase(fieldName, leadOwner, assignedToNames) ??
                 ['none'],
             onSaved: (value) {
-              _formData[fieldName] = value!;
+              _formData[fieldName] = value;
             },
           ),
         ),
@@ -117,7 +121,7 @@ List<Widget> _getListInformation(
             keyboardType: _getKeyboardType(fieldName),
             maxLines: fieldName == 'Description' ? 3 : 1,
             onSaved: (value) {
-              _formData[fieldName] = value!;
+              _formData[fieldName] = value;
             },
             validator: (value) => _validateAllFields(fieldName, value),
           ),
@@ -128,17 +132,17 @@ List<Widget> _getListInformation(
   return childs;
 }
 
-List<String>? _selectionCase(
+List<dynamic>? _selectionCase(
   String fieldName,
-  String userName,
-  List<String> assignedToNames,
+  List<Map<String, dynamic>>? leadOwner,
+  List<Map<String, dynamic>>? assignedToNames,
 ) {
   final sectionLeadOwner = [
-    '$userName(you)',
+    ...leadOwner!,
   ];
   final sectionAssignTo = [
-    '$userName(you)',
-    ...assignedToNames,
+    ...leadOwner,
+    ...assignedToNames!,
   ];
   const sectionIndustry = [
     'ASP (Application Service Provider)',
@@ -254,6 +258,7 @@ _getKeyboardType(String fieldName) {
   return switch (fieldName) {
     'Phone Number' => TextInputType.phone,
     'Sec Phone Number' => TextInputType.phone,
+    'Annual Revenue' => TextInputType.phone,
     'Email' => TextInputType.emailAddress,
     'Secondary Email' => TextInputType.emailAddress,
     _ => null,
@@ -294,28 +299,31 @@ void _submitCreateLead(context) {
     _formKey.currentState?.save();
     log("_formData: $_formData");
     var createLeadRequestBody = CreateLeadRequestBody(
-      firstName: _formData['First Name']!,
-      lastName: _formData['Last Name']!,
-      email: _formData['Email']!,
-      mobile: _formData['Phone Number']!,
+      firstName: _formData['First Name'],
+      lastName: _formData['Last Name'],
+      email: _formData['Email'],
+      mobile: _formData['Phone Number'],
       image: null,
       saluation: null,
-      // leadOwner: 'leadOwner',
       leadName: null,
-      company: _formData['Company']!,
-      jobTitle: _formData['Title']!,
-      mobile2: _formData['Sec Phone Number']!,
-      website: _formData['Website']!,
-      rating: _formData['Rating']!,
-      leadStatus: _formData['Lead Status']!,
-      leadSource: _formData['Lead Source']!,
-      annualRevenue: null,
+      company: _formData['Company'],
+      jobTitle: _formData['Title'],
+      mobile2: _formData['Sec Phone Number'],
+      website: _formData['Website'],
+      rating: _formData['Rating'],
+      leadStatus: _formData['Lead Status'],
+      leadSource: _formData['Lead Source'],
+      annualRevenue: _formData['Annual Revenue'] != ''
+          ? int.parse(_formData['Annual Revenue'])
+          : null,
       industry: null,
-      country: _formData['Country']!,
-      city: _formData['City']!,
-      state: _formData['State']!,
-      description: _formData['Description']!,
-      assignedToId: null,
+      country: _formData['Country'],
+      city: _formData['City'],
+      state: _formData['State'],
+      description: _formData['Description'],
+      assignedToId: _formData['Assign To'] != null
+          ? int.parse(_formData['Assign To'])
+          : null,
       endTime: null,
       endTimeHour: null,
       userId: null,

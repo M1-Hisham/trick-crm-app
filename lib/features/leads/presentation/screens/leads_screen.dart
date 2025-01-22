@@ -30,6 +30,12 @@ class LeadsScreen extends StatelessWidget {
                         text: 'Create Lead',
                         onPressed: () {
                           showModalBottomSheet(
+                            sheetAnimationStyle: AnimationStyle(
+                              duration: const Duration(milliseconds: 1000),
+                              curve: Curves.easeInOutCubicEmphasized,
+                              reverseDuration:
+                                  const Duration(milliseconds: 600),
+                            ),
                             useSafeArea: true,
                             isScrollControlled: true,
                             backgroundColor:
