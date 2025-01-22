@@ -316,7 +316,7 @@ void _submitCreateLead(context) {
       annualRevenue: _formData['Annual Revenue'] != ''
           ? int.parse(_formData['Annual Revenue'])
           : null,
-      industry: null,
+      industry: _formData['Industry'],
       country: _formData['Country'],
       city: _formData['City'],
       state: _formData['State'],
