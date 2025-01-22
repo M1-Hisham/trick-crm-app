@@ -26,14 +26,14 @@ class CreateLeadRequestBody {
   @JsonKey(name: 'lead_source')
   final String? leadSource;
   @JsonKey(name: 'annual_revenue')
-  final String? annualRevenue;
+  final int? annualRevenue;
   final String? industry;
   final String? country;
   final String? city;
   final String? state;
   final String? description;
   @JsonKey(name: 'assigned_to_id')
-  final String? assignedToId;
+  final int? assignedToId;
   @JsonKey(name: 'end_time')
   final String? endTime;
   @JsonKey(name: 'end_time_hour')
