@@ -83,7 +83,7 @@ class LeadsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                spacingV(32),
+                spacingV(20),
                 // leads data table
                 const LeadsDataBlocBuilder(),
               ],

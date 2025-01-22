@@ -57,6 +57,16 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "Total number: ${leads?.length ?? 0}",
+            style: R.textStyles.font14WhiteW500.copyWith(
+              color: R.colors.black,
+            ),
+          ),
+        ),
+        spacingV(20),
         AppTextFormField(
           controller: _searchController,
           suffixIcon: _searchController.text.isNotEmpty
