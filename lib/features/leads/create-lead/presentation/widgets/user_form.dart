@@ -49,6 +49,7 @@ ListView userForm(
   context,
   List<Map<String, dynamic>>? leadOwner,
   List<Map<String, dynamic>>? assignedToNames,
+  isShowFields,
 ) {
   return ListView(
     controller: scrollController,
@@ -63,7 +64,8 @@ ListView userForm(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ..._getListInformation(leadOwner, assignedToNames),
+            ..._getListInformation(
+                context, leadOwner, assignedToNames, isShowFields),
           ],
         ),
       ),
@@ -74,8 +76,10 @@ ListView userForm(
 }
 
 List<Widget> _getListInformation(
+  context,
   List<Map<String, dynamic>>? leadOwner,
   List<Map<String, dynamic>>? assignedToNames,
+  isShowFields,
 ) {
   List<Widget> childs = [];
   const sectionHeaders = [
@@ -110,6 +114,20 @@ List<Widget> _getListInformation(
           ),
         ),
       );
+      isShowFields == true && fieldName == 'Assign To'
+          ? childs.add(
+              const Padding(
+                padding: EdgeInsets.only(bottom: 22),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text('Show Form field data'),
+                    Text('Show Form field data'),
+                  ],
+                ),
+              ),
+            )
+          : null;
     } else {
       childs.add(
         Padding(

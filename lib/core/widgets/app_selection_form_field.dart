@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 
 import '../resources/resources.dart';
 
@@ -78,6 +80,9 @@ class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
           onChanged: (dynamic value) {
             if (value != null) {
               setState(() {
+                widget.labelText == 'Assign To' && value != null
+                    ? context.read<CreateLeadCubit>().showFields()
+                    : null;
                 _selectedValue = value;
               });
             }
