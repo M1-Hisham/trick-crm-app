@@ -6,7 +6,6 @@ import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/widgets/app_selection_form_field.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
-import '../../../create-lead/presentation/widgets/uploud_image.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -48,7 +47,7 @@ ListView editUserForm(context, String userName, List<String> assignedToNames,
     padding: const EdgeInsets.all(20),
     children: [
       spacingV(120),
-      ...uploudImage(),
+      // ...uploudImage(),
       spacingV(20),
       Form(
         key: _formKey,

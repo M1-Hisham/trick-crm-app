@@ -12,7 +12,7 @@ import '../../../../../core/widgets/app_date_picker_field.dart';
 import '../../../../../core/widgets/app_selection_form_field.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
 import '../../data/models/create_lead_request_body.dart';
-import 'uploud_image.dart';
+import 'upload_image.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -58,7 +58,7 @@ ListView userForm(
     padding: const EdgeInsets.all(20),
     children: [
       spacingV(120),
-      ...uploudImage(),
+      ...uploadImage(),
       spacingV(20),
       Form(
         key: _formKey,

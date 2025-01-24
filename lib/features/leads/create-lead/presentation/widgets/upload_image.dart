@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/resources/resources.dart';
 
-List<Widget> uploudImage() {
+List<Widget> uploadImage() {
   return [
     Text(
       "Image",
