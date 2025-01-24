@@ -8,6 +8,7 @@ class AppTextFormField extends StatelessWidget {
   final String hintText;
   final String? labelText;
   final bool? isObscureText;
+  final bool? isclickable;
   final EdgeInsetsGeometry? contentPadding;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
@@ -20,6 +21,7 @@ class AppTextFormField extends StatelessWidget {
   final Color? hoverColor;
   final Color? fillColor;
   final Color? colorEnableBorder;
+  final Color? disabledBorder;
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
@@ -50,12 +52,15 @@ class AppTextFormField extends StatelessWidget {
     this.maxLines,
     this.onSaved,
     this.valueKey,
+    this.isclickable,
+    this.disabledBorder,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       key: valueKey,
+      enabled: isclickable,
       onFieldSubmitted: (value) =>
           FocusScope.of(context).requestFocus(nextFocusNode),
       focusNode: focusNode,
@@ -109,10 +114,10 @@ class AppTextFormField extends StatelessWidget {
             color: Colors.red,
           ),
         ),
-        disabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
-            color: Color.fromARGB(255, 139, 139, 139),
+            color: disabledBorder ?? const Color.fromARGB(255, 139, 139, 139),
           ),
         ),
       ),

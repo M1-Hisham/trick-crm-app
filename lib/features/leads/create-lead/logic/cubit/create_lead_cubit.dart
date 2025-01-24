@@ -8,6 +8,7 @@ import 'create_lead_state.dart';
 
 class CreateLeadCubit extends Cubit<CreateLeadState> {
   final CreateLeadRepo _createLeadRepo;
+  bool isShowFields = false;
   CreateLeadCubit(this._createLeadRepo)
       : super(const CreateLeadState.initial());
 
@@ -25,5 +26,15 @@ class CreateLeadCubit extends Cubit<CreateLeadState> {
       emit(CreateLeadState.error(error: message));
       log("Error in create lead cubit: $message");
     });
+  }
+
+  void showFields() {
+    isShowFields = true;
+    emit(CreateLeadState.showFields(isShowFields: isShowFields));
+  }
+
+  void hideFields() {
+    isShowFields = false;
+    emit(CreateLeadState.showFields(isShowFields: isShowFields));
   }
 }

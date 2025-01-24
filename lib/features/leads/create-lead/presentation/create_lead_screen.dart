@@ -7,8 +7,10 @@ import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/core/resources/resources.dart';
 import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
+import '../../logic/cubit/leads_cubit.dart' as leads;
 import '../../logic/cubit/leads_cubit.dart';
 import '../logic/cubit/create_lead_cubit.dart';
+import '../logic/cubit/create_lead_state.dart';
 import 'widgets/user_form.dart';
 
 class CreateLeadScreen extends StatefulWidget {
@@ -21,6 +23,7 @@ class CreateLeadScreen extends StatefulWidget {
 class _CreateLeadScreenState extends State<CreateLeadScreen> {
   List<Map<String, dynamic>>? assignedToNames;
   List<Map<String, dynamic>>? leadOwner;
+  static bool isShowFields = false;
   @override
   void initState() {
     super.initState();
@@ -29,9 +32,16 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
   }
 
   @override
+  void dispose() {
+    log("Cubit is being closed.");
+    GetIt.I<CreateLeadCubit>().hideFields();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.I<CreateLeadCubit>(),
+    return BlocProvider.value(
+      value: GetIt.I<CreateLeadCubit>(),
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Stack(
@@ -43,16 +53,24 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                 ),
               )
             else
-              userForm(
-                context,
-                leadOwner ??
-                    [
-                      {'name': 'No data'}
-                    ],
-                assignedToNames ??
-                    [
-                      {'name': 'No data'}
-                    ],
+              BlocBuilder<CreateLeadCubit, CreateLeadState>(
+                builder: (context, state) {
+                  final cubit = context.read<CreateLeadCubit>();
+                  isShowFields = cubit.isShowFields;
+
+                  return userForm(
+                    context,
+                    leadOwner ??
+                        [
+                          {'name': 'No data'}
+                        ],
+                    assignedToNames ??
+                        [
+                          {'name': 'No data'}
+                        ],
+                    isShowFields,
+                  );
+                },
               ),
             Positioned(
               top: 0,
@@ -60,7 +78,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
               right: 0,
               child: appTopBarDialog(
                 "Create New Lead",
-                "complete all the fields below the form",
+                "Complete all the fields below the form",
               ),
             ),
           ],
@@ -94,7 +112,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
   }
 
   Future<List<Map<String, dynamic>>> loadAssignedToNames() async {
-    while (GetIt.I<LeadsCubit>().state is Loading) {
+    while (GetIt.I<LeadsCubit>().state is leads.Loading) {
       await Future.delayed(const Duration(milliseconds: 10));
     }
 

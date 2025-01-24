@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 
 import '../resources/resources.dart';
 
@@ -7,11 +9,13 @@ class AppSelectionFormField extends StatefulWidget {
   final String? labelText;
   final List<dynamic> selections;
   final FormFieldSetter<dynamic>? onSaved;
+  final String? Function(String?)? validator;
   const AppSelectionFormField({
     super.key,
     required this.labelText,
     required this.selections,
     required this.onSaved,
+    this.validator,
   });
 
   @override
@@ -78,10 +82,14 @@ class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
           onChanged: (dynamic value) {
             if (value != null) {
               setState(() {
+                widget.labelText == 'Assign To' && value != null
+                    ? context.read<CreateLeadCubit>().showFields()
+                    : null;
                 _selectedValue = value;
               });
             }
           },
+          validator: widget.validator,
           onSaved: widget.onSaved,
           items: _currencies.map((dynamic value) {
             return DropdownMenuItem<String>(
