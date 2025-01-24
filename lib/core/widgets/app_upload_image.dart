@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +15,7 @@ class AppUploadImage extends StatefulWidget {
 }
 
 class _AppUploadImageState extends State<AppUploadImage> {
+  XFile? pickedFile;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -27,23 +30,31 @@ class _AppUploadImageState extends State<AppUploadImage> {
           color: R.colors.secGray,
           borderRadius: BorderRadius.circular(100.r),
         ),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.add,
-              color: Color(0xff727272),
-            ),
-            Text(
-              "Uploud",
-              style: TextStyle(
-                color: Color(0xff727272),
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
+        child: pickedFile == null
+            ? const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: Color(0xff727272),
+                  ),
+                  Text(
+                    "Uploud",
+                    style: TextStyle(
+                      color: Color(0xff727272),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              )
+            : ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                child: Image.file(
+                  fit: BoxFit.fill,
+                  File(pickedFile!.path),
+                ),
               ),
-            )
-          ],
-        ),
       ),
     );
   }
@@ -120,13 +131,17 @@ class _AppUploadImageState extends State<AppUploadImage> {
     Navigator.pop(context);
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    // cropImage(pickedFile);
+    setState(() {
+      this.pickedFile = pickedFile;
+    });
   }
 
   void uploadImageCamera() async {
     Navigator.pop(context);
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.camera);
-    // cropImage(pickedFile);
+    setState(() {
+      this.pickedFile = pickedFile;
+    });
   }
 }
