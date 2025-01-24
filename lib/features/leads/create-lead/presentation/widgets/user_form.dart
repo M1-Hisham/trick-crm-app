@@ -8,6 +8,7 @@ import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/widgets/app_button.dart';
+import '../../../../../core/widgets/app_date_picker_field.dart';
 import '../../../../../core/widgets/app_selection_form_field.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
 import '../../data/models/create_lead_request_body.dart';
@@ -102,32 +103,77 @@ List<Widget> _getListInformation(
       );
     } else if (_requiredFields[fieldName] == 'selection') {
       childs.add(
-        Padding(
-          padding: const EdgeInsets.only(bottom: 22),
-          child: AppSelectionFormField(
-            labelText: fieldName,
-            selections: _selectionCase(fieldName, leadOwner, assignedToNames) ??
-                ['none'],
-            onSaved: (value) {
-              _formData[fieldName] = value;
-            },
-          ),
-        ),
-      );
-      isShowFields == true && fieldName == 'Assign To'
-          ? childs.add(
-              const Padding(
-                padding: EdgeInsets.only(bottom: 22),
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 22),
+              child: AppSelectionFormField(
+                labelText: fieldName,
+                selections:
+                    _selectionCase(fieldName, leadOwner, assignedToNames) ??
+                        ['none'],
+                onSaved: (value) {
+                  _formData[fieldName] = value;
+                },
+              ),
+            ),
+            Visibility(
+              visible: isShowFields == true && fieldName == 'Assign To',
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 22),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Show Form field data'),
-                    Text('Show Form field data'),
+                    Flexible(
+                      child: AppDatePickerField(
+                        onSaved: (value) {
+                          _formData['End Time'] = value;
+                        },
+                      ),
+                    ),
+                    spacingH(20),
+                    Flexible(
+                      child: AppSelectionFormField(
+                          labelText: 'Time',
+                          selections: const [
+                            '6:00 AM',
+                            '7:00 AM',
+                            '8:00 AM',
+                            '9:00 AM',
+                            '10:00 AM',
+                            '11:00 AM',
+                            '12:00 PM',
+                            '1:00 PM',
+                            '2:00 PM',
+                            '3:00 PM',
+                            '4:00 PM',
+                            '5:00 PM',
+                            '6:00 PM',
+                            '7:00 PM',
+                            '8:00 PM',
+                            '9:00 PM',
+                            '10:00 PM',
+                            '11:00 PM',
+                            '12:00 AM',
+                          ],
+                          onSaved: (value) {
+                            _formData['End Time Hour'] = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              _scrollToTop();
+                              return 'Please enter a valid time';
+                            }
+                            return null;
+                          }),
+                    ),
                   ],
                 ),
               ),
             )
-          : null;
+          ],
+        ),
+      );
     } else {
       childs.add(
         Padding(
@@ -339,11 +385,12 @@ void _submitCreateLead(context) {
       city: _formData['City'],
       state: _formData['State'],
       description: _formData['Description'],
-      assignedToId: _formData['Assign To'] != null
-          ? int.parse(_formData['Assign To'])
-          : null,
-      endTime: null,
-      endTimeHour: null,
+      assignedToId:
+          _formData['Assign To'] != null && _formData['Assign To'] != ''
+              ? int.parse(_formData['Assign To'])
+              : null,
+      endTime: _formData['End Time'],
+      endTimeHour: _formData['End Time Hour'],
       userId: null,
       tenantId: null,
     );

@@ -9,11 +9,13 @@ class AppSelectionFormField extends StatefulWidget {
   final String? labelText;
   final List<dynamic> selections;
   final FormFieldSetter<dynamic>? onSaved;
+  final String? Function(String?)? validator;
   const AppSelectionFormField({
     super.key,
     required this.labelText,
     required this.selections,
     required this.onSaved,
+    this.validator,
   });
 
   @override
@@ -87,6 +89,7 @@ class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
               });
             }
           },
+          validator: widget.validator,
           onSaved: widget.onSaved,
           items: _currencies.map((dynamic value) {
             return DropdownMenuItem<String>(
