@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:trick_crm_app/core/widgets/app_upload_image.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/resources/resources.dart';
 
-List<Widget> uploadImage() {
+List<Widget> uploadImage({required Function(XFile?) fun}) {
   return [
     Text(
       "Image",
@@ -13,7 +14,9 @@ List<Widget> uploadImage() {
     spacingV(13),
     Row(
       children: [
-        const AppUploadImage(),
+        AppUploadImage(
+          onImageSelected: fun,
+        ),
         spacingH(14),
         const Text("Accept images: JPG, PNG,\nJPG2000, GIF,...")
       ],

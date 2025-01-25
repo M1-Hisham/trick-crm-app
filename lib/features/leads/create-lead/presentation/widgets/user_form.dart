@@ -58,7 +58,13 @@ ListView userForm(
     padding: const EdgeInsets.all(20),
     children: [
       spacingV(120),
-      ...uploadImage(),
+      ...uploadImage(
+        fun: (pickedFile) {
+          if (pickedFile != null) {
+            _formData['Image'] = pickedFile.path;
+          }
+        },
+      ),
       spacingV(20),
       Form(
         key: _formKey,
@@ -367,7 +373,7 @@ void _submitCreateLead(context) {
       lastName: _formData['Last Name'],
       email: _formData['Email'],
       mobile: _formData['Phone Number'],
-      image: null,
+      image: _formData['Image'],
       saluation: null,
       leadName: null,
       company: _formData['Company'],
