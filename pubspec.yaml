@@ -79,6 +79,8 @@ dependencies:
   intl: ^0.20.1
   # for logger
   logger: ^2.5.0
+  # for image picker
+  image_picker: ^1.1.2
 
 
 
