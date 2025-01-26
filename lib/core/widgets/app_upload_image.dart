@@ -8,7 +8,8 @@ import 'package:trick_crm_app/core/helpers/spacing.dart';
 import '../resources/resources.dart';
 
 class AppUploadImage extends StatefulWidget {
-  const AppUploadImage({super.key});
+  final Function(XFile?) onImageSelected;
+  const AppUploadImage({super.key, required this.onImageSelected});
 
   @override
   State<AppUploadImage> createState() => _AppUploadImageState();
@@ -131,17 +132,27 @@ class _AppUploadImageState extends State<AppUploadImage> {
     Navigator.pop(context);
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      this.pickedFile = pickedFile;
-    });
+    setState(
+      () {
+        if (pickedFile != null) {
+          this.pickedFile = pickedFile;
+          widget.onImageSelected(pickedFile);
+        }
+      },
+    );
   }
 
   void uploadImageCamera() async {
     Navigator.pop(context);
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.camera);
-    setState(() {
-      this.pickedFile = pickedFile;
-    });
+    setState(
+      () {
+        if (pickedFile != null) {
+          this.pickedFile = pickedFile;
+          widget.onImageSelected(pickedFile);
+        }
+      },
+    );
   }
 }

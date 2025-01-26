@@ -96,11 +96,13 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
       if (mounted) {
         var userName = userData?.name ?? 'Unknown User';
         var userId = userData?.id;
+        var userTenantId = userData?.tenantId;
         setState(() {
           leadOwner = [
             {
               'name': userName,
               'id': userId,
+              'Tenant Id': userTenantId,
             },
           ];
           this.assignedToNames = assignedToNames;

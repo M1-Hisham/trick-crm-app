@@ -58,7 +58,13 @@ ListView userForm(
     padding: const EdgeInsets.all(20),
     children: [
       spacingV(120),
-      ...uploadImage(),
+      ...uploadImage(
+        fun: (pickedFile) {
+          if (pickedFile != null) {
+            _formData['Image'] = pickedFile.path;
+          }
+        },
+      ),
       spacingV(20),
       Form(
         key: _formKey,
@@ -114,6 +120,13 @@ List<Widget> _getListInformation(
                         ['none'],
                 onSaved: (value) {
                   _formData[fieldName] = value;
+                  if (fieldName == 'Lead Owner') {
+                    int? index = leadOwner?.indexWhere(
+                        (element) => element['id'] == int.parse(value));
+                    if (index != -1 && index != null) {
+                      _formData['Tenant Id'] = leadOwner?[index]['Tenant Id'];
+                    }
+                  }
                 },
               ),
             ),
@@ -367,7 +380,7 @@ void _submitCreateLead(context) {
       lastName: _formData['Last Name'],
       email: _formData['Email'],
       mobile: _formData['Phone Number'],
-      image: null,
+      image: _formData['Image'],
       saluation: null,
       leadName: null,
       company: _formData['Company'],
@@ -391,8 +404,10 @@ void _submitCreateLead(context) {
               : null,
       endTime: _formData['End Time'],
       endTimeHour: _formData['End Time Hour'],
-      userId: null,
-      tenantId: null,
+      userId: _formData['Lead Owner'] != null && _formData['Lead Owner'] != ''
+          ? int.parse(_formData['Lead Owner'])
+          : null,
+      tenantId: _formData['Tenant Id'],
     );
     GetIt.I<CreateLeadCubit>().emitCreateLeadState(createLeadRequestBody);
     log("createLeadRequestBody: $createLeadRequestBody");
