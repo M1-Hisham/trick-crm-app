@@ -39,7 +39,7 @@ class CreateLeadRequestBody {
   @JsonKey(name: 'end_time_hour')
   final String? endTimeHour;
   @JsonKey(name: 'user_id')
-  final String? userId;
+  final int? userId;
   @JsonKey(name: 'tenant_id')
   final String? tenantId;
   CreateLeadRequestBody({

@@ -32,7 +32,7 @@ CreateLeadRequestBody _$CreateLeadRequestBodyFromJson(
       assignedToId: (json['assigned_to_id'] as num?)?.toInt(),
       endTime: json['end_time'] as String?,
       endTimeHour: json['end_time_hour'] as String?,
-      userId: json['user_id'] as String?,
+      userId: (json['user_id'] as num?)?.toInt(),
       tenantId: json['tenant_id'] as String?,
     );
 
