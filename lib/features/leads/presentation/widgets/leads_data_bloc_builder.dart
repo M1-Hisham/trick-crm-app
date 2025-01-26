@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:trick_crm_app/features/leads/logic/cubit/leads_cubit.dart';
 
 import '../../../../core/resources/resources.dart';
@@ -17,10 +18,14 @@ class LeadsDataBlocBuilder extends StatelessWidget {
       buildWhen: (previous, current) => current is Success || current is Error,
       builder: (context, state) {
         return state.maybeWhen(
-            loading: () => Center(
-                  heightFactor: 2.5,
-                  child: CircularProgressIndicator(
-                    color: R.colors.primaryColor,
+            loading: () => Shimmer.fromColors(
+                  baseColor: R.colors.baseColorShimmer,
+                  highlightColor: R.colors.highlightColorShimmer,
+                  enabled: true,
+                  child: const AppDataTable<Leads>(
+                    data: [],
+                    headers: [],
+                    dataExtractors: [],
                   ),
                 ),
             success: (leadsModel) {

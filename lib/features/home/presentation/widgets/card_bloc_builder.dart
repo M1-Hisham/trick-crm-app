@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:trick_crm_app/features/home/data/models/dashboard_response.dart';
 import 'package:trick_crm_app/features/home/logic/cubit/dashboard_cubit.dart';
 import 'package:trick_crm_app/features/home/logic/cubit/dashboard_state.dart';
@@ -18,11 +19,11 @@ class CardBlocBuilder extends StatelessWidget {
           current is Loading || current is Success || current is Error,
       builder: (context, state) {
         return state.maybeWhen(
-          loading: () => Center(
-            heightFactor: 2.5,
-            child: CircularProgressIndicator(
-              color: R.colors.primaryColor,
-            ),
+          loading: () => Shimmer.fromColors(
+            baseColor: R.colors.baseColorShimmer,
+            highlightColor: R.colors.highlightColorShimmer,
+            enabled: true,
+            child: _buildCard(Data()),
           ),
           success: (dashboardResponseModel) {
             final Data? data = dashboardResponseModel.data;

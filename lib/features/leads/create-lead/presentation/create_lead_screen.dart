@@ -3,15 +3,17 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
-import 'package:trick_crm_app/core/resources/resources.dart';
 import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
+import '../../../../core/resources/resources.dart';
 import '../../logic/cubit/leads_cubit.dart' as leads;
 import '../../logic/cubit/leads_cubit.dart';
 import '../logic/cubit/create_lead_cubit.dart';
 import '../logic/cubit/create_lead_state.dart';
 import 'widgets/user_form.dart';
+import 'widgets/user_form_loading.dart';
 
 class CreateLeadScreen extends StatefulWidget {
   const CreateLeadScreen({super.key});
@@ -47,9 +49,12 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
         child: Stack(
           children: [
             if (leadOwner == null || assignedToNames == null)
-              Center(
-                child: CircularProgressIndicator(
-                  color: R.colors.primaryColor,
+              Shimmer.fromColors(
+                baseColor: R.colors.baseColorShimmer,
+                highlightColor: R.colors.highlightColorShimmer,
+                enabled: true,
+                child: userFormLoading(
+                  context,
                 ),
               )
             else
@@ -115,7 +120,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
   Future<List<Map<String, dynamic>>> loadAssignedToNames() async {
     while (GetIt.I<LeadsCubit>().state is leads.Loading) {
-      await Future.delayed(const Duration(milliseconds: 10));
+      await Future.delayed(const Duration(microseconds: 1));
     }
 
     final leadsState = GetIt.I<LeadsCubit>().state;

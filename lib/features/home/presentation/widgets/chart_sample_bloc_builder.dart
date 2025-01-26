@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:trick_crm_app/features/home/logic/cubit/dashboard_cubit.dart';
 
 import '../../../../core/helpers/spacing.dart';
@@ -19,11 +20,11 @@ class ChartSampleBlocBuilder extends StatelessWidget {
           current is Loading || current is Success || current is Error,
       builder: (context, state) {
         return state.maybeWhen(
-          loading: () => Center(
-            heightFactor: 2.5,
-            child: CircularProgressIndicator(
-              color: R.colors.primaryColor,
-            ),
+          loading: () => Shimmer.fromColors(
+            baseColor: R.colors.baseColorShimmer,
+            highlightColor: R.colors.highlightColorShimmer,
+            enabled: true,
+            child: _builedEmployeesChart(Data()),
           ),
           success: (dashboardResponseModel) {
             final Data? data = dashboardResponseModel.data;
