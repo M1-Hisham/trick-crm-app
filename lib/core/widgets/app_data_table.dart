@@ -1,49 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:trick_crm_app/core/helpers/spacing.dart';
 import 'package:intl/intl.dart';
+import 'package:trick_crm_app/core/helpers/spacing.dart';
 
 import '../../../../core/resources/resources.dart';
-import '../../../../core/routes/routes.dart';
 import '../../../../core/widgets/app_control_table_button.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
-import '../../data/models/leads_model.dart';
 
-class LeadsDataTable extends StatefulWidget {
-  final List<Leads>? leads;
-  const LeadsDataTable({
+class AppDataTable<T> extends StatefulWidget {
+  final List<T>? data;
+  final List<String> headers;
+  final List<String Function(T)> dataExtractors;
+  final String Function(T)? dataIdExtractor;
+  final void Function(String)? onViewDetails;
+
+  const AppDataTable({
     super.key,
-    required this.leads,
+    required this.data,
+    required this.headers,
+    required this.dataExtractors,
+    this.dataIdExtractor,
+    this.onViewDetails,
   });
 
   @override
-  State<LeadsDataTable> createState() => _LeadsDataTableState();
+  State<AppDataTable<T>> createState() => _AppDataTableState<T>();
 }
 
-class _LeadsDataTableState extends State<LeadsDataTable> {
-  late final List<Leads>? leads = widget.leads;
-  List<Leads>? filteredLeads;
+class _AppDataTableState<T> extends State<AppDataTable<T>> {
+  late final List<T>? data = widget.data;
+  List<T>? filteredData;
   final ScrollController _scrollController = ScrollController();
   final int _dataPerPage = 10;
   int _currentPage = 1;
   final TextEditingController _searchController = TextEditingController();
-
-  List<String> headers = [
-    "Name",
-    "Lead Source",
-    "Email",
-    "Phone",
-    "Lead Assigned to",
-    "Created At",
-  ];
   int _switchHeaders = 0;
 
   @override
   void initState() {
     super.initState();
-    filteredLeads = leads;
-    _searchController.addListener(_filterLeads);
+    filteredData = data;
+    _searchController.addListener(_filterData);
   }
 
   @override
@@ -60,7 +57,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Total number: ${leads?.length ?? 0}",
+            "Total number: ${data?.length ?? 0}",
             style: R.textStyles.font14WhiteW500.copyWith(
               color: R.colors.black,
             ),
@@ -78,21 +75,21 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                   onPressed: () {
                     FocusScope.of(context).unfocus();
                     _searchController.clear();
-                    _filterLeads();
+                    _filterData();
                   },
                 )
               : null,
           keyboardType: TextInputType.text,
           hintText: "search",
           colorEnableBorder: const Color(0XFFD1D1D1),
-          onSaved: (newValue) => _filterLeads(),
+          onSaved: (newValue) => _filterData(),
           prefixIcon: Icon(
             Icons.search,
             color: const Color(0xFF8A8A8A),
             size: 31.dg,
           ),
         ),
-        filteredLeads!.isEmpty
+        filteredData!.isEmpty
             ? Center(
                 heightFactor: 2,
                 child: Text(
@@ -122,7 +119,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                 ),
               ),
         spacingV(15),
-        filteredLeads!.isEmpty ? const SizedBox.shrink() : _pageControl(),
+        filteredData!.isEmpty ? const SizedBox.shrink() : _pageControl(),
       ],
     );
   }
@@ -134,8 +131,8 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
       child: Row(
         children: [
           spacingH(8),
-          _buildHeader(headers[_switchHeaders]),
-          _buildHeader(headers[_switchHeaders + 1]),
+          _buildHeader(widget.headers[_switchHeaders]),
+          _buildHeader(widget.headers[_switchHeaders + 1]),
           ControlTableButton(
             icon: const Icon(Icons.arrow_back_ios_rounded),
             color: R.colors.white,
@@ -144,9 +141,12 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
             onPressed: _switchHeaders == 0
                 ? null
                 : () {
-                    setState(() {
-                      _switchHeaders -= 2;
-                    });
+                    setState(
+                      () {
+                        _switchHeaders -=
+                            widget.headers.length % 2 == 0 ? 2 : 1;
+                      },
+                    );
                   },
           ),
           spacingH(8),
@@ -155,12 +155,15 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
             color: R.colors.white,
             borderRadius: 50,
             iconSize: 16,
-            onPressed: _switchHeaders == 4
+            onPressed: _switchHeaders == widget.headers.length - 2
                 ? null
                 : () {
-                    setState(() {
-                      _switchHeaders += 2;
-                    });
+                    setState(
+                      () {
+                        _switchHeaders +=
+                            widget.headers.length % 2 == 0 ? 2 : 1;
+                      },
+                    );
                   },
           ),
         ],
@@ -169,26 +172,27 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
   }
 
   Column _tableBody() {
-    final currentLeads = _currentLeads;
+    final currentData = _currentData;
 
     return Column(
-      children: currentLeads != null
-          ? currentLeads.map((lead) {
-              int index = filteredLeads!.indexOf(lead);
-              final List<String?> leadsBody = [
-                lead.leadName,
-                lead.leadSource,
-                lead.email,
-                lead.mobile,
-                lead.assigned?.name,
-                lead.createdAt,
-              ];
+      children: currentData != null
+          ? currentData.map((data) {
+              int index = filteredData!.indexOf(data);
+              final List<String?> dataBody = widget.dataExtractors
+                  .map((extractor) => extractor(data))
+                  .toList();
 
+              int? indexCreatedAt = widget.headers.indexOf('Created At');
               var dateValue = DateFormat("yyyy-MM-ddTHH:mm:ssZ")
-                  .parseUTC(lead.createdAt ?? "0000-00-00T00:00:21Z")
+                  .parseUTC(indexCreatedAt != -1
+                      ? dataBody[indexCreatedAt] ?? "0000-00-00T00:00:21Z"
+                      : "0000-00-00T00:00:21Z")
                   .toLocal();
               String formattedDate = DateFormat("yyyy-MM-dd").format(dateValue);
-              leadsBody[5] = formattedDate;
+              indexCreatedAt != -1
+                  ? dataBody[indexCreatedAt] = formattedDate
+                  : null;
+
               return Container(
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                 decoration: BoxDecoration(
@@ -200,17 +204,18 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
                 ),
                 child: Row(
                   children: [
-                    _buildBody(leadsBody[_switchHeaders] ?? 'empty'),
-                    _buildBody(leadsBody[_switchHeaders + 1] ?? 'empty'),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(
-                          RoutesNames.leadsView,
-                          arguments: lead.id,
-                        );
-                      },
-                      child: Icon(Icons.visibility, size: 20.sp),
-                    ),
+                    _buildBody(dataBody[_switchHeaders] ?? 'empty'),
+                    _buildBody(dataBody[_switchHeaders + 1] ?? 'empty'),
+                    if (widget.onViewDetails != null &&
+                        widget.dataIdExtractor != null)
+                      GestureDetector(
+                        onTap: () {
+                          widget.onViewDetails?.call(
+                            widget.dataIdExtractor!(data),
+                          );
+                        },
+                        child: Icon(Icons.visibility, size: 20.sp),
+                      ),
                   ],
                 ),
               );
@@ -219,17 +224,17 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
     );
   }
 
-  void _filterLeads() {
+  void _filterData() {
     final query = _searchController.text.toLowerCase();
     setState(() {
       if (query.isEmpty) {
-        filteredLeads = leads;
+        filteredData = data;
       } else {
         _currentPage = 1;
-        filteredLeads = leads?.where((lead) {
-          final leadName = lead.leadName?.toLowerCase() ?? '';
-          final leadSource = lead.leadSource?.toLowerCase() ?? '';
-          return leadName.contains(query) || leadSource.contains(query);
+        filteredData = data?.where((data) {
+          return widget.dataExtractors.any((extractor) {
+            return extractor(data).toLowerCase().contains(query);
+          });
         }).toList();
       }
     });
@@ -258,7 +263,7 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
     return Row(
       children: [
         Text(
-          "$_currentPage Page of ${(filteredLeads != null && filteredLeads!.isNotEmpty ? (filteredLeads!.length / _dataPerPage).ceil() : 1)}",
+          "$_currentPage Page of ${(filteredData != null && filteredData!.isNotEmpty ? (filteredData!.length / _dataPerPage).ceil() : 1)}",
         ),
         const Spacer(),
         ControlTableButton(
@@ -268,27 +273,26 @@ class _LeadsDataTableState extends State<LeadsDataTable> {
         spacingH(14),
         ControlTableButton(
           icon: const Icon(Icons.arrow_forward_ios_rounded),
-          onPressed:
-              (_currentPage * _dataPerPage) < (filteredLeads?.length ?? 0)
-                  ? _loadMore
-                  : null,
+          onPressed: (_currentPage * _dataPerPage) < (filteredData?.length ?? 0)
+              ? _loadMore
+              : null,
         ),
       ],
     );
   }
 
-  List<Leads>? get _currentLeads {
-    if (filteredLeads == null || filteredLeads!.isEmpty) return [];
+  List<T>? get _currentData {
+    if (filteredData == null || filteredData!.isEmpty) return [];
     final start = (_currentPage - 1) * _dataPerPage;
     final end = start + _dataPerPage;
-    return filteredLeads?.sublist(
+    return filteredData?.sublist(
       start,
-      end > (filteredLeads?.length ?? 0) ? filteredLeads!.length : end,
+      end > (filteredData?.length ?? 0) ? filteredData!.length : end,
     );
   }
 
   void _loadMore() {
-    if ((_currentPage * _dataPerPage) < (filteredLeads?.length ?? 0)) {
+    if ((_currentPage * _dataPerPage) < (filteredData?.length ?? 0)) {
       setState(() {
         _currentPage++;
       });

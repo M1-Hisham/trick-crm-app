@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:trick_crm_app/features/leads/logic/cubit/leads_cubit.dart';
 
 import '../../../../core/resources/resources.dart';
-import 'leads_data_table.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/widgets/app_data_table.dart';
+import '../../data/models/leads_model.dart';
 
 class LeadsDataBlocBuilder extends StatelessWidget {
   const LeadsDataBlocBuilder({super.key});
@@ -22,8 +25,31 @@ class LeadsDataBlocBuilder extends StatelessWidget {
                 ),
             success: (leadsModel) {
               final leads = leadsModel.leads;
-              return LeadsDataTable(
-                leads: leads,
+              return AppDataTable<Leads>(
+                data: leads ?? [],
+                headers: const [
+                  "Name",
+                  "Lead Source",
+                  "Email",
+                  "Phone",
+                  "Lead Assigned to",
+                  "Created At",
+                ],
+                dataExtractors: [
+                  (lead) => lead.leadName ?? '_',
+                  (lead) => lead.leadSource ?? '_',
+                  (lead) => lead.email ?? '_',
+                  (lead) => lead.mobile ?? '_',
+                  (lead) => lead.assigned?.name ?? '_',
+                  (lead) => lead.createdAt ?? '_',
+                ],
+                dataIdExtractor: (lead) => (lead.id ?? 0).toString(),
+                onViewDetails: (id) {
+                  Get.toNamed(
+                    RoutesNames.leadsView,
+                    arguments: id != '' ? int.parse(id) : 0,
+                  );
+                },
               );
             },
             error: (message) => Center(
