@@ -13,7 +13,7 @@ CreateLeadRequestBody _$CreateLeadRequestBodyFromJson(
       lastName: json['last_name'] as String,
       email: json['email'] as String,
       mobile: json['mobile'] as String,
-      image: json['image'] as String?,
+      image: CreateLeadRequestBody._fileFromJson(json['image'] as String?),
       saluation: json['saluation'] as String?,
       leadName: json['lead_name'] as String?,
       company: json['company'] as String?,
@@ -39,7 +39,7 @@ CreateLeadRequestBody _$CreateLeadRequestBodyFromJson(
 Map<String, dynamic> _$CreateLeadRequestBodyToJson(
         CreateLeadRequestBody instance) =>
     <String, dynamic>{
-      'image': instance.image,
+      'image': CreateLeadRequestBody._fileToJson(instance.image),
       'saluation': instance.saluation,
       'first_name': instance.firstName,
       'last_name': instance.lastName,
