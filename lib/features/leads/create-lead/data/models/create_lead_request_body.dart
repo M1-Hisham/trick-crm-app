@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'create_lead_request_body.g.dart';
 
 @JsonSerializable()
 class CreateLeadRequestBody {
-  final String? image;
+  @JsonKey(
+    fromJson: _fileFromJson,
+    toJson: _fileToJson,
+  )
+  final File? image;
   final String? saluation;
   @JsonKey(name: 'first_name')
   final String firstName;
@@ -70,5 +76,16 @@ class CreateLeadRequestBody {
     this.tenantId,
   });
 
+  static File? _fileFromJson(String? path) {
+    if (path == null) return null;
+    return File(path);
+  }
+
+  static String? _fileToJson(File? file) {
+    return file?.path;
+  }
+
   Map<String, dynamic> toJson() => _$CreateLeadRequestBodyToJson(this);
+  factory CreateLeadRequestBody.fromJson(Map<String, dynamic> json) =>
+      _$CreateLeadRequestBodyFromJson(json);
 }
