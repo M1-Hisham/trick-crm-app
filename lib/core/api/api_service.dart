@@ -49,4 +49,5 @@ abstract class ApiService {
   @POST("/leads/{id}/create-note")
   Future<CreateLeadNoteModel> createLeadNote(@Path("id") int id,
       @Body() CreateLeadNoteRequestBody createLeadNoteRequestBody);
+      
 }
