@@ -8,8 +8,8 @@ import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
 import '../../../../core/resources/resources.dart';
-import '../../logic/cubit/leads_cubit.dart' as leads;
-import '../../logic/cubit/leads_cubit.dart';
+import '../../leads/logic/cubit/leads_cubit.dart' as leads;
+import '../../leads/logic/cubit/leads_cubit.dart';
 import '../logic/cubit/create_lead_cubit.dart';
 import '../logic/cubit/create_lead_state.dart';
 import 'widgets/user_form.dart';
