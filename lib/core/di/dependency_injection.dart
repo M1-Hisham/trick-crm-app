@@ -11,6 +11,8 @@ import '../../features/auth/login/logic/cubit/login_cubit.dart';
 import '../../features/home/data/repo/dashboard_repo.dart';
 import '../../features/leads/create-lead/data/repo/create_lead_repo.dart';
 import '../../features/leads/edit-lead/logic/cubit/edit_lead_cubit.dart';
+import '../../features/leads/leads-view/create-note/data/repo/create_note_repo.dart';
+import '../../features/leads/leads-view/create-note/logic/cubit/create_note_cubit.dart';
 import '../../features/leads/leads-view/data/repo/leads_view_repo.dart';
 import '../../features/leads/leads-view/logic/cubit/leads_view_cubit.dart';
 import '../../features/leads/logic/cubit/leads_cubit.dart';
@@ -49,4 +51,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<EditLeadRepo>(() => EditLeadRepo(getIt()));
   getIt.registerLazySingleton<EditLeadCubit>(
       () => EditLeadCubit(getIt<EditLeadRepo>()));
+
+  // Create Note instance
+  getIt.registerLazySingleton<CreateNoteRepo>(() => CreateNoteRepo(getIt()));
+  getIt.registerLazySingleton<CreateNoteCubit>(
+      () => CreateNoteCubit(getIt<CreateNoteRepo>()));
 }

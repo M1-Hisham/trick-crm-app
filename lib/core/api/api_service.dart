@@ -8,6 +8,8 @@ import 'package:trick_crm_app/features/leads/edit-lead/data/model/edit_lead_mode
 
 import '../../features/home/data/models/dashboard_response.dart';
 import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
+import '../../features/leads/leads-view/create-note/data/model/create_lead_note_model.dart';
+import '../../features/leads/leads-view/create-note/data/model/create_lead_note_reqest_body.dart';
 import '../../features/leads/leads-view/data/model/leads_view_model.dart';
 import 'api_constants.dart';
 
@@ -38,8 +40,14 @@ abstract class ApiService {
   /// service for Leads View
   @GET("/leads/{id}/view")
   Future<LeadsViewModel> getLeadsView(@Path("id") int id);
-  
+
   /// service for Leads Edit
   @GET("/leads/{id}/edit")
   Future<EditLeadModel> getEditLead(@Path("id") int id);
+
+  /// service for create Lead Note
+  @POST("/leads/{id}/create-note")
+  Future<CreateLeadNoteModel> createLeadNote(@Path("id") int id,
+      @Body() CreateLeadNoteRequestBody createLeadNoteRequestBody);
+      
 }
