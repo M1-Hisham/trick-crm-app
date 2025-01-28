@@ -11,6 +11,8 @@ import '../../features/leads/create-lead/data/models/create_lead_request_body.da
 import '../../features/leads/lead-view/create-note/data/model/create_lead_note_model.dart';
 import '../../features/leads/lead-view/create-note/data/model/create_lead_note_reqest_body.dart';
 import '../../features/leads/lead-view/lead-view/data/model/leads_view_model.dart';
+import '../../features/leads/lead-view/update-note/data/models/update_lead_note_model.dart';
+import '../../features/leads/lead-view/update-note/data/models/update_lead_note_request_body.dart';
 import 'api_constants.dart';
 
 part 'api_service.g.dart';
@@ -49,5 +51,11 @@ abstract class ApiService {
   @POST("/leads/{id}/create-note")
   Future<CreateLeadNoteModel> createLeadNote(@Path("id") int id,
       @Body() CreateLeadNoteRequestBody createLeadNoteRequestBody);
-      
+
+  /// service for update Lead Note
+  @PUT("/leads/{id}/{idNote}/update-note")
+  Future<UpdateLeadNoteModel> updateLeadNote(
+      @Path("id") int id,
+      @Path("idNote") int idNote,
+      @Body() UpdateLeadNoteRequestBody updateLeadNoteRequestBody);
 }
