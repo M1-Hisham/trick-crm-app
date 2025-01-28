@@ -232,7 +232,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = createLeadNoteRequestBody;
+    final _data = <String, dynamic>{};
+    _data.addAll(createLeadNoteRequestBody.toJson());
     final _options = _setStreamType<CreateLeadNoteModel>(Options(
       method: 'POST',
       headers: _headers,

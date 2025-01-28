@@ -7,5 +7,5 @@ class CreateLeadNoteRequestBody {
   String? comment;
   CreateLeadNoteRequestBody({this.comment});
 
-  factory CreateLeadNoteRequestBody.fromJson(Map<String, dynamic> json) => _$CreateLeadNoteRequestBodyFromJson(json);
+  Map<String, dynamic> toJson() => _$CreateLeadNoteRequestBodyToJson(this);
 }
