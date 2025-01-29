@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:trick_crm_app/features/auth/login/data/models/login_request_body.dart';
@@ -8,6 +10,7 @@ import 'package:trick_crm_app/features/leads/lead-view/edit-lead/data/model/edit
 
 import '../../features/home/data/models/dashboard_response.dart';
 import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
+import '../../features/leads/lead-view/create-attachment/data/model/create_attachment_model.dart';
 import '../../features/leads/lead-view/create-note/data/model/create_lead_note_model.dart';
 import '../../features/leads/lead-view/create-note/data/model/create_lead_note_reqest_body.dart';
 import '../../features/leads/lead-view/delete-note/data/model/delete_note_model.dart';
@@ -64,4 +67,11 @@ abstract class ApiService {
   @GET("/leads/{id}/{idNote}/delete-note")
   Future<DeleteNoteModel> deleteLeadNote(
       @Path("id") int id, @Path("idNote") int idNote);
+
+  /// service for create attachment
+  @POST("/leads/{id}/create-attachment")
+  Future<CreateAttachmentModel> createAttachment(
+    @Path("id") int leadId,
+    @Body() File attachment,
+  );
 }
