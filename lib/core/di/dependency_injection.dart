@@ -10,6 +10,8 @@ import '../../features/auth/login/data/repos/login_repo.dart';
 import '../../features/auth/login/logic/cubit/login_cubit.dart';
 import '../../features/home/data/repo/dashboard_repo.dart';
 import '../../features/leads/create-lead/data/repo/create_lead_repo.dart';
+import '../../features/leads/lead-view/delete-note/data/repo/delete_note_repo.dart';
+import '../../features/leads/lead-view/delete-note/logic/cubit/delete_note_cubit.dart';
 import '../../features/leads/lead-view/edit-lead/logic/cubit/edit_lead_cubit.dart';
 import '../../features/leads/lead-view/create-note/data/repo/create_note_repo.dart';
 import '../../features/leads/lead-view/create-note/logic/cubit/create_note_cubit.dart';
@@ -64,4 +66,9 @@ Future<void> setupGetIt() async {
       () => UpdateLeadNoteRepo(getIt()));
   getIt.registerLazySingleton<UpdateNoteCubit>(
       () => UpdateNoteCubit(getIt<UpdateLeadNoteRepo>()));
+
+  // Delete Note instance
+  getIt.registerLazySingleton<DeleteNoteRepo>(() => DeleteNoteRepo(getIt()));
+  getIt.registerLazySingleton<DeleteNoteCubit>(
+      () => DeleteNoteCubit(getIt<DeleteNoteRepo>()));
 }
