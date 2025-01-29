@@ -8,13 +8,13 @@ class UpdateLeadNoteRepo {
   final ApiService _apiService;
   UpdateLeadNoteRepo(this._apiService);
 
-  Future<ApiResult<UpdateLeadNoteModel>> updateLeadNote(
-      int leadId, int noteId, String note) async {
+  Future<ApiResult<UpdateLeadNoteModel>> updateLeadNote(int leadId, int noteId,
+      UpdateLeadNoteRequestBody updateLeadNoteRequestBody) async {
     try {
       final response = await _apiService.updateLeadNote(
         leadId,
         noteId,
-        UpdateLeadNoteRequestBody(comment: note),
+        updateLeadNoteRequestBody,
       );
       return ApiResult.success(response);
     } catch (e) {

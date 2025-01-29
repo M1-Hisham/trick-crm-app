@@ -20,7 +20,7 @@ mixin _$UpdateNoteState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(UpdateLeadNoteModel updateLeadNoteModel) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$UpdateNoteState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$UpdateNoteState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -132,7 +132,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(UpdateLeadNoteModel updateLeadNoteModel) success,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -154,7 +154,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -249,7 +249,7 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(UpdateLeadNoteModel updateLeadNoteModel) success,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -328,6 +328,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UpdateLeadNoteModel updateLeadNoteModel});
 }
 
 /// @nodoc
@@ -340,36 +342,62 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
   /// Create a copy of UpdateNoteState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? updateLeadNoteModel = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == updateLeadNoteModel
+          ? _value.updateLeadNoteModel
+          : updateLeadNoteModel // ignore: cast_nullable_to_non_nullable
+              as UpdateLeadNoteModel,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl();
+  const _$SuccessImpl(this.updateLeadNoteModel);
+
+  @override
+  final UpdateLeadNoteModel updateLeadNoteModel;
 
   @override
   String toString() {
-    return 'UpdateNoteState.success()';
+    return 'UpdateNoteState.success(updateLeadNoteModel: $updateLeadNoteModel)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.updateLeadNoteModel, updateLeadNoteModel) ||
+                other.updateLeadNoteModel == updateLeadNoteModel));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, updateLeadNoteModel);
+
+  /// Create a copy of UpdateNoteState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(UpdateLeadNoteModel updateLeadNoteModel) success,
     required TResult Function(String message) error,
   }) {
-    return success();
+    return success(updateLeadNoteModel);
   }
 
   @override
@@ -377,10 +405,10 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult? Function(String message)? error,
   }) {
-    return success?.call();
+    return success?.call(updateLeadNoteModel);
   }
 
   @override
@@ -388,12 +416,12 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(updateLeadNoteModel);
     }
     return orElse();
   }
@@ -437,7 +465,16 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements UpdateNoteState {
-  const factory Success() = _$SuccessImpl;
+  const factory Success(final UpdateLeadNoteModel updateLeadNoteModel) =
+      _$SuccessImpl;
+
+  UpdateLeadNoteModel get updateLeadNoteModel;
+
+  /// Create a copy of UpdateNoteState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -510,7 +547,7 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(UpdateLeadNoteModel updateLeadNoteModel) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -521,7 +558,7 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -532,7 +569,7 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(UpdateLeadNoteModel updateLeadNoteModel)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
