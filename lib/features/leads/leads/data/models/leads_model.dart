@@ -4,7 +4,7 @@ part 'leads_model.g.dart';
 
 @JsonSerializable()
 class LeadsModel {
-  String? status;
+  int? status;
   String? message;
   List<Users>? users;
   List<Leads>? leads;

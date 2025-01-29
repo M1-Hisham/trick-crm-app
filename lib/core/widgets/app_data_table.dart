@@ -13,6 +13,7 @@ class AppDataTable<T> extends StatefulWidget {
   final List<String Function(T)> dataExtractors;
   final String Function(T)? dataIdExtractor;
   final void Function(String)? onViewDetails;
+  final String? dataMessage;
 
   const AppDataTable({
     super.key,
@@ -21,6 +22,7 @@ class AppDataTable<T> extends StatefulWidget {
     required this.dataExtractors,
     this.dataIdExtractor,
     this.onViewDetails,
+    this.dataMessage,
   });
 
   @override
@@ -93,7 +95,7 @@ class _AppDataTableState<T> extends State<AppDataTable<T>> {
             ? Center(
                 heightFactor: 2,
                 child: Text(
-                  'No results found',
+                  widget.dataMessage ?? 'No results found',
                   style: TextStyle(color: Colors.grey, fontSize: 16.sp),
                 ),
               )

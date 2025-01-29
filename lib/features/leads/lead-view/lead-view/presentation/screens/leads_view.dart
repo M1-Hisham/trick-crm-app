@@ -29,6 +29,7 @@ class LeadsView extends StatelessWidget {
             ),
             success: (leadsViewModel) {
               final leadView = leadsViewModel;
+              // final noteId = leadsViewModel.leadNotes.;
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -36,6 +37,7 @@ class LeadsView extends StatelessWidget {
                   CreateNote(
                     leadId: leadId,
                   ),
+                  // UpdateNote(leadId: leadId, noteId: noteId),
                   Center(
                       child: TextButton(
                     onPressed: () {
