@@ -29,8 +29,10 @@ class LeadsDataBlocBuilder extends StatelessWidget {
                   ),
                 ),
             success: (leadsModel) {
+              final String? leadsMessage = leadsModel.message;
               final leads = leadsModel.leads;
               return AppDataTable<Leads>(
+                dataMessage: leadsMessage,
                 data: leads ?? [],
                 headers: const [
                   "Name",

@@ -7,7 +7,7 @@ part of 'leads_model.dart';
 // **************************************************************************
 
 LeadsModel _$LeadsModelFromJson(Map<String, dynamic> json) => LeadsModel(
-      status: json['status'] as String?,
+      status: (json['status'] as num?)?.toInt(),
       message: json['message'] as String?,
       users: (json['users'] as List<dynamic>?)
           ?.map((e) => Users.fromJson(e as Map<String, dynamic>))
