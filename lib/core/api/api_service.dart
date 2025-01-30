@@ -11,6 +11,8 @@ import 'package:trick_crm_app/features/leads/lead-view/edit-lead/data/model/edit
 import '../../features/home/data/models/dashboard_response.dart';
 import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
 import '../../features/leads/lead-view/create-attachment/data/model/create_attachment_model.dart';
+import '../../features/leads/lead-view/create-lead-task/data/model/create_lead_task_model.dart';
+import '../../features/leads/lead-view/create-lead-task/data/model/create_lead_task_request_body.dart';
 import '../../features/leads/lead-view/create-note/data/model/create_lead_note_model.dart';
 import '../../features/leads/lead-view/create-note/data/model/create_lead_note_reqest_body.dart';
 import '../../features/leads/lead-view/delete-note/data/model/delete_note_model.dart';
@@ -80,4 +82,11 @@ abstract class ApiService {
   @GET("/leads/{id}/{idAttachment}/delete-attachment")
   Future<DeleteAttachmentModel> deleteAttachment(
       @Path("id") int id, @Path("idAttachment") int idAttachment);
+
+  /// service for create lead task
+  @POST("/leads/{id}/create-task")
+  Future<CreateLeadTaskModel> createLeadTask(
+    @Path("id") int leadId,
+    @Body() CreateLeadTaskRequestBody createLeadTaskRequestBody,
+  );
 }
