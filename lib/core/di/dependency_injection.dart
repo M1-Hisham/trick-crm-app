@@ -14,6 +14,7 @@ import '../../features/leads/lead-view/create-attachment/data/repo/create_attach
 import '../../features/leads/lead-view/create-attachment/logic/cubit/create_attachment_cubit.dart';
 import '../../features/leads/lead-view/delete-note/data/repo/delete_note_repo.dart';
 import '../../features/leads/lead-view/delete-note/logic/cubit/delete_note_cubit.dart';
+import '../../features/leads/lead-view/delete_attachment/data/repo/delete_attachment_repo.dart';
 import '../../features/leads/lead-view/edit-lead/logic/cubit/edit_lead_cubit.dart';
 import '../../features/leads/lead-view/create-note/data/repo/create_note_repo.dart';
 import '../../features/leads/lead-view/create-note/logic/cubit/create_note_cubit.dart';
@@ -79,4 +80,8 @@ Future<void> setupGetIt() async {
       () => CreateAttachmentRepo(getIt()));
   getIt.registerLazySingleton<CreateAttachmentCubit>(
       () => CreateAttachmentCubit(getIt<CreateAttachmentRepo>()));
+
+  // Delete Attachment instance
+  getIt.registerLazySingleton<DeleteAttachmentRepo>(
+      () => DeleteAttachmentRepo(getIt()));
 }
