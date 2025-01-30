@@ -12,6 +12,8 @@ import '../../features/home/data/repo/dashboard_repo.dart';
 import '../../features/leads/create-lead/data/repo/create_lead_repo.dart';
 import '../../features/leads/lead-view/create-attachment/data/repo/create_attachment_repo.dart';
 import '../../features/leads/lead-view/create-attachment/logic/cubit/create_attachment_cubit.dart';
+import '../../features/leads/lead-view/create-lead-meeting/data/repo/create_lead_meeting_repo.dart';
+import '../../features/leads/lead-view/create-lead-meeting/logic/cubit/create_lead_meeting_cubit.dart';
 import '../../features/leads/lead-view/create-lead-task/data/repo/create_lead_task_repo.dart';
 import '../../features/leads/lead-view/create-lead-task/logic/cubit/create_lead_task_cubit.dart';
 import '../../features/leads/lead-view/delete-note/data/repo/delete_note_repo.dart';
@@ -95,4 +97,10 @@ Future<void> setupGetIt() async {
       () => CreateLeadTaskRepo(getIt()));
   getIt.registerLazySingleton<CreateLeadTaskCubit>(
       () => CreateLeadTaskCubit(getIt<CreateLeadTaskRepo>()));
+
+  // Create Lead Meeting instance
+  getIt.registerLazySingleton<CreateLeadMeetingRepo>(
+      () => CreateLeadMeetingRepo(getIt()));
+  getIt.registerLazySingleton<CreateLeadMeetingCubit>(
+      () => CreateLeadMeetingCubit(getIt<CreateLeadMeetingRepo>()));
 }

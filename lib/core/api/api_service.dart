@@ -11,6 +11,8 @@ import 'package:trick_crm_app/features/leads/lead-view/edit-lead/data/model/edit
 import '../../features/home/data/models/dashboard_response.dart';
 import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
 import '../../features/leads/lead-view/create-attachment/data/model/create_attachment_model.dart';
+import '../../features/leads/lead-view/create-lead-meeting/data/model/create_lead_meeting_model.dart';
+import '../../features/leads/lead-view/create-lead-meeting/data/model/create_lead_meeting_request_body.dart';
 import '../../features/leads/lead-view/create-lead-task/data/model/create_lead_task_model.dart';
 import '../../features/leads/lead-view/create-lead-task/data/model/create_lead_task_request_body.dart';
 import '../../features/leads/lead-view/create-note/data/model/create_lead_note_model.dart';
@@ -88,5 +90,12 @@ abstract class ApiService {
   Future<CreateLeadTaskModel> createLeadTask(
     @Path("id") int leadId,
     @Body() CreateLeadTaskRequestBody createLeadTaskRequestBody,
+  );
+
+  /// service for create lead meeting
+  @POST("/leads/{id}/create-meeting")
+  Future<CreateLeadMeetingModel> createLeadMeeting(
+    @Path("id") int leadId,
+    @Body() CreateLeadMeetingRequestBody createLeadMeetingRequestBody,
   );
 }
