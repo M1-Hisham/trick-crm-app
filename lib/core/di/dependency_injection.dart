@@ -12,6 +12,8 @@ import '../../features/home/data/repo/dashboard_repo.dart';
 import '../../features/leads/create-lead/data/repo/create_lead_repo.dart';
 import '../../features/leads/lead-view/create-attachment/data/repo/create_attachment_repo.dart';
 import '../../features/leads/lead-view/create-attachment/logic/cubit/create_attachment_cubit.dart';
+import '../../features/leads/lead-view/create-lead-task/data/repo/create_lead_task_repo.dart';
+import '../../features/leads/lead-view/create-lead-task/logic/cubit/create_lead_task_cubit.dart';
 import '../../features/leads/lead-view/delete-note/data/repo/delete_note_repo.dart';
 import '../../features/leads/lead-view/delete-note/logic/cubit/delete_note_cubit.dart';
 import '../../features/leads/lead-view/delete_attachment/data/repo/delete_attachment_repo.dart';
@@ -87,4 +89,10 @@ Future<void> setupGetIt() async {
       () => DeleteAttachmentRepo(getIt()));
   getIt.registerLazySingleton<DeleteAttachmentCubit>(
       () => DeleteAttachmentCubit(getIt<DeleteAttachmentRepo>()));
+
+  // Create Lead Task instance
+  getIt.registerLazySingleton<CreateLeadTaskRepo>(
+      () => CreateLeadTaskRepo(getIt()));
+  getIt.registerLazySingleton<CreateLeadTaskCubit>(
+      () => CreateLeadTaskCubit(getIt<CreateLeadTaskRepo>()));
 }
