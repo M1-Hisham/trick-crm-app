@@ -95,7 +95,9 @@ class _AppDataTableState<T> extends State<AppDataTable<T>> {
             ? Center(
                 heightFactor: 2,
                 child: Text(
-                  widget.dataMessage ?? 'No results found',
+                  widget.dataMessage == "Data retrieved successfully"
+                      ? 'No results found'
+                      : widget.dataMessage!,
                   style: TextStyle(color: Colors.grey, fontSize: 16.sp),
                 ),
               )
