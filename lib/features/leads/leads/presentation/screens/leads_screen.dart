@@ -5,7 +5,7 @@ import 'package:trick_crm_app/core/widgets/app_button.dart';
 
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/widgets/app_bar.dart';
-import '../../../create-lead/presentation/create_lead_screen.dart';
+import '../../../create-lead/presentation/screen/create_lead_screen.dart';
 import '../widgets/leads_data_bloc_builder.dart';
 
 class LeadsScreen extends StatelessWidget {

@@ -17,12 +17,11 @@ class AppUploadImage extends StatefulWidget {
 
 class _AppUploadImageState extends State<AppUploadImage> {
   XFile? pickedFile;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        imageShowDialogAdd();
-      },
+      onTap: _showImageSourceDialog,
       splashColor: R.colors.primaryColor,
       child: Container(
         width: 72,
@@ -40,7 +39,7 @@ class _AppUploadImageState extends State<AppUploadImage> {
                     color: Color(0xff727272),
                   ),
                   Text(
-                    "Uploud",
+                    "Upload",
                     style: TextStyle(
                       color: Color(0xff727272),
                       fontSize: 12,
@@ -52,107 +51,98 @@ class _AppUploadImageState extends State<AppUploadImage> {
             : ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 child: Image.file(
-                  fit: BoxFit.fill,
                   File(pickedFile!.path),
+                  fit: BoxFit.fill,
                 ),
               ),
       ),
     );
   }
 
-  void imageShowDialogAdd() {
+  void _showImageSourceDialog() {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Please choose an option',
-                    style: R.textStyles.font17whiteW600.copyWith(
-                      color: R.colors.black,
-                    ),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Please choose an option',
+                  style: R.textStyles.font17whiteW600.copyWith(
+                    color: R.colors.black,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: uploadImageCamera,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.camera,
-                          color: R.colors.primaryColor,
-                          size: 27.sp,
-                        ),
-                        spacingH(12),
-                        Text(
-                          'Camera',
-                          style: R.textStyles.font20ShadowGray29W500.copyWith(
-                            fontSize: 18.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: uploadImageGallery,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.photo,
-                          color: R.colors.primaryColor,
-                          size: 27.sp,
-                        ),
-                        spacingH(12),
-                        Text(
-                          'Gallery',
-                          style: R.textStyles.font20ShadowGray29W500,
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          );
-        });
+              ),
+              const SizedBox(height: 10),
+              _buildDialogOption(
+                icon: Icons.camera,
+                text: 'Camera',
+                onTap: _uploadImageFromCamera,
+              ),
+              _buildDialogOption(
+                icon: Icons.photo,
+                text: 'Gallery',
+                onTap: _uploadImageFromGallery,
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
-  void uploadImageGallery() async {
+  Widget _buildDialogOption({
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: R.colors.primaryColor,
+              size: 27.sp,
+            ),
+            spacingH(12),
+            Text(
+              text,
+              style: R.textStyles.font20ShadowGray29W500.copyWith(
+                fontSize: 18.sp,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _uploadImageFromGallery() async {
     Navigator.pop(context);
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(
-      () {
-        if (pickedFile != null) {
-          this.pickedFile = pickedFile;
-          widget.onImageSelected(pickedFile);
-        }
-      },
-    );
+    _setPickedFile(pickedFile);
   }
 
-  void uploadImageCamera() async {
+  Future<void> _uploadImageFromCamera() async {
     Navigator.pop(context);
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.camera);
-    setState(
-      () {
-        if (pickedFile != null) {
-          this.pickedFile = pickedFile;
-          widget.onImageSelected(pickedFile);
-        }
-      },
-    );
+    _setPickedFile(pickedFile);
+  }
+
+  void _setPickedFile(XFile? pickedFile) {
+    setState(() {
+      if (pickedFile != null) {
+        this.pickedFile = pickedFile;
+        widget.onImageSelected(pickedFile);
+      }
+    });
   }
 }
