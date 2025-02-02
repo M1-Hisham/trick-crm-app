@@ -7,20 +7,20 @@ class LeadsViewModel {
   String? status;
   Lead? lead;
   List<Users>? users;
-  List<dynamic>? leadNotes;
-  List<dynamic>? leadAttachments;
+  List<LeadNote>? leadNotes;
+  List<LeadAttatchment>? leadAttachments;
   @JsonKey(name: 'activity_log')
   List<ActivityLog>? activityLog;
-  List<dynamic>? openActivity;
-  List<dynamic>? closedActivity;
-  List<dynamic>? campaignLeads;
-  List<dynamic>? campaigns;
-  List<dynamic>? leadMails;
+  List<OpenActivity>? openActivity;
+  // List<dynamic>? closedActivity;
+  // List<dynamic>? campaignLeads;
+  // List<dynamic>? campaigns;
+  // List<dynamic>? leadMails;
   List<Calls>? calls;
-  List<dynamic>? contacts;
+  // List<dynamic>? contacts;
   List<Clients>? clients;
   List<Deals>? deals;
-  List<dynamic>? hostUsers;
+  List<HostUsers>? hostUsers;
 
   LeadsViewModel({
     this.status,
@@ -30,12 +30,12 @@ class LeadsViewModel {
     this.leadAttachments,
     this.activityLog,
     this.openActivity,
-    this.closedActivity,
-    this.campaignLeads,
-    this.campaigns,
-    this.leadMails,
+    // this.closedActivity,
+    // this.campaignLeads,
+    // this.campaigns,
+    // this.leadMails,
     this.calls,
-    this.contacts,
+    // this.contacts,
     this.clients,
     this.deals,
     this.hostUsers,
@@ -99,9 +99,9 @@ class Lead {
   @JsonKey(name: 'is_converted')
   int? isConverted;
   @JsonKey(name: 'end_time')
-  dynamic endTime;
+  String? endTime;
   @JsonKey(name: 'end_time_hour')
-  dynamic endTimeHour;
+  String? endTimeHour;
   @JsonKey(name: 'deleted_at')
   dynamic deletedAt;
   @JsonKey(name: 'created_at')
@@ -284,6 +284,137 @@ class Department {
 }
 
 @JsonSerializable()
+class LeadNote {
+  int? id;
+  int? leadId;
+  int? userId;
+  String? tenantId;
+  String? comment;
+  int? status;
+  String? createdAt;
+  String? updatedAt;
+  UserNote? userNote;
+
+  LeadNote({
+    this.id,
+    this.leadId,
+    this.userId,
+    this.tenantId,
+    this.comment,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.userNote,
+  });
+  factory LeadNote.fromJson(Map<String, dynamic> json) =>
+      _$LeadNoteFromJson(json);
+}
+
+@JsonSerializable()
+class UserNote {
+  int? id;
+  String? name;
+  String? email;
+  String? tenantId;
+  String? emailVerifiedAt;
+  dynamic departmentId;
+  int? companyId;
+  String? avatar;
+  int? roleAs;
+  int? isTenant;
+  int? isActive;
+  String? createdAt;
+  String? updatedAt;
+  dynamic department;
+
+  UserNote({
+    this.id,
+    this.name,
+    this.email,
+    this.tenantId,
+    this.emailVerifiedAt,
+    this.departmentId,
+    this.companyId,
+    this.avatar,
+    this.roleAs,
+    this.isTenant,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.department,
+  });
+
+  factory UserNote.fromJson(Map<String, dynamic> json) =>
+      _$UserNoteFromJson(json);
+}
+
+@JsonSerializable()
+class LeadAttatchment {
+  int? id;
+  int? leadId;
+  int? userId;
+  String? tenantId;
+  String? name;
+  String? url;
+  int? status;
+  String? createdAt;
+  String? updatedAt;
+  UserAttatchment? userAttatchment;
+
+  LeadAttatchment({
+    this.id,
+    this.leadId,
+    this.userId,
+    this.tenantId,
+    this.name,
+    this.url,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.userAttatchment,
+  });
+  factory LeadAttatchment.fromJson(Map<String, dynamic> json) =>
+      _$LeadAttatchmentFromJson(json);
+}
+
+@JsonSerializable()
+class UserAttatchment {
+  int? id;
+  String? name;
+  String? email;
+  String? tenantId;
+  String? emailVerifiedAt;
+  dynamic departmentId;
+  int? companyId;
+  String? avatar;
+  int? roleAs;
+  int? isTenant;
+  int? isActive;
+  String? createdAt;
+  String? updatedAt;
+  dynamic department;
+
+  UserAttatchment({
+    this.id,
+    this.name,
+    this.email,
+    this.tenantId,
+    this.emailVerifiedAt,
+    this.departmentId,
+    this.companyId,
+    this.avatar,
+    this.roleAs,
+    this.isTenant,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.department,
+  });
+  factory UserAttatchment.fromJson(Map<String, dynamic> json) =>
+      _$UserAttatchmentFromJson(json);
+}
+
+@JsonSerializable()
 class ActivityLog {
   int? id;
   @JsonKey(name: 'log_name')
@@ -358,7 +489,7 @@ class Attributes {
   int? userId;
   String? website;
   @JsonKey(name: 'end_time')
-  dynamic endTime;
+  String? endTime;
   String? industry;
   @JsonKey(name: 'mobile_2')
   String? mobile2;
@@ -388,7 +519,7 @@ class Attributes {
   @JsonKey(name: 'is_converted')
   int? isConverted;
   @JsonKey(name: 'end_time_hour')
-  dynamic endTimeHour;
+  String? endTimeHour;
   @JsonKey(name: 'assigned_to_id')
   dynamic assignedToId;
   @JsonKey(name: 'fb_campaign_name')
@@ -560,6 +691,81 @@ class Subject {
 
   factory Subject.fromJson(Map<String, dynamic> json) =>
       _$SubjectFromJson(json);
+}
+
+@JsonSerializable()
+class OpenActivity {
+  int? id;
+  int? leadId;
+  int? userId;
+  String? tenantId;
+  int? taskId;
+  dynamic meetingId;
+  dynamic callId;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+  Task? task;
+  dynamic call;
+  dynamic meeting;
+
+  OpenActivity({
+    this.id,
+    this.leadId,
+    this.userId,
+    this.tenantId,
+    this.taskId,
+    this.meetingId,
+    this.callId,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.task,
+    this.call,
+    this.meeting,
+  });
+  factory OpenActivity.fromJson(Map<String, dynamic> json) =>
+      _$OpenActivityFromJson(json);
+}
+
+@JsonSerializable()
+class Task {
+  int? id;
+  int? userId;
+  String? tenantId;
+  String? taskOwner;
+  int? assignedToId;
+  int? leadId;
+  dynamic contactId;
+  dynamic clientId;
+  String? subject;
+  String? status;
+  String? priority;
+  String? description;
+  String? dueDate;
+  int? isDeleted;
+  String? createdAt;
+  String? updatedAt;
+
+  Task({
+    this.id,
+    this.userId,
+    this.tenantId,
+    this.taskOwner,
+    this.assignedToId,
+    this.leadId,
+    this.contactId,
+    this.clientId,
+    this.subject,
+    this.status,
+    this.priority,
+    this.description,
+    this.dueDate,
+    this.isDeleted,
+    this.createdAt,
+    this.updatedAt,
+  });
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }
 
 @JsonSerializable()
@@ -1046,4 +1252,41 @@ class DealsUsers {
 
   factory DealsUsers.fromJson(Map<String, dynamic> json) =>
       _$DealsUsersFromJson(json);
+}
+
+@JsonSerializable()
+class HostUsers {
+  int? id;
+  String? name;
+  String? email;
+  String? tenantId;
+  String? emailVerifiedAt;
+  dynamic departmentId;
+  dynamic companyId;
+  String? avatar;
+  int? roleAs;
+  int? isTenant;
+  int? isActive;
+  String? createdAt;
+  String? updatedAt;
+  dynamic department;
+
+  HostUsers({
+    this.id,
+    this.name,
+    this.email,
+    this.tenantId,
+    this.emailVerifiedAt,
+    this.departmentId,
+    this.companyId,
+    this.avatar,
+    this.roleAs,
+    this.isTenant,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.department,
+  });
+  factory HostUsers.fromJson(Map<String, dynamic> json) =>
+      _$HostUsersFromJson(json);
 }
