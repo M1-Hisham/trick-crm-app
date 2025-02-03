@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:trick_crm_app/core/di/dependency_injection.dart';
 import 'package:trick_crm_app/core/helpers/spacing.dart';
 
+import '../cubits/image_picker_cubit.dart';
 import '../resources/resources.dart';
 
 class AppUploadImage extends StatefulWidget {
@@ -20,6 +22,8 @@ class _AppUploadImageState extends State<AppUploadImage> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = getIt<ImagePickerCubit>();
+    pickedFile = cubit.image;
     return InkWell(
       onTap: _showImageSourceDialog,
       splashColor: R.colors.primaryColor,
@@ -138,11 +142,13 @@ class _AppUploadImageState extends State<AppUploadImage> {
   }
 
   void _setPickedFile(XFile? pickedFile) {
-    setState(() {
-      if (pickedFile != null) {
+    if (pickedFile != null) {
+      final cubit = getIt<ImagePickerCubit>();
+      cubit.image = pickedFile;
+      setState(() {
         this.pickedFile = pickedFile;
-        widget.onImageSelected(pickedFile);
-      }
-    });
+      });
+      widget.onImageSelected(pickedFile);
+    }
   }
 }
