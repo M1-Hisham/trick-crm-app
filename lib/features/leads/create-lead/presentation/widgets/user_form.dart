@@ -62,7 +62,7 @@ ListView userForm(
       ...uploadImage(
         fun: (pickedFile) {
           if (pickedFile != null) {
-            _formData['Image'] = File(pickedFile.path);
+            _formData['Image'] = File(pickedFile.name);
           }
         },
       ),

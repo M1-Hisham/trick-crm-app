@@ -28,6 +28,7 @@ import '../../features/leads/lead-view/lead-view/logic/cubit/leads_view_cubit.da
 import '../../features/leads/lead-view/update-note/data/repo/update_lead_note_repo.dart';
 import '../../features/leads/lead-view/update-note/logic/cubit/update_note_cubit.dart';
 import '../../features/leads/leads/logic/cubit/leads_cubit.dart';
+import '../cubits/image_picker_cubit.dart';
 
 /// This is the dependency injection file for the app.
 final getIt = GetIt.instance;
@@ -58,6 +59,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<CreateLeadRepo>(() => CreateLeadRepo(getIt()));
   getIt.registerLazySingleton<CreateLeadCubit>(
       () => CreateLeadCubit(getIt<CreateLeadRepo>()));
+
+  // image picker cubit instance
+  getIt.registerLazySingleton<ImagePickerCubit>(() => ImagePickerCubit());
 
   // Edit lead instance
   getIt.registerLazySingleton<EditLeadRepo>(() => EditLeadRepo(getIt()));
