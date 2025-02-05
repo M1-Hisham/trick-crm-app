@@ -8,11 +8,10 @@ import 'package:trick_crm_app/core/cubits/image_picker_cubit.dart';
 import 'package:trick_crm_app/core/helpers/shaerd_pref_helper.dart';
 import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
+import '../../../../../core/cubits/show_fields.cubit.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../leads/logic/cubit/leads_cubit.dart' as leads;
 import '../../../leads/logic/cubit/leads_cubit.dart';
-import '../../logic/cubit/create_lead_cubit.dart';
-import '../../logic/cubit/create_lead_state.dart';
 import '../widgets/user_form.dart';
 import '../widgets/user_form_loading.dart';
 
@@ -37,7 +36,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
   @override
   void dispose() {
     log("Cubit is being closed.");
-    GetIt.I<CreateLeadCubit>().hideFields();
+    GetIt.I<ShowFieldsCubit>().hideFields();
     GetIt.I<ImagePickerCubit>().image = null;
     super.dispose();
   }
@@ -45,7 +44,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: GetIt.I<CreateLeadCubit>(),
+      value: GetIt.I<ShowFieldsCubit>(),
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Stack(
@@ -60,9 +59,9 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                 ),
               )
             else
-              BlocBuilder<CreateLeadCubit, CreateLeadState>(
+              BlocBuilder<ShowFieldsCubit, bool>(
                 builder: (context, state) {
-                  final cubit = context.read<CreateLeadCubit>();
+                  final cubit = context.read<ShowFieldsCubit>();
                   isShowFields = cubit.isShowFields;
 
                   return userForm(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 
+import '../cubits/show_fields.cubit.dart';
 import '../resources/resources.dart';
 
 class AppSelectionFormField extends StatefulWidget {
@@ -83,7 +83,7 @@ class _AppSelectionFormFieldState extends State<AppSelectionFormField> {
             if (value != null) {
               setState(() {
                 widget.labelText == 'Assign To' && value != null
-                    ? context.read<CreateLeadCubit>().showFields()
+                    ? context.read<ShowFieldsCubit>().showFields()
                     : null;
                 _selectedValue = value;
               });
