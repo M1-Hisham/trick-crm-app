@@ -1,11 +1,14 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trick_crm_app/features/leads/lead-view/edit-lead/data/model/edit_lead_model.dart';
 
 import '../../../../../../core/helpers/spacing.dart';
 import '../../../../../../core/resources/resources.dart';
+import '../../../../../../core/widgets/app_date_picker_field.dart';
 import '../../../../../../core/widgets/app_selection_form_field.dart';
 import '../../../../../../core/widgets/app_text_form_field.dart';
+import '../../../../create-lead/presentation/widgets/upload_image.dart';
+import '../../data/model/edit_lead_model.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -35,30 +38,42 @@ final Map<String, dynamic> _requiredFields = {
   'Description Information': null,
   'Description': false,
 };
-final Map<String, String> _formData = {};
+final Map<String, dynamic> _formData = {};
 
 ScrollController scrollController = ScrollController();
 
-ListView editUserForm(context, String userName, List<String> assignedToNames,
-    EditLeadModel editLeadModel) {
+ListView editUserForm(
+  context,
+  Lead? leadDtatModel,
+  List<Map<String, dynamic>>? leadOwner,
+  List<Map<String, dynamic>>? assignedToNames,
+  isShowFields,
+) {
   return ListView(
     controller: scrollController,
     shrinkWrap: true,
     padding: const EdgeInsets.all(20),
     children: [
       spacingV(120),
-      // ...uploudImage(),
+      ...uploadImage(
+        fun: (pickedFile) {
+          if (pickedFile != null) {
+            _formData['Image'] = File(pickedFile.name);
+          }
+        },
+      ),
       spacingV(20),
       Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ..._getListInformation(userName, assignedToNames, editLeadModel),
+            ..._getListInformation(context, leadDtatModel, leadOwner,
+                assignedToNames, isShowFields),
           ],
         ),
       ),
-      //? Refactor this function
+      //! Edit this function
       // ..._submitAndCancel(context),
       spacingV(20),
     ],
@@ -66,9 +81,11 @@ ListView editUserForm(context, String userName, List<String> assignedToNames,
 }
 
 List<Widget> _getListInformation(
-  String userName,
-  List<String> assignedToNames,
-  EditLeadModel editLeadModel,
+  context,
+  Lead? leadDtatModel,
+  List<Map<String, dynamic>>? leadOwner,
+  List<Map<String, dynamic>>? assignedToNames,
+  isShowFields,
 ) {
   List<Widget> childs = [];
   const sectionHeaders = [
@@ -91,27 +108,92 @@ List<Widget> _getListInformation(
       );
     } else if (_requiredFields[fieldName] == 'selection') {
       childs.add(
-        Padding(
-          padding: const EdgeInsets.only(bottom: 22),
-          child: AppSelectionFormField(
-            labelText: fieldName,
-            selections: _selectionCase(fieldName, userName, assignedToNames) ??
-                ['none'],
-            onSaved: (value) {
-              _formData[fieldName] = value!;
-            },
-          ),
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 22),
+              child: AppSelectionFormField(
+                // selectValue: 'nulll',
+                labelText: fieldName,
+                selections:
+                    _selectionCase(fieldName, leadOwner, assignedToNames) ??
+                        ['none'],
+                onSaved: (value) {
+                  _formData[fieldName] = value;
+                  if (fieldName == 'Lead Owner') {
+                    int? index = leadOwner?.indexWhere(
+                        (element) => element['id'] == int.parse(value));
+                    if (index != -1 && index != null) {
+                      _formData['Tenant Id'] = leadOwner?[index]['Tenant Id'];
+                    }
+                  }
+                },
+              ),
+            ),
+            Visibility(
+              visible: isShowFields == true && fieldName == 'Assign To',
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 22),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: AppDatePickerField(
+                        onSaved: (value) {
+                          _formData['End Time'] = value;
+                        },
+                      ),
+                    ),
+                    spacingH(20),
+                    Flexible(
+                      child: AppSelectionFormField(
+                          labelText: 'Time',
+                          selections: const [
+                            '6:00 AM',
+                            '7:00 AM',
+                            '8:00 AM',
+                            '9:00 AM',
+                            '10:00 AM',
+                            '11:00 AM',
+                            '12:00 PM',
+                            '1:00 PM',
+                            '2:00 PM',
+                            '3:00 PM',
+                            '4:00 PM',
+                            '5:00 PM',
+                            '6:00 PM',
+                            '7:00 PM',
+                            '8:00 PM',
+                            '9:00 PM',
+                            '10:00 PM',
+                            '11:00 PM',
+                            '12:00 AM',
+                          ],
+                          onSaved: (value) {
+                            _formData['End Time Hour'] = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              _scrollToTop();
+                              return 'Please enter a valid time';
+                            }
+                            return null;
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       );
     } else {
-      String? fieldValue = _getFieldValue(fieldName, editLeadModel.lead);
-
       childs.add(
         Padding(
           padding: const EdgeInsets.only(bottom: 22),
           child: AppTextFormField(
             controller: TextEditingController(
-              text: fieldValue ?? 'null',
+              text: _getFieldValue(fieldName, leadDtatModel),
             ),
             labelText: fieldName,
             hintText: '',
@@ -119,7 +201,7 @@ List<Widget> _getListInformation(
             keyboardType: _getKeyboardType(fieldName),
             maxLines: fieldName == 'Description' ? 3 : 1,
             onSaved: (value) {
-              _formData[fieldName] = value!;
+              _formData[fieldName] = value;
             },
             validator: (value) => _validateAllFields(fieldName, value),
           ),
@@ -164,23 +246,23 @@ String? _getFieldValue(String fieldName, Lead? lead) {
     case 'Lead Owner':
       return lead.ownerName;
     case 'Annual Revenue':
-      return lead.annualRevenue.toString();
+      return lead.annualRevenue == null ? '' : lead.annualRevenue.toString();
     default:
       return null;
   }
 }
 
-List<String>? _selectionCase(
+List<dynamic>? _selectionCase(
   String fieldName,
-  String userName,
-  List<String> assignedToNames,
+  List<Map<String, dynamic>>? leadOwner,
+  List<Map<String, dynamic>>? assignedToNames,
 ) {
   final sectionLeadOwner = [
-    '$userName(you)',
+    ...leadOwner!,
   ];
   final sectionAssignTo = [
-    '$userName(you)',
-    ...assignedToNames,
+    ...leadOwner,
+    ...assignedToNames!,
   ];
   const sectionIndustry = [
     'ASP (Application Service Provider)',
@@ -296,12 +378,13 @@ _getKeyboardType(String fieldName) {
   return switch (fieldName) {
     'Phone Number' => TextInputType.phone,
     'Sec Phone Number' => TextInputType.phone,
+    'Annual Revenue' => TextInputType.phone,
     'Email' => TextInputType.emailAddress,
     'Secondary Email' => TextInputType.emailAddress,
     _ => null,
   };
 }
-
+//! Edit this function
 // List<Widget> _submitAndCancel(context) {
 //   return [
 //     Row(
@@ -309,7 +392,7 @@ _getKeyboardType(String fieldName) {
 //         Expanded(
 //           child: AppButton(
 //             icon: SvgPicture.asset(R.icons.createLeads),
-//             text: "Update Lead",
+//             text: "Create Lead",
 //             onPressed: () => _submitCreateLead(context),
 //           ),
 //         ),
@@ -331,38 +414,44 @@ _getKeyboardType(String fieldName) {
 //   ];
 // }
 
-//! Refactor this function
+//! Edit this function
 // void _submitCreateLead(context) {
 //   if (_formKey.currentState!.validate()) {
 //     _formKey.currentState?.save();
 //     log("_formData: $_formData");
 //     var createLeadRequestBody = CreateLeadRequestBody(
-//       firstName: _formData['First Name']!,
-//       lastName: _formData['Last Name']!,
-//       email: _formData['Email']!,
-//       mobile: _formData['Phone Number']!,
-//       image: null,
+//       firstName: _formData['First Name'],
+//       lastName: _formData['Last Name'],
+//       email: _formData['Email'],
+//       mobile: _formData['Phone Number'],
+//       image: _formData['Image'],
 //       saluation: null,
-//       // leadOwner: 'leadOwner',
 //       leadName: null,
-//       company: _formData['Company']!,
-//       jobTitle: _formData['Title']!,
-//       mobile2: _formData['Sec Phone Number']!,
-//       website: _formData['Website']!,
-//       rating: _formData['Rating']!,
-//       leadStatus: _formData['Lead Status']!,
-//       leadSource: _formData['Lead Source']!,
-//       annualRevenue: null,
-//       industry: null,
-//       country: _formData['Country']!,
-//       city: _formData['City']!,
-//       state: _formData['State']!,
-//       description: _formData['Description']!,
-//       assignedToId: null,
-//       endTime: null,
-//       endTimeHour: null,
-//       userId: null,
-//       tenantId: null,
+//       company: _formData['Company'],
+//       jobTitle: _formData['Title'],
+//       mobile2: _formData['Sec Phone Number'],
+//       website: _formData['Website'],
+//       rating: _formData['Rating'],
+//       leadStatus: _formData['Lead Status'],
+//       leadSource: _formData['Lead Source'],
+//       annualRevenue: _formData['Annual Revenue'] != ''
+//           ? int.parse(_formData['Annual Revenue'])
+//           : null,
+//       industry: _formData['Industry'],
+//       country: _formData['Country'],
+//       city: _formData['City'],
+//       state: _formData['State'],
+//       description: _formData['Description'],
+//       assignedToId:
+//           _formData['Assign To'] != null && _formData['Assign To'] != ''
+//               ? int.parse(_formData['Assign To'])
+//               : null,
+//       endTime: _formData['End Time'],
+//       endTimeHour: _formData['End Time Hour'],
+//       userId: _formData['Lead Owner'] != null && _formData['Lead Owner'] != ''
+//           ? int.parse(_formData['Lead Owner'])
+//           : null,
+//       tenantId: _formData['Tenant Id'],
 //     );
 //     GetIt.I<CreateLeadCubit>().emitCreateLeadState(createLeadRequestBody);
 //     log("createLeadRequestBody: $createLeadRequestBody");
