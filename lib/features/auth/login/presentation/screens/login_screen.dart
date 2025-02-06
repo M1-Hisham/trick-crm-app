@@ -22,51 +22,62 @@ class LoginScreen extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: R.colors.white,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 55.h),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                spacingV(15),
-                Image.asset(
-                  R.icons.logo,
-                  width: 112.w,
-                  height: 55.h,
-                ),
-                spacingV(101),
-                Text(
-                  "Welcome back!\nGlad to see you,\nAgain!",
-                  style: R.textStyles.font40BlackBold,
-                ),
-                spacingV(74),
-                const EmailAndPassField(),
-                spacingV(11),
-                GestureDetector(
-                  onTap: () {
-                    //TODO: Forgot Password
-                    log("Forgot Password?");
-                  },
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "Forgot Password?",
-                      style: R.textStyles.font14darkGeryW600,
+        body: SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, 1.5),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(
+            parent: ModalRoute.of(context)!.animation!,
+            curve: Curves.linear,
+          )),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 55.h),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  spacingV(15),
+                  Hero(
+                    tag: 'logo',
+                    child: Image.asset(
+                      R.icons.logo,
+                      width: 112.w,
+                      height: 55.h,
                     ),
                   ),
-                ),
-                spacingV(39),
-                AppButton(
-                  onPressed: () {
-                    _login(context);
-                    context.read<LoginCubit>().clearLoginFields();
-                  },
-                  text: "Login",
-                  borderRadius: 8,
-                ),
-                const LoginBlocListener(),
-              ],
+                  spacingV(101),
+                  Text(
+                    "Welcome back!\nGlad to see you,\nAgain!",
+                    style: R.textStyles.font40BlackBold,
+                  ),
+                  spacingV(74),
+                  const EmailAndPassField(),
+                  spacingV(11),
+                  GestureDetector(
+                    onTap: () {
+                      log("Forgot Password?");
+                    },
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "Forgot Password?",
+                        style: R.textStyles.font14darkGeryW600,
+                      ),
+                    ),
+                  ),
+                  spacingV(39),
+                  AppButton(
+                    onPressed: () {
+                      _login(context);
+                      context.read<LoginCubit>().clearLoginFields();
+                    },
+                    text: "Login",
+                    borderRadius: 8,
+                  ),
+                  const LoginBlocListener(),
+                ],
+              ),
             ),
           ),
         ),

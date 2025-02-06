@@ -23,6 +23,7 @@ abstract class AppRouter {
         create: (context) => getIt<LoginCubit>(),
         child: const LoginScreen(),
       ),
+      transitionDuration: const Duration(milliseconds: 1400),
     ),
     GetPage(
         name: RoutesNames.home,
