@@ -15,66 +15,78 @@ class HomeBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: R.colors.primaryColor,
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(35),
-          bottomRight: Radius.circular(35),
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: Offset.fromDirection(-4.8, -4.8),
+        end: Offset.zero,
+      ).animate(CurvedAnimation(
+        parent: ModalRoute.of(context)!.animation!,
+        curve: Curves.linearToEaseOut,
+      )),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: R.colors.primaryColor,
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(35),
+            bottomRight: Radius.circular(35),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-        child: SafeArea(
-          child: BlocBuilder<DashboardCubit, DashboardState>(
-            builder: (context, state) {
-              final cubit = DashboardCubit.get(context);
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
+          child: SafeArea(
+            child: BlocBuilder<DashboardCubit, DashboardState>(
+              builder: (context, state) {
+                final cubit = DashboardCubit.get(context);
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (cubit.isOpenOrClose) ...[
-                    SvgPicture.asset(
-                      R.icons.notification,
-                      width: 32.w,
-                      height: 32.h,
-                    ),
-                    spacingV(115),
-                  ] else ...[
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            cubit.toggleMenu();
-                          },
-                          child: SvgPicture.asset(
-                            R.icons.openMenu,
-                            width: 35.w,
-                            height: 25.h,
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (cubit.isOpenOrClose) ...[
+                      SvgPicture.asset(
+                        R.icons.notification,
+                        width: 32.w,
+                        height: 32.h,
+                      ),
+                      spacingV(115),
+                    ] else ...[
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              cubit.toggleMenu();
+                            },
+                            child: SvgPicture.asset(
+                              R.icons.openMenu,
+                              width: 35.w,
+                              height: 25.h,
+                            ),
                           ),
-                        ),
-                        spacingH(16),
-                        Image.asset(
-                          R.icons.logoMenu,
-                          width: 122.w,
-                          height: 49.h,
-                        ),
-                        const Spacer(),
-                        SvgPicture.asset(
-                          R.icons.notification,
-                          width: 32.w,
-                          height: 32.h,
-                        ),
-                      ],
-                    ),
-                    spacingV(25),
-                    _userBar(),
-                    spacingV(10),
-                  ]
-                ],
-              );
-            },
+                          spacingH(16),
+                          Hero(
+                            tag: 'logo',
+                            child: Image.asset(
+                              R.icons.logoMenu,
+                              width: 122.w,
+                              height: 49.h,
+                            ),
+                          ),
+                          const Spacer(),
+                          SvgPicture.asset(
+                            R.icons.notification,
+                            width: 32.w,
+                            height: 32.h,
+                          ),
+                        ],
+                      ),
+                      spacingV(25),
+                      _userBar(),
+                      spacingV(10),
+                    ]
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

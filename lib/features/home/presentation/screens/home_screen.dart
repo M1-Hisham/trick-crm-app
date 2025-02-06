@@ -35,18 +35,27 @@ class HomeScreen extends StatelessWidget {
                 const HomeBar(),
                 Padding(
                   padding: const EdgeInsets.all(22),
-                  child: Column(
-                    children: [
-                      const CardBlocBuilder(),
-                      spacingV(22),
-                      const EmployeesChartCard(),
-                      spacingV(16),
-                      const DealsCard(),
-                      spacingV(16),
-                      const MeetingsCard(),
-                      spacingV(16),
-                      const Logout(),
-                    ],
+                  child: SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(0, 1.5),
+                      end: Offset.zero,
+                    ).animate(CurvedAnimation(
+                      parent: ModalRoute.of(context)!.animation!,
+                      curve: Curves.linear,
+                    )),
+                    child: Column(
+                      children: [
+                        const CardBlocBuilder(),
+                        spacingV(22),
+                        const EmployeesChartCard(),
+                        spacingV(16),
+                        const DealsCard(),
+                        spacingV(16),
+                        const MeetingsCard(),
+                        spacingV(16),
+                        const Logout(),
+                      ],
+                    ),
                   ),
                 ),
               ],
