@@ -23,13 +23,16 @@ abstract class AppRouter {
         create: (context) => getIt<LoginCubit>(),
         child: const LoginScreen(),
       ),
+      transitionDuration: const Duration(milliseconds: 1400),
     ),
     GetPage(
-        name: RoutesNames.home,
-        page: () => BlocProvider(
-              create: (context) => DashboardCubit(getIt())..getDashboard(),
-              child: const HomeScreen(),
-            )),
+      name: RoutesNames.home,
+      page: () => BlocProvider(
+        create: (context) => DashboardCubit(getIt())..getDashboard(),
+        child: const HomeScreen(),
+      ),
+      transitionDuration: const Duration(milliseconds: 1200),
+    ),
     GetPage(
       name: RoutesNames.leads,
       page: () => BlocProvider(
