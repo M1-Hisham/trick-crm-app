@@ -8,6 +8,7 @@ import 'package:trick_crm_app/features/leads/create-lead/data/models/create_lead
 import 'package:trick_crm_app/features/leads/leads/data/models/leads_model.dart';
 import 'package:trick_crm_app/features/leads/lead-view/edit-lead/data/model/edit_lead_model.dart';
 
+import '../../features/clients/clients/data/model/clients_model.dart';
 import '../../features/home/data/models/dashboard_response.dart';
 import '../../features/leads/create-lead/data/models/create_lead_request_body.dart';
 import '../../features/leads/lead-view/create-attachment/data/model/create_attachment_model.dart';
@@ -98,4 +99,8 @@ abstract class ApiService {
     @Path("id") int leadId,
     @Body() CreateLeadMeetingRequestBody createLeadMeetingRequestBody,
   );
+
+  /// service for Clients
+  @GET(ApiConstants.clients)
+  Future<ClientsModel> getClients();
 }
