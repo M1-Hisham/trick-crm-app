@@ -116,6 +116,7 @@ class AppMenu extends StatelessWidget {
     Map<String, String> menuRoutes = {
       'Dashboard': RoutesNames.home,
       'Leads': RoutesNames.leads,
+      'Clients': RoutesNames.clients,
       //? more routes here
     };
     for (MapEntry menus in R.icons.iconsMenu.entries) {
