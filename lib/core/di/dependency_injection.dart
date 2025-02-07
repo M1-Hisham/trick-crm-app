@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trick_crm_app/core/api/api_service.dart';
 import 'package:trick_crm_app/core/api/dio_factory.dart';
+import 'package:trick_crm_app/features/clients/clients/data/repo/clients_repo.dart';
 import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 import 'package:trick_crm_app/features/leads/leads/data/repo/leads_repo.dart';
 import 'package:trick_crm_app/features/leads/lead-view/edit-lead/data/repo/edit_lead_repo.dart';
 
 import '../../features/auth/login/data/repos/login_repo.dart';
 import '../../features/auth/login/logic/cubit/login_cubit.dart';
+import '../../features/clients/clients/logic/cubit/clients_cubit.dart';
 import '../../features/home/data/repo/dashboard_repo.dart';
 import '../../features/leads/create-lead/data/repo/create_lead_repo.dart';
 import '../../features/leads/lead-view/create-attachment/data/repo/create_attachment_repo.dart';
@@ -111,4 +113,9 @@ Future<void> setupGetIt() async {
       () => CreateLeadMeetingRepo(getIt()));
   getIt.registerLazySingleton<CreateLeadMeetingCubit>(
       () => CreateLeadMeetingCubit(getIt<CreateLeadMeetingRepo>()));
+
+  // Client instance
+  getIt.registerLazySingleton<ClientsRepo>(() => ClientsRepo(getIt()));
+  getIt.registerLazySingleton<ClientsCubit>(
+      () => ClientsCubit(getIt<ClientsRepo>()));
 }
