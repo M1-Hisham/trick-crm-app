@@ -26,10 +26,11 @@ class BaseCubit<T> extends Cubit<BaseState<T>> {
   }
 
   /// Send data to API Service
-  Future<void> sendData(dynamic requestBody) async {
+  Future<void> sendData(dynamic requestBody,
+      {Map<String, dynamic>? params}) async {
     emit(const BaseState.loading());
     log("BaseCubit: sendData called");
-    final response = await _repo.sendData(requestBody);
+    final response = await _repo.sendData(requestBody, params: params);
     response.when(
       success: (data) {
         log("Data cubit: success");

@@ -8,10 +8,12 @@ class BaseRepo<T> {
   final Future<T> Function()? _fetchData;
 
   /// Send data to API Service
-  final Future<T> Function(dynamic requestBody)? _sendData;
+  final Future<T> Function(dynamic requestBody, {Map<String, dynamic>? params})?
+      _sendData;
 
   BaseRepo(
-      {Future<T> Function()? fetchData, Future<T> Function(dynamic)? sendData})
+      {Future<T> Function()? fetchData,
+      Future<T> Function(dynamic, {Map<String, dynamic>? params})? sendData})
       : _fetchData = fetchData,
         _sendData = sendData;
 
@@ -31,12 +33,13 @@ class BaseRepo<T> {
   }
 
   /// @POST
-  Future<ApiResult<T>> sendData(dynamic requestBody) async {
+  Future<ApiResult<T>> sendData(dynamic requestBody,
+      {Map<String, dynamic>? params}) async {
     try {
       if (_sendData == null) {
         throw Exception("No sendData function provided!");
       }
-      final response = await _sendData(requestBody);
+      final response = await _sendData(requestBody, params: params);
       log("Base Repo: success");
       return ApiResult.success(response);
     } catch (e) {
