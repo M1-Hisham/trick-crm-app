@@ -8,7 +8,8 @@ import '../../data/models/create_lead_request_body.dart';
 class CreateLeadCubit extends BaseCubit<CreateLeadModel> {
   CreateLeadCubit(ApiService apiService)
       : super(BaseRepo(
-            sendData: (requestBody) => apiService.createLead(requestBody)));
+            sendData: (requestBody, {Map<String, dynamic>? params}) =>
+                apiService.createLead(requestBody)));
 
   Future<void> createLead(CreateLeadRequestBody createLeadRequestBody) async {
     await sendData(createLeadRequestBody);

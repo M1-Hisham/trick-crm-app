@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trick_crm_app/core/cubits/base_state.dart';
 import 'package:trick_crm_app/core/di/dependency_injection.dart';
 
 import 'package:trick_crm_app/core/widgets/app_button.dart';
@@ -10,7 +11,6 @@ import 'package:trick_crm_app/features/leads/lead-view/update-note/data/models/u
 import 'package:trick_crm_app/features/leads/lead-view/update-note/data/models/update_lead_note_request_body.dart';
 
 import '../../logic/cubit/update_note_cubit.dart';
-import '../../logic/cubit/update_note_state.dart';
 
 class UpdateNote extends StatelessWidget {
   final int leadId;
@@ -25,7 +25,7 @@ class UpdateNote extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: getIt<UpdateNoteCubit>(),
-      child: BlocBuilder<UpdateNoteCubit, UpdateNoteState>(
+      child: BlocBuilder<UpdateNoteCubit, BaseState<UpdateLeadNoteModel>>(
           builder: (context, state) {
         return state.maybeWhen(
           loading: () => const Center(

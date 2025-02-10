@@ -1,30 +1,19 @@
-import 'dart:developer';
+import 'package:trick_crm_app/core/cubits/base_cubit.dart';
+import 'package:trick_crm_app/features/leads/lead-view/update-note/data/models/update_lead_note_request_body.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trick_crm_app/features/leads/lead-view/update-note/data/repo/update_lead_note_repo.dart';
+import '../../../../../../core/api/api_service.dart';
+import '../../../../../../core/repo/base_repo.dart';
+import '../../data/models/update_lead_note_model.dart';
 
-import '../../data/models/update_lead_note_request_body.dart';
-import 'update_note_state.dart';
+class UpdateNoteCubit extends BaseCubit<UpdateLeadNoteModel> {
+  UpdateNoteCubit(ApiService apiService)
+      : super(BaseRepo(
+            sendData: (requestBody, {Map<String, dynamic>? params}) =>
+                apiService.updateLeadNote(
+                    params!['id'], params['idNote'], requestBody)));
 
-class UpdateNoteCubit extends Cubit<UpdateNoteState> {
-  final UpdateLeadNoteRepo _updateLeadNoteRepo;
-  UpdateNoteCubit(this._updateLeadNoteRepo)
-      : super(const UpdateNoteState.initial());
-
-  void updateNote(int leadId, int noteId,
-      UpdateLeadNoteRequestBody updateLeadNoteRequestBody) async {
-    emit(const UpdateNoteState.loading());
-    final response = await _updateLeadNoteRepo.updateLeadNote(
-        leadId, noteId, updateLeadNoteRequestBody);
-    response.when(
-      success: (updateLeadNoteModel) {
-        log("Cubit: Note updated successfully");
-        emit(UpdateNoteState.success(updateLeadNoteModel));
-      },
-      error: (message) {
-        log("Cubit: Error in update note cubit: $message");
-        emit(UpdateNoteState.error(message));
-      },
-    );
+  Future<void> updateNote(
+      int leadId, int noteId, UpdateLeadNoteRequestBody requestBody) async {
+    await sendData(requestBody, params: {'id': leadId, 'idNote': noteId});
   }
 }

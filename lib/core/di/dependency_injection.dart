@@ -23,7 +23,6 @@ import '../../features/leads/lead-view/create-note/data/repo/create_note_repo.da
 import '../../features/leads/lead-view/create-note/logic/cubit/create_note_cubit.dart';
 import '../../features/leads/lead-view/lead-view/data/repo/leads_view_repo.dart';
 import '../../features/leads/lead-view/lead-view/logic/cubit/leads_view_cubit.dart';
-import '../../features/leads/lead-view/update-note/data/repo/update_lead_note_repo.dart';
 import '../../features/leads/lead-view/update-note/logic/cubit/update_note_cubit.dart';
 import '../../features/leads/leads/logic/cubit/leads_cubit.dart';
 import '../cubits/image_picker_cubit.dart';
@@ -75,10 +74,8 @@ Future<void> setupGetIt() async {
       () => CreateNoteCubit(getIt<CreateNoteRepo>()));
 
   // Update Note instance
-  getIt.registerLazySingleton<UpdateLeadNoteRepo>(
-      () => UpdateLeadNoteRepo(getIt()));
   getIt.registerLazySingleton<UpdateNoteCubit>(
-      () => UpdateNoteCubit(getIt<UpdateLeadNoteRepo>()));
+      () => UpdateNoteCubit(getIt<ApiService>()));
 
   // Delete Note instance
   getIt.registerLazySingleton<DeleteNoteRepo>(() => DeleteNoteRepo(getIt()));
