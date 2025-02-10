@@ -1,26 +1,10 @@
-import 'dart:developer';
+import 'package:trick_crm_app/core/api/api_service.dart';
+import 'package:trick_crm_app/core/cubits/base_cubit.dart';
+import 'package:trick_crm_app/core/repo/base_repo.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trick_crm_app/features/leads/leads/data/repo/leads_repo.dart';
+import '../../data/models/leads_model.dart';
 
-import 'leads_state.dart';
-
-class LeadsCubit extends Cubit<LeadsState> {
-  final LeadsRepo _leadsRepo;
-  LeadsCubit(this._leadsRepo) : super(const LeadsState.initial());
-  void getLeads() async {
-    emit(const LeadsState.loading());
-    log("LeadsCubit: getLeads called");
-    final leadsModel = await _leadsRepo.getLeadsData();
-    leadsModel.when(
-      success: (leadsModel) {
-        log("Leads data cubit: success");
-        emit(LeadsState.success(leadsModel));
-      },
-      error: (e) {
-        log("Error message LeadsCubit: $e");
-        emit(LeadsState.error(e.toString()));
-      },
-    );
-  }
+class LeadsCubit extends BaseCubit<LeadsModel> {
+  LeadsCubit(ApiService apiService)
+      : super(BaseRepo(() => apiService.getLeads()));
 }

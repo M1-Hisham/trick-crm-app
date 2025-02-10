@@ -10,8 +10,8 @@ import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
 import '../../../../../core/cubits/show_fields.cubit.dart';
 import '../../../../../core/resources/resources.dart';
+import '../../../../../core/cubits/base_state.dart';
 import '../../../leads/logic/cubit/leads_cubit.dart';
-import '../../../leads/logic/cubit/leads_state.dart';
 import '../widgets/user_form.dart';
 import '../widgets/user_form_loading.dart';
 
@@ -29,7 +29,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
   @override
   void initState() {
     super.initState();
-    GetIt.I<LeadsCubit>().getLeads();
+    GetIt.I<LeadsCubit>().getData();
     loadUserData();
   }
 
@@ -120,7 +120,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
   }
 
   Future<List<Map<String, dynamic>>> loadAssignedToNames() async {
-    while (GetIt.I<LeadsCubit>().state is Loading ) { 
+    while (GetIt.I<LeadsCubit>().state is Loading) {
       await Future.delayed(const Duration(microseconds: 1));
     }
 

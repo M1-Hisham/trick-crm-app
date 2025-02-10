@@ -10,10 +10,10 @@ import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 
 import '../../../../../../core/cubits/show_fields.cubit.dart';
 import '../../../../../../core/resources/resources.dart';
+import '../../../../../../core/cubits/base_state.dart';
 import '../../../../create-lead/presentation/widgets/user_form_loading.dart';
 import '../../../../leads/logic/cubit/leads_cubit.dart';
 import '../widgets/edit_data_bloc_builder.dart';
-import '../../../../leads/logic/cubit/leads_state.dart';
 
 class EditLeadScreen extends StatefulWidget {
   final int leadId;
@@ -29,7 +29,7 @@ class _EditLeadScreenState extends State<EditLeadScreen> {
   @override
   void initState() {
     super.initState();
-    GetIt.I<LeadsCubit>().getLeads();
+    GetIt.I<LeadsCubit>().getData();
     loadUserData();
   }
 

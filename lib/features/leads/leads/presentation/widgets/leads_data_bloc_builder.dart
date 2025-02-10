@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:trick_crm_app/core/cubits/base_state.dart';
 import 'package:trick_crm_app/features/leads/leads/logic/cubit/leads_cubit.dart';
 
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/widgets/app_data_table.dart';
 import '../../data/models/leads_model.dart';
-import '../../logic/cubit/leads_state.dart';
 
 class LeadsDataBlocBuilder extends StatelessWidget {
   const LeadsDataBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LeadsCubit, LeadsState>(
+    return BlocBuilder<LeadsCubit, BaseState<LeadsModel>>(
       buildWhen: (previous, current) => current is Success || current is Error,
       builder: (context, state) {
         return state.maybeWhen(
