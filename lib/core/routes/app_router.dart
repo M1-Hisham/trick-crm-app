@@ -13,6 +13,7 @@ import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/leads/lead-view/lead-view/presentation/screens/leads_view.dart';
 import '../../features/leads/leads/logic/cubit/leads_cubit.dart';
 import '../../features/splash/splash_screen.dart';
+import '../api/api_service.dart';
 import '../di/dependency_injection.dart';
 
 /// App Router class for the app
@@ -52,7 +53,7 @@ abstract class AppRouter {
     GetPage(
       name: RoutesNames.clients,
       page: () => BlocProvider(
-        create: (context) => ClientsCubit(getIt())..getClients(),
+        create: (context) => ClientsCubit(getIt<ApiService>())..getData(),
         child: const Clients(),
       ),
     ),
