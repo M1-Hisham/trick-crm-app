@@ -6,6 +6,7 @@ import '../../../../../../core/cubits/show_fields.cubit.dart';
 import '../../../../../../core/resources/resources.dart';
 import '../../../../create-lead/presentation/widgets/user_form_loading.dart';
 import '../../logic/cubit/edit_lead_cubit.dart';
+import '../../logic/cubit/edit_lead_state.dart';
 import 'edit_user_form.dart';
 
 class EditDataBlocBuilder extends StatelessWidget {

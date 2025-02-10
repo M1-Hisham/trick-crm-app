@@ -11,9 +11,9 @@ import 'package:trick_crm_app/core/widgets/app_top_bar_dialog.dart';
 import '../../../../../../core/cubits/show_fields.cubit.dart';
 import '../../../../../../core/resources/resources.dart';
 import '../../../../create-lead/presentation/widgets/user_form_loading.dart';
-import '../../../../leads/logic/cubit/leads_cubit.dart' as leads;
 import '../../../../leads/logic/cubit/leads_cubit.dart';
 import '../widgets/edit_data_bloc_builder.dart';
+import '../../../../leads/logic/cubit/leads_state.dart';
 
 class EditLeadScreen extends StatefulWidget {
   final int leadId;
@@ -106,7 +106,7 @@ class _EditLeadScreenState extends State<EditLeadScreen> {
   }
 
   Future<List<Map<String, dynamic>>> loadAssignedToNames() async {
-    while (GetIt.I<LeadsCubit>().state is leads.Loading) {
+    while (GetIt.I<LeadsCubit>().state is Loading) {
       await Future.delayed(const Duration(microseconds: 1));
     }
 
