@@ -10,8 +10,4 @@ class CreateLeadState with _$CreateLeadState {
   const factory CreateLeadState.success(CreateLeadModel createLeadModel) =
       Success;
   const factory CreateLeadState.error({required String error}) = Error;
-
-  /// for show form field data
-  const factory CreateLeadState.showFields({required bool isShowFields}) =
-      ShowFields;
 }

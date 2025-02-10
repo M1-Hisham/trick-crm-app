@@ -8,7 +8,6 @@ import 'create_lead_state.dart';
 
 class CreateLeadCubit extends Cubit<CreateLeadState> {
   final CreateLeadRepo _createLeadRepo;
-  bool isShowFields = false;
   CreateLeadCubit(this._createLeadRepo)
       : super(const CreateLeadState.initial());
 
@@ -17,24 +16,17 @@ class CreateLeadCubit extends Cubit<CreateLeadState> {
 
     final response = await _createLeadRepo.createLead(createLeadRequestBody);
 
-    response.when(success: (createLeadModel) async {
-      emit(CreateLeadState.success(createLeadModel));
-      log("Lead created successfully");
-      log('status: ${createLeadModel.status}');
-      log('message ${createLeadModel.message}');
-    }, error: (message) {
-      emit(CreateLeadState.error(error: message));
-      log("Error in create lead cubit: $message");
-    });
-  }
-
-  void showFields() {
-    isShowFields = true;
-    emit(CreateLeadState.showFields(isShowFields: isShowFields));
-  }
-
-  void hideFields() {
-    isShowFields = false;
-    emit(CreateLeadState.showFields(isShowFields: isShowFields));
+    response.when(
+      success: (createLeadModel) async {
+        emit(CreateLeadState.success(createLeadModel));
+        log("Lead created successfully");
+        log('status: ${createLeadModel.status}');
+        log('message ${createLeadModel.message}');
+      },
+      error: (message) {
+        emit(CreateLeadState.error(error: message));
+        log("Error in create lead cubit: $message");
+      },
+    );
   }
 }

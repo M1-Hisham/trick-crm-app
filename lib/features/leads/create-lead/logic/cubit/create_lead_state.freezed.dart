@@ -22,7 +22,6 @@ mixin _$CreateLeadState {
     required TResult Function() loading,
     required TResult Function(CreateLeadModel createLeadModel) success,
     required TResult Function(String error) error,
-    required TResult Function(bool isShowFields) showFields,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +30,6 @@ mixin _$CreateLeadState {
     TResult? Function()? loading,
     TResult? Function(CreateLeadModel createLeadModel)? success,
     TResult? Function(String error)? error,
-    TResult? Function(bool isShowFields)? showFields,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +38,6 @@ mixin _$CreateLeadState {
     TResult Function()? loading,
     TResult Function(CreateLeadModel createLeadModel)? success,
     TResult Function(String error)? error,
-    TResult Function(bool isShowFields)? showFields,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,7 +47,6 @@ mixin _$CreateLeadState {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(ShowFields value) showFields,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +55,6 @@ mixin _$CreateLeadState {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(ShowFields value)? showFields,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,7 +63,6 @@ mixin _$CreateLeadState {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(ShowFields value)? showFields,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,7 +134,6 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(CreateLeadModel createLeadModel) success,
     required TResult Function(String error) error,
-    required TResult Function(bool isShowFields) showFields,
   }) {
     return initial();
   }
@@ -152,7 +145,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(CreateLeadModel createLeadModel)? success,
     TResult? Function(String error)? error,
-    TResult? Function(bool isShowFields)? showFields,
   }) {
     return initial?.call();
   }
@@ -164,7 +156,6 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(CreateLeadModel createLeadModel)? success,
     TResult Function(String error)? error,
-    TResult Function(bool isShowFields)? showFields,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -180,7 +171,6 @@ class _$InitialImpl implements _Initial {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(ShowFields value) showFields,
   }) {
     return initial(this);
   }
@@ -192,7 +182,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(ShowFields value)? showFields,
   }) {
     return initial?.call(this);
   }
@@ -204,7 +193,6 @@ class _$InitialImpl implements _Initial {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(ShowFields value)? showFields,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -263,7 +251,6 @@ class _$LoadingImpl implements Loading {
     required TResult Function() loading,
     required TResult Function(CreateLeadModel createLeadModel) success,
     required TResult Function(String error) error,
-    required TResult Function(bool isShowFields) showFields,
   }) {
     return loading();
   }
@@ -275,7 +262,6 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? loading,
     TResult? Function(CreateLeadModel createLeadModel)? success,
     TResult? Function(String error)? error,
-    TResult? Function(bool isShowFields)? showFields,
   }) {
     return loading?.call();
   }
@@ -287,7 +273,6 @@ class _$LoadingImpl implements Loading {
     TResult Function()? loading,
     TResult Function(CreateLeadModel createLeadModel)? success,
     TResult Function(String error)? error,
-    TResult Function(bool isShowFields)? showFields,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -303,7 +288,6 @@ class _$LoadingImpl implements Loading {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(ShowFields value) showFields,
   }) {
     return loading(this);
   }
@@ -315,7 +299,6 @@ class _$LoadingImpl implements Loading {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(ShowFields value)? showFields,
   }) {
     return loading?.call(this);
   }
@@ -327,7 +310,6 @@ class _$LoadingImpl implements Loading {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(ShowFields value)? showFields,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -414,7 +396,6 @@ class _$SuccessImpl implements Success {
     required TResult Function() loading,
     required TResult Function(CreateLeadModel createLeadModel) success,
     required TResult Function(String error) error,
-    required TResult Function(bool isShowFields) showFields,
   }) {
     return success(createLeadModel);
   }
@@ -426,7 +407,6 @@ class _$SuccessImpl implements Success {
     TResult? Function()? loading,
     TResult? Function(CreateLeadModel createLeadModel)? success,
     TResult? Function(String error)? error,
-    TResult? Function(bool isShowFields)? showFields,
   }) {
     return success?.call(createLeadModel);
   }
@@ -438,7 +418,6 @@ class _$SuccessImpl implements Success {
     TResult Function()? loading,
     TResult Function(CreateLeadModel createLeadModel)? success,
     TResult Function(String error)? error,
-    TResult Function(bool isShowFields)? showFields,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -454,7 +433,6 @@ class _$SuccessImpl implements Success {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(ShowFields value) showFields,
   }) {
     return success(this);
   }
@@ -466,7 +444,6 @@ class _$SuccessImpl implements Success {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(ShowFields value)? showFields,
   }) {
     return success?.call(this);
   }
@@ -478,7 +455,6 @@ class _$SuccessImpl implements Success {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(ShowFields value)? showFields,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -572,7 +548,6 @@ class _$ErrorImpl implements Error {
     required TResult Function() loading,
     required TResult Function(CreateLeadModel createLeadModel) success,
     required TResult Function(String error) error,
-    required TResult Function(bool isShowFields) showFields,
   }) {
     return error(this.error);
   }
@@ -584,7 +559,6 @@ class _$ErrorImpl implements Error {
     TResult? Function()? loading,
     TResult? Function(CreateLeadModel createLeadModel)? success,
     TResult? Function(String error)? error,
-    TResult? Function(bool isShowFields)? showFields,
   }) {
     return error?.call(this.error);
   }
@@ -596,7 +570,6 @@ class _$ErrorImpl implements Error {
     TResult Function()? loading,
     TResult Function(CreateLeadModel createLeadModel)? success,
     TResult Function(String error)? error,
-    TResult Function(bool isShowFields)? showFields,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -612,7 +585,6 @@ class _$ErrorImpl implements Error {
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(ShowFields value) showFields,
   }) {
     return error(this);
   }
@@ -624,7 +596,6 @@ class _$ErrorImpl implements Error {
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(ShowFields value)? showFields,
   }) {
     return error?.call(this);
   }
@@ -636,7 +607,6 @@ class _$ErrorImpl implements Error {
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(ShowFields value)? showFields,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -655,165 +625,5 @@ abstract class Error implements CreateLeadState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ShowFieldsImplCopyWith<$Res> {
-  factory _$$ShowFieldsImplCopyWith(
-          _$ShowFieldsImpl value, $Res Function(_$ShowFieldsImpl) then) =
-      __$$ShowFieldsImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isShowFields});
-}
-
-/// @nodoc
-class __$$ShowFieldsImplCopyWithImpl<$Res>
-    extends _$CreateLeadStateCopyWithImpl<$Res, _$ShowFieldsImpl>
-    implements _$$ShowFieldsImplCopyWith<$Res> {
-  __$$ShowFieldsImplCopyWithImpl(
-      _$ShowFieldsImpl _value, $Res Function(_$ShowFieldsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CreateLeadState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isShowFields = null,
-  }) {
-    return _then(_$ShowFieldsImpl(
-      isShowFields: null == isShowFields
-          ? _value.isShowFields
-          : isShowFields // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ShowFieldsImpl implements ShowFields {
-  const _$ShowFieldsImpl({required this.isShowFields});
-
-  @override
-  final bool isShowFields;
-
-  @override
-  String toString() {
-    return 'CreateLeadState.showFields(isShowFields: $isShowFields)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ShowFieldsImpl &&
-            (identical(other.isShowFields, isShowFields) ||
-                other.isShowFields == isShowFields));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isShowFields);
-
-  /// Create a copy of CreateLeadState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ShowFieldsImplCopyWith<_$ShowFieldsImpl> get copyWith =>
-      __$$ShowFieldsImplCopyWithImpl<_$ShowFieldsImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(CreateLeadModel createLeadModel) success,
-    required TResult Function(String error) error,
-    required TResult Function(bool isShowFields) showFields,
-  }) {
-    return showFields(isShowFields);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(CreateLeadModel createLeadModel)? success,
-    TResult? Function(String error)? error,
-    TResult? Function(bool isShowFields)? showFields,
-  }) {
-    return showFields?.call(isShowFields);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(CreateLeadModel createLeadModel)? success,
-    TResult Function(String error)? error,
-    TResult Function(bool isShowFields)? showFields,
-    required TResult orElse(),
-  }) {
-    if (showFields != null) {
-      return showFields(isShowFields);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-    required TResult Function(ShowFields value) showFields,
-  }) {
-    return showFields(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
-    TResult? Function(ShowFields value)? showFields,
-  }) {
-    return showFields?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    TResult Function(ShowFields value)? showFields,
-    required TResult orElse(),
-  }) {
-    if (showFields != null) {
-      return showFields(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ShowFields implements CreateLeadState {
-  const factory ShowFields({required final bool isShowFields}) =
-      _$ShowFieldsImpl;
-
-  bool get isShowFields;
-
-  /// Create a copy of CreateLeadState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ShowFieldsImplCopyWith<_$ShowFieldsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
