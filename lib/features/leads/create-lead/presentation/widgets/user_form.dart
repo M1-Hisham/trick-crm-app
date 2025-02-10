@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
+import 'package:trick_crm_app/core/di/dependency_injection.dart';
 import 'package:trick_crm_app/features/leads/create-lead/logic/cubit/create_lead_cubit.dart';
 
 import '../../../../../core/helpers/spacing.dart';
@@ -372,7 +372,7 @@ List<Widget> _submitAndCancel(context) {
   ];
 }
 
-void _submitCreateLead(context) {
+void _submitCreateLead(context) async {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState?.save();
     log("_formData: $_formData");
@@ -410,7 +410,8 @@ void _submitCreateLead(context) {
           : null,
       tenantId: _formData['Tenant Id'],
     );
-    GetIt.I<CreateLeadCubit>().emitCreateLeadState(createLeadRequestBody);
+    final cubit = getIt.get<CreateLeadCubit>();
+    await cubit.createLead(createLeadRequestBody);
     log("createLeadRequestBody: $createLeadRequestBody");
     log("Submit Successfully");
     Get.back();

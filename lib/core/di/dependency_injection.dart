@@ -8,7 +8,6 @@ import 'package:trick_crm_app/features/leads/lead-view/edit-lead/data/repo/edit_
 import '../../features/auth/login/data/repos/login_repo.dart';
 import '../../features/auth/login/logic/cubit/login_cubit.dart';
 import '../../features/home/data/repo/dashboard_repo.dart';
-import '../../features/leads/create-lead/data/repo/create_lead_repo.dart';
 import '../../features/leads/lead-view/create-attachment/data/repo/create_attachment_repo.dart';
 import '../../features/leads/lead-view/create-attachment/logic/cubit/create_attachment_cubit.dart';
 import '../../features/leads/lead-view/create-lead-meeting/data/repo/create_lead_meeting_repo.dart';
@@ -59,9 +58,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<ShowFieldsCubit>(() => ShowFieldsCubit());
 
   // create lead instance
-  getIt.registerLazySingleton<CreateLeadRepo>(() => CreateLeadRepo(getIt()));
   getIt.registerLazySingleton<CreateLeadCubit>(
-      () => CreateLeadCubit(getIt<CreateLeadRepo>()));
+      () => CreateLeadCubit(getIt<ApiService>()));
 
   // image picker cubit instance
   getIt.registerLazySingleton<ImagePickerCubit>(() => ImagePickerCubit());

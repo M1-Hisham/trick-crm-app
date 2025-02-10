@@ -1,32 +1,16 @@
-import 'dart:developer';
+import 'package:trick_crm_app/core/api/api_service.dart';
+import 'package:trick_crm_app/core/cubits/base_cubit.dart';
+import 'package:trick_crm_app/core/repo/base_repo.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trick_crm_app/features/leads/create-lead/data/models/create_lead_request_body.dart';
-import 'package:trick_crm_app/features/leads/create-lead/data/repo/create_lead_repo.dart';
+import '../../data/models/create_lead_model.dart';
+import '../../data/models/create_lead_request_body.dart';
 
-import 'create_lead_state.dart';
+class CreateLeadCubit extends BaseCubit<CreateLeadModel> {
+  CreateLeadCubit(ApiService apiService)
+      : super(BaseRepo(
+            sendData: (requestBody) => apiService.createLead(requestBody)));
 
-class CreateLeadCubit extends Cubit<CreateLeadState> {
-  final CreateLeadRepo _createLeadRepo;
-  CreateLeadCubit(this._createLeadRepo)
-      : super(const CreateLeadState.initial());
-
-  void emitCreateLeadState(CreateLeadRequestBody createLeadRequestBody) async {
-    emit(const CreateLeadState.loading());
-
-    final response = await _createLeadRepo.createLead(createLeadRequestBody);
-
-    response.when(
-      success: (createLeadModel) async {
-        emit(CreateLeadState.success(createLeadModel));
-        log("Lead created successfully");
-        log('status: ${createLeadModel.status}');
-        log('message ${createLeadModel.message}');
-      },
-      error: (message) {
-        emit(CreateLeadState.error(error: message));
-        log("Error in create lead cubit: $message");
-      },
-    );
+  Future<void> createLead(CreateLeadRequestBody createLeadRequestBody) async {
+    await sendData(createLeadRequestBody);
   }
 }
