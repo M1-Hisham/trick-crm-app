@@ -8,6 +8,7 @@ import '../../../../../core/resources/resources.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/widgets/app_data_table.dart';
 import '../../data/models/leads_model.dart';
+import '../../logic/cubit/leads_state.dart';
 
 class LeadsDataBlocBuilder extends StatelessWidget {
   const LeadsDataBlocBuilder({super.key});

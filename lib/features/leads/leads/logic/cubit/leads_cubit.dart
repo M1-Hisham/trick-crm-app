@@ -1,13 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:trick_crm_app/features/leads/leads/data/repo/leads_repo.dart';
 
-import '../../data/models/leads_model.dart';
-
-part 'leads_state.dart';
-part 'leads_cubit.freezed.dart';
+import 'leads_state.dart';
 
 class LeadsCubit extends Cubit<LeadsState> {
   final LeadsRepo _leadsRepo;

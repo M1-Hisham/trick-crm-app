@@ -1,4 +1,8 @@
-part of 'leads_cubit.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../data/models/leads_model.dart';
+
+part 'leads_state.freezed.dart';
 
 @freezed
 class LeadsState with _$LeadsState {
