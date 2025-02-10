@@ -6,5 +6,5 @@ import '../../data/models/leads_model.dart';
 
 class LeadsCubit extends BaseCubit<LeadsModel> {
   LeadsCubit(ApiService apiService)
-      : super(BaseRepo(() => apiService.getLeads()));
+      : super(BaseRepo(fetchData: () => apiService.getLeads()));
 }

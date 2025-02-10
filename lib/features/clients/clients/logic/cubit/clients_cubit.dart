@@ -6,5 +6,5 @@ import '../../data/model/clients_model.dart';
 
 class ClientsCubit extends BaseCubit<ClientsModel> {
   ClientsCubit(ApiService apiService)
-      : super(BaseRepo(() => apiService.getClients()));
+      : super(BaseRepo(fetchData: () => apiService.getClients()));
 }
