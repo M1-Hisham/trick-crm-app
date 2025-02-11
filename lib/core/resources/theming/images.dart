@@ -39,4 +39,11 @@ class AppImages {
     //! "Settings": "assets/icons/iconsMenu/Settings.svg",
     "Settings": "assets/icons/iconsMenu/Reports.svg",
   };
+
+  Map<String, String> iconsLeadView = {
+    "information": "assets/icons/icons-lead-view/information.svg",
+    "timeline": "assets/icons/icons-lead-view/Timeline.svg",
+    "notes": "assets/icons/icons-lead-view/Notes.svg",
+    "attachments": "assets/icons/icons-lead-view/Attachments.svg",
+  };
 }
