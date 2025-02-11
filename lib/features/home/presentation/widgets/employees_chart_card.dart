@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/resources/resources.dart';
-import 'chart_sample_bloc_builder.dart';
 
 class EmployeesChartCard extends StatelessWidget {
   const EmployeesChartCard({super.key});
@@ -21,7 +20,15 @@ class EmployeesChartCard extends StatelessWidget {
               style: R.textStyles.font24JetBlackBold,
             ),
             spacingV(22),
-            const ChartSampleBlocBuilder(),
+            // const ChartSampleBlocBuilder(),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Center(
+                child: Text(
+                  'Employees Chart mode is still under development👨🏻‍💻 and will be available soon!',
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,19 +51,19 @@ class LoginScreen extends StatelessWidget {
                   ),
                   spacingV(74),
                   const EmailAndPassField(),
-                  spacingV(11),
-                  GestureDetector(
-                    onTap: () {
-                      log("Forgot Password?");
-                    },
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot Password?",
-                        style: R.textStyles.font14darkGeryW600,
-                      ),
-                    ),
-                  ),
+                  // spacingV(11),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     log("Forgot Password?");
+                  //   },
+                  //   child: Align(
+                  //     alignment: Alignment.centerRight,
+                  //     child: Text(
+                  //       "Forgot Password?",
+                  //       style: R.textStyles.font14darkGeryW600,
+                  //     ),
+                  //   ),
+                  // ),
                   spacingV(39),
                   AppButton(
                     onPressed: () {
