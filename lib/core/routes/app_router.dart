@@ -46,7 +46,7 @@ abstract class AppRouter {
     GetPage(
       name: RoutesNames.leadsView,
       page: () => BlocProvider(
-        create: (context) => LeadsViewCubit(getIt()),
+        create: (context) => LeadsViewCubit(getIt<ApiService>())..getData(),
         child: const LeadsView(),
       ),
     ),
