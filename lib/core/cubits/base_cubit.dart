@@ -9,10 +9,10 @@ class BaseCubit<T> extends Cubit<BaseState<T>> {
   BaseCubit(this._repo) : super(const BaseState.initial());
 
   /// Fetch data from API Service
-  Future<void> getData() async {
+  Future<void> getData({Map<String, dynamic>? params}) async {
     emit(const BaseState.loading());
     log("BaseCubit: getData called");
-    final response = await _repo.getData();
+    final response = await _repo.getData(params: params);
     response.when(
       success: (data) {
         log("Data cubit: success");
