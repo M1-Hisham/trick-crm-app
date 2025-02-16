@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trick_crm_app/features/leads/lead-view/create-note/data/model/create_lead_note_reqest_body.dart';
-import 'package:trick_crm_app/features/leads/lead-view/create-note/data/repo/create_note_repo.dart';
+import 'package:trick_crm_app/features/leads/lead-view/notes/create-note/data/model/create_lead_note_reqest_body.dart';
+import 'package:trick_crm_app/features/leads/lead-view/notes/create-note/data/repo/create_note_repo.dart';
 
 import 'create_note_state.dart';
 
