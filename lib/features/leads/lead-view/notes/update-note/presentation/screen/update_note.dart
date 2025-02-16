@@ -7,8 +7,8 @@ import 'package:trick_crm_app/core/di/dependency_injection.dart';
 
 import 'package:trick_crm_app/core/widgets/app_button.dart';
 import 'package:trick_crm_app/core/widgets/app_text_form_field.dart';
-import 'package:trick_crm_app/features/leads/lead-view/update-note/data/models/update_lead_note_model.dart';
-import 'package:trick_crm_app/features/leads/lead-view/update-note/data/models/update_lead_note_request_body.dart';
+import 'package:trick_crm_app/features/leads/lead-view/notes/update-note/data/models/update_lead_note_model.dart';
+import 'package:trick_crm_app/features/leads/lead-view/notes/update-note/data/models/update_lead_note_request_body.dart';
 
 import '../../logic/cubit/update_note_cubit.dart';
 

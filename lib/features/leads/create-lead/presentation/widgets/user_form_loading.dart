@@ -113,7 +113,7 @@ List<Widget> _submitAndCancel(context) {
       children: [
         Expanded(
           child: AppButton(
-            icon: SvgPicture.asset(R.icons.createLeads),
+            icon: SvgPicture.asset(R.icons.add),
             text: "Create Lead",
             onPressed: (){},
           ),
