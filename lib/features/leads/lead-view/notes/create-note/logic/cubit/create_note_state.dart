@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:trick_crm_app/features/leads/lead-view/create-note/data/model/create_lead_note_model.dart';
+import 'package:trick_crm_app/features/leads/lead-view/notes/create-note/data/model/create_lead_note_model.dart';
 
 part 'create_note_state.freezed.dart';
 

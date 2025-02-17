@@ -22,7 +22,7 @@ class Clients extends StatelessWidget {
             child: Column(
               children: [
                 AppButton(
-                  icon: SvgPicture.asset(R.icons.createLeads),
+                  icon: SvgPicture.asset(R.icons.add),
                   text: 'Create Client',
                   onPressed: () {
                     // showModalBottomSheet(

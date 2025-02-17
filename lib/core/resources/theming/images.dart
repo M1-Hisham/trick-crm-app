@@ -14,7 +14,7 @@ class AppImages {
   String graph = "assets/icons/graph.svg";
   String user = "assets/icons/user.svg";
   String notification = "assets/icons/notification.svg";
-  String createLeads = "assets/icons/create-leads.svg";
+  String add = "assets/icons/create-leads.svg";
   String exportOptions = "assets/icons/Export-Options.svg";
   String integrateFacebook = "assets/icons/Integrate-Facebook.svg";
   String importOptions = "assets/icons/Import-Options.svg";

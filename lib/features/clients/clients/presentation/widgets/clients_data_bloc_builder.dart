@@ -50,7 +50,8 @@ class ClientsDataBlocBuilder extends StatelessWidget {
                   (client) => client.assigned?.name ?? '_',
                 ],
                 dataIdExtractor: (client) => (client.id ?? 0).toString(),
-                onViewDetails: (id) {
+                dataLeadNameExtractor: (client) => client.firstName ?? '',
+                onViewDetails: (id, leadName) {
                   // Get.toNamed(
                   //   RoutesNames.leadsView,
                   //   arguments: id != '' ? int.parse(id) : 0,

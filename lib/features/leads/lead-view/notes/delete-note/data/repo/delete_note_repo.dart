@@ -1,6 +1,6 @@
 import 'package:trick_crm_app/core/api/api_result.dart';
 
-import '../../../../../../core/api/api_service.dart';
+import '../../../../../../../core/api/api_service.dart';
 import '../model/delete_note_model.dart';
 
 class DeleteNoteRepo {
