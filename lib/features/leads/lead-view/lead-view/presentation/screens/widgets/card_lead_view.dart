@@ -5,11 +5,13 @@ import '../../../../../../../core/helpers/spacing.dart';
 import '../../../../../../../core/resources/resources.dart';
 
 /// Generate a card view for the leads view
-cardLeadView(String title, String icon) {
+cardLeadView({
+  required String title,
+  required String icon,
+  required void Function() onTap,
+}) {
   return GestureDetector(
-    onTap: () {
-      // Navigate to ...
-    },
+    onTap: onTap,
     child: Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
       child: Card(

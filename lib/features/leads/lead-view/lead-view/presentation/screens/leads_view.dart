@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../../core/widgets/app_bar.dart';
-import 'widgets/card_lead_view.dart';
+import 'widgets/lead_view_data_bloc_builder.dart';
 
-class LeadsView extends StatelessWidget {
-  const LeadsView({super.key});
+class LeadView extends StatelessWidget {
+  final int leadId;
+  final String leadName;
+  const LeadView({super.key, required this.leadId, required this.leadName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(
-        'Leads View',
+        'Lead $leadName',
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -18,18 +19,7 @@ class LeadsView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
-              // Show Cards
-              cardLeadView('Information', 'information'),
-              cardLeadView('Timeline', 'timeline'),
-              cardLeadView('Notes', 'notes'),
-              //! edit icon
-              cardLeadView('Attachments', 'attachments'),
-              //! edit icon
-              cardLeadView('Campaigns', 'information'),
-              //! edit icon
-              cardLeadView('Email', 'information'),
-              //! edit icon
-              cardLeadView('Open Activities', 'information'),
+              LeadViewDataBlocBuilder(leadId: leadId),
             ],
           ),
         ),
