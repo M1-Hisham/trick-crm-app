@@ -21,7 +21,7 @@ import '../../features/leads/lead-view/delete_attachment/logic/cubit/delete_atta
 import '../../features/leads/lead-view/edit-lead/logic/cubit/edit_lead_cubit.dart';
 import '../../features/leads/lead-view/notes/create-note/data/repo/create_note_repo.dart';
 import '../../features/leads/lead-view/notes/create-note/logic/cubit/create_note_cubit.dart';
-import '../../features/leads/lead-view/lead-view/logic/cubit/leads_view_cubit.dart';
+import '../../features/leads/lead-view/lead-view/logic/cubit/lead_view_cubit.dart';
 import '../../features/leads/lead-view/notes/update-note/logic/cubit/update_note_cubit.dart';
 import '../../features/leads/leads/logic/cubit/leads_cubit.dart';
 import '../cubits/image_picker_cubit.dart';
@@ -48,8 +48,8 @@ Future<void> setupGetIt() async {
       .registerLazySingleton<LeadsCubit>(() => LeadsCubit(getIt<ApiService>()));
 
   // leads view cubit instance
-  getIt.registerLazySingleton<LeadsViewCubit>(
-      () => LeadsViewCubit(getIt<ApiService>()));
+  getIt
+      .registerFactory<LeadViewCubit>(() => LeadViewCubit(getIt<ApiService>()));
 
   // show fields cubit instance
   getIt.registerLazySingleton<ShowFieldsCubit>(() => ShowFieldsCubit());

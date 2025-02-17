@@ -26,7 +26,7 @@ class LeadsScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
-                        icon: SvgPicture.asset(R.icons.createLeads),
+                        icon: SvgPicture.asset(R.icons.add),
                         text: 'Create Lead',
                         onPressed: () {
                           showModalBottomSheet(

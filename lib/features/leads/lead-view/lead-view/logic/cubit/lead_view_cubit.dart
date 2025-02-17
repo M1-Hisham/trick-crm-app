@@ -3,8 +3,8 @@ import '../../../../../../core/cubits/base_cubit.dart';
 import '../../../../../../core/repo/base_repo.dart';
 import '../../data/model/leads_view_model.dart';
 
-class LeadsViewCubit extends BaseCubit<LeadsViewModel> {
-  LeadsViewCubit(ApiService apiService)
+class LeadViewCubit extends BaseCubit<LeadsViewModel> {
+  LeadViewCubit(ApiService apiService)
       : super(
           BaseRepo(
             fetchData: ({Map<String, dynamic>? params}) =>
