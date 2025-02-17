@@ -12,7 +12,8 @@ class AppDataTable<T> extends StatefulWidget {
   final List<String> headers;
   final List<String Function(T)> dataExtractors;
   final String Function(T)? dataIdExtractor;
-  final void Function(String)? onViewDetails;
+  final String Function(T)? dataLeadNameExtractor;
+  final void Function(String,String)? onViewDetails;
   final String? dataMessage;
 
   const AppDataTable({
@@ -21,6 +22,7 @@ class AppDataTable<T> extends StatefulWidget {
     required this.headers,
     required this.dataExtractors,
     this.dataIdExtractor,
+    this.dataLeadNameExtractor,
     this.onViewDetails,
     this.dataMessage,
   });
@@ -211,11 +213,13 @@ class _AppDataTableState<T> extends State<AppDataTable<T>> {
                     _buildBody(dataBody[_switchHeaders] ?? 'empty'),
                     _buildBody(dataBody[_switchHeaders + 1] ?? 'empty'),
                     if (widget.onViewDetails != null &&
-                        widget.dataIdExtractor != null)
+                        widget.dataIdExtractor != null &&
+                        widget.dataLeadNameExtractor != null)
                       GestureDetector(
                         onTap: () {
                           widget.onViewDetails?.call(
                             widget.dataIdExtractor!(data),
+                            widget.dataLeadNameExtractor!(data),
                           );
                         },
                         child: Icon(Icons.visibility, size: 20.sp),
